@@ -1,6 +1,9 @@
+## To update the Boot WIM
+## edit-osdcloudwinpe -StartURL https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LL-Startup.ps1
+
 ## Run from URL
 Write-Host "Running from Github"
-pause
+#pause
 
 ## Approved Device Checks
 
