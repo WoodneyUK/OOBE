@@ -41,7 +41,7 @@ Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/setupcom
 New-Item c:\windows\panther\unattend -force -ItemType Directory
 copy-item -path "x:\OSDCloud\Config\OOBEDeploy\Unattend.xml" -destination "C:\Windows\panther\unattend\unattend.xml"
 
-Write-Host "Restarting Computer..."
-Restart-Computer -Force
+Write-Host "I would normally Restart Computer now, but not during development :-)"
+#Restart-Computer -Force
 
 #pause
