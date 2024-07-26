@@ -10,7 +10,7 @@ start-sleep 5
 $ApprovedDevices = Get-Content "X:\OSDCloud\Config\Scripts\Startup\approveddevices.txt"
 $model=Get-CimInstance -ClassName Win32_ComputerSystem
 $computermodel=$model.Model.substring(0,4)
-If (($model.Manufacturer -eq "Lenovo") -and ($approveddevices -notcontains $computermodel)) { Write-Warning "This Lenovo Device is Not Approved, please exit" }
+#If (($model.Manufacturer -eq "Lenovo") -and ($approveddevices -notcontains $computermodel)) { Write-Warning "This Lenovo Device is Not Approved, please exit" }
 write-host "Supported Device check complete"
 
 start-sleep 5
