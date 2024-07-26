@@ -21,7 +21,7 @@ Write-Host "Starting Windows Install, and adding Language Pack:$($LLOffice)"
 
 start-sleep 5
 
-Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume -UpdateWindows
+Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume -ZTI
 #Start-OSDCloud -findimagefile -ZTI -OSImageIndex 3
 #pause
 
