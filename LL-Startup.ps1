@@ -3,6 +3,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
+Write-host "Hi Ace, Greg"
 start-sleep 5
 
 ## Approved Device Checks
