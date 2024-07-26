@@ -8,4 +8,4 @@ import-module osd
 
 start-windowsupdate
 
-restart-computer
+restart-computer -force
