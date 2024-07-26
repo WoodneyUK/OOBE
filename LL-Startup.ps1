@@ -42,6 +42,6 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 copy-item -path "x:\OSDCloud\Config\OOBEDeploy\Unattend.xml" -destination "C:\Windows\panther\unattend\unattend.xml"
 
 Write-Host "I would normally Restart Computer now, but not during development :-)"
+Write-Host "so i'll just pause and allow you develop some more or restart yourself"
 #Restart-Computer -Force
-
-#pause
+pause
