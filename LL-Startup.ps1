@@ -17,8 +17,8 @@ If (($model.Manufacturer -eq "Lenovo") -and ($approveddevices -notcontains $comp
 #$LLOffice = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOffice).LLOffice)
 #Write-Host "Starting Windows Install, and adding Language Pack:$($LLOffice)"
 
-#Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume -UpdateWindows
-Start-OSDCloud -findimagefile -ZTI -OSImageIndex 3
+Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume -UpdateWindows -ZTI
+#Start-OSDCloud -findimagefile -ZTI -OSImageIndex 3
 #pause
 
 # Drop a custom unattend.xml which runs a post-install script
