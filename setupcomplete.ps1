@@ -1,3 +1,3 @@
 (Get-Date) | out-file c:\osdcloud\testfromPS.txt -force
 
-net user administrator /activate:yes
+net user administrator /active:yes
