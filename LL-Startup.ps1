@@ -3,7 +3,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-#pause
+pause
 
 ## Approved Device Checks
 $ApprovedDevices = Get-Content "X:\OSDCloud\Config\Scripts\Startup\approveddevices.txt"
