@@ -35,7 +35,10 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module AutopilotOOBE -Fo
 Write-Host -ForegroundColor DarkGray "Installing OSD PS Module"
 Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbose" -Wait
 
+
 # Running Updates
+Write-Host -ForegroundColor Green "SJW::Running start-windowsupdare"
+Start-Process PowerShell -ArgumentList "-NoL -C start-WindowsUpdate" -Wait
 
 
 #Write-Host -ForegroundColor DarkGray "Executing Keyboard Language Skript"
