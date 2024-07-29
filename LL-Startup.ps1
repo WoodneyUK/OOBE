@@ -29,6 +29,32 @@ Start-OSDCloud -findimagefile -ZTI
 write-host "Windows Restore complete"
 start-sleep 5
 
+
+# Load the offline registry hive from the OS volume
+Write-Host "writing to offline registry"
+$HivePath = "c:\Windows\System32\config\SOFTWARE"
+reg load "HKLM\NewOS" $HivePath 
+Start-Sleep -Seconds 5
+
+$RegistryKey = "HKLM:\SOFTWARE\Linklaters" 
+$Result = New-Item -Path $RegistryKey -ItemType Directory -Force
+$Result.Handle.Close()
+
+$RegistryValue = "LL-OfficeLang"
+$RegistryValueType = "String"
+$RegistryValueData = $LLOffice
+$Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
+
+# Cleanup (to prevent access denied issue unloading the registry hive)
+Remove-Variable Result
+Get-Variable Registry* | Remove-Variable
+Start-Sleep -Seconds 5
+
+# Unload the registry hive
+Set-Location X:\
+reg unload "HKLM\NewOS"
+
+
 # Drop a custom unattend.xml which runs a post-install script
 New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
 #copy-item -path "X:\OSDCloud\Config\OOBEDeploy\OOBEDeploy.ps1" -destination "c:\Windows\system32\Linklaters\OOBE\OOBEDeploy.ps1"
