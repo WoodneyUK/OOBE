@@ -91,7 +91,7 @@ Write-Host -ForegroundColor DarkGray "Stop Debug-Mode (SHIFT + F10) with Wscript
 Write-Host -ForegroundColor DarkGray "SendKeys: ALT + TAB"
 `$WscriptShell.SendKeys("%({TAB})")
 
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 3
 
 # Shift + F10
 Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
