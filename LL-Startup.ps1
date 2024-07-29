@@ -40,7 +40,7 @@ $RegistryKey = "HKLM:\SOFTWARE\Linklaters"
 $Result = New-Item -Path $RegistryKey -ItemType Directory -Force
 $Result.Handle.Close()
 
-$RegistryValue = "LL-OfficeLang"
+$RegistryValue = "LLOfficeLang"
 $RegistryValueType = "String"
 $RegistryValueData = $LLOffice
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
