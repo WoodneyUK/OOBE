@@ -64,8 +64,9 @@ Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/setupcom
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\windows\setup\scripts\oobe.ps1" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/oobe.cmd | out-file "c:\windows\setup\scripts\oobe.cmd" -force -encoding ascii
 
+#Custom unattend.xml
 New-Item c:\windows\panther\unattend -force -ItemType Directory
-copy-item -path "x:\OSDCloud\Config\OOBEDeploy\Unattend.xml" -destination "C:\Windows\panther\unattend\unattend.xml"
+#copy-item -path "x:\OSDCloud\Config\OOBEDeploy\Unattend.xml" -destination "C:\Windows\panther\unattend\unattend.xml"
 
 Write-Host "I would normally Restart Computer now, but not during development :-)"
 Write-Host "so i'll just pause and allow you develop some more or restart yourself"
