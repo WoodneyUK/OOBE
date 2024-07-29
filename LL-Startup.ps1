@@ -36,7 +36,7 @@ $HivePath = "c:\Windows\System32\config\SOFTWARE"
 reg load "HKLM\NewOS" $HivePath 
 Start-Sleep -Seconds 5
 
-$RegistryKey = "HKLM:\SOFTWARE\Linklaters" 
+$RegistryKey = "HKLM:\NewOS\Linklaters" 
 $Result = New-Item -Path $RegistryKey -ItemType Directory -Force
 $Result.Handle.Close()
 
