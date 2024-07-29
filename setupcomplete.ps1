@@ -97,6 +97,9 @@ Start-Sleep -Seconds 3
 Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
 `$WscriptShell.SendKeys("+({F10})")
 
+# Bring to Front
+Set-ForegroundWindow (Get-Process PowerShell).MainWindowHandle
+
 Stop-Transcript -Verbose | Out-File
 "@
 
