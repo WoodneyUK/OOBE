@@ -37,7 +37,7 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbo
 
 # Install Language Pack
 install-language en-GB
-install-language fr-FR
+#install-language fr-FR
 $InstallLangPack = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOfficeLang).LLOfficeLang)
 install-language $InstallLangPack
 
