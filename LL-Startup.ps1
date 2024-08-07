@@ -23,7 +23,7 @@ $LLOffice = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOffice).LL
 #start-sleep 5
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
-Start-OSDCloud -product -findimagefile -ZTI
+Start-OSDCloud -findimagefile -ZTI
 #pause
 
 write-host "Windows Restore complete"
