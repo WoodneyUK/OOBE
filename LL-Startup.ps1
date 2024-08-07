@@ -23,13 +23,15 @@ $LLOffice = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOffice).LL
 #start-sleep 5
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
-Start-OSDCloud -findimagefile -ZTI
+#Start-OSDCloud -product -findimagefile -ZTI
+start-osdcloud -OSName "Windows 11 23H2 x64" -OSEdition Enterprise -OSLanguage "en-US" -findimagefile -zti
 #pause
 
 write-host "Windows Restore complete"
 start-sleep 5
 
 # Install Feature On Demand Fonts
+Write-Host "Installing Feature on Demand Fonts"
 md c:\temp
 dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
 dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
@@ -70,6 +72,9 @@ Start-Sleep -Seconds 5
 Set-Location X:\
 reg unload "HKLM\NewOS"
 
+# Apply Latest CU
+Write-Host "Applying Latest Windows Updates"
+update-mywindowsimage -path c: -update all
 
 # Drop a custom unattend.xml which runs a post-install script
 #New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
