@@ -22,6 +22,12 @@ start-sleep 5
 
 #start-sleep 5
 
+# Download the MS ISO if needed
+#Update-OSDCloudUSB -driverpack Lenovo,wifi -OSName "Windows 11 22H2 x64" -OSLanguage "en-US" -OSLicense Volume
+
+# Get Update
+#Save-featureupdate -OSName "Windows 11 23H2 x64"
+
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 Start-OSDCloud -findimagefile -ZTI
 #pause
@@ -73,7 +79,7 @@ reg unload "HKLM\NewOS"
 
 # Apply Latest CU
 Write-Host "Applying Latest Windows Updates"
-update-mywindowsimage -path c: -update all
+update-mywindowsimage -path c: -update all -
 
 # Drop a custom unattend.xml which runs a post-install script
 #New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
