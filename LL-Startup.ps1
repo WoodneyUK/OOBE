@@ -16,11 +16,11 @@ write-host "Supported Device check complete"
 start-sleep 5
 
 ## Linklaters Office UI
-start-process "X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\x64\UI++64.exe" -argumentlist "/config:X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\UI++.xml" -Wait
+#start-process "X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\x64\UI++64.exe" -argumentlist "/config:X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\UI++.xml" -Wait
 $LLOffice = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOffice).LLOffice)
-Write-Host "Starting Windows Install, and adding Language Pack:$($LLOffice)"
+#Write-Host "Starting Windows Install, and adding Language Pack:$($LLOffice)"
 
-start-sleep 5
+#start-sleep 5
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 Start-OSDCloud -findimagefile -ZTI
