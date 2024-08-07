@@ -38,23 +38,28 @@ dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\Fo
 dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
 dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
-# Install Language Packs
-
-
 # Load the offline registry hive from the OS volume
 Write-Host "writing to offline registry"
 $HivePath = "c:\Windows\System32\config\SOFTWARE"
 reg load "HKLM\NewOS" $HivePath 
 Start-Sleep -Seconds 5
 
+# Set LL Office Info
 $RegistryKey = "HKLM:\NewOS\Linklaters" 
 $Result = New-Item -Path $RegistryKey -ItemType Directory -Force
 $Result.Handle.Close()
-
 $RegistryValue = "LLOfficeLang"
 $RegistryValueType = "String"
 $RegistryValueData = $LLOffice
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
+
+# Set OOBE wallpaper
+md c:\windows\system32\oobe\info\backgrounds
+copy-item -path "x:\OSDCloud\Media\OSDCloud\backgrounddefault.jpg" -destination "c:\windows\system32\oobe\info\backgrounds\backgrounddefault.jpg"
+$RegistryKey = "HKLM:\NewOS\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background"
+$RegistryValue = "OEMBackground"
+$RegistryValueData = 1
+$Result = Set-ItemProperty -Path $RegistryKey -Name $RegistryValue -Value $RegistryValueData -Force
 
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
