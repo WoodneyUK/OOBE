@@ -62,11 +62,12 @@ $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType
 
 # Set OOBE wallpaper
 md c:\windows\system32\oobe\info\backgrounds
-copy-item -path "x:\OSDCloud\Media\OSDCloud\backgrounddefault.jpg" -destination "c:\windows\system32\oobe\info\backgrounds\backgrounddefault.jpg"
+copy-item -path "x:\OSDCloud\backgrounddefault.jpg" -destination "c:\windows\system32\oobe\info\backgrounds\backgrounddefault.jpg"
 $RegistryKey = "HKLM:\NewOS\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background"
 $RegistryValue = "OEMBackground"
+$RegistryValueType = "Dword"
 $RegistryValueData = 1
-$Result = Set-ItemProperty -Path $RegistryKey -Name $RegistryValue -Value $RegistryValueData -Force
+$Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -Value $RegistryValueData -Force -PropertyType $RegistryValueType
 
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
@@ -636,7 +637,7 @@ function New-UnattendXml {
         }
     }
 }
-
+md c:\windows\panther\unattend
 New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\windows\panther\unattend\unattend.xml -InputLocale "en-GB" -SystemLocale "en-US" -UILanguage "en-GB" -UserLocale "en-GB"
 
 
