@@ -35,9 +35,6 @@ Start-OSDCloud -findimagefile -ZTI
 write-host "Windows Restore complete"
 start-sleep 5
 
-md c:\temp
-$env:temp = "c:\temp"
-
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts"
 md c:\temp
@@ -83,6 +80,9 @@ reg unload "HKLM\NewOS"
 
 # Apply Latest CU
 Write-Host "Applying Latest Windows Updates"
+md c:\temp
+$env:temp = "c:\temp"
+set-location c:
 update-mywindowsimage -path c: -update all
 
 # Drop a custom unattend.xml which runs a post-install script
