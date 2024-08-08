@@ -35,6 +35,9 @@ Start-OSDCloud -findimagefile -ZTI
 write-host "Windows Restore complete"
 start-sleep 5
 
+md c:\temp
+$env:temp = "c:\temp"
+
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts"
 md c:\temp
