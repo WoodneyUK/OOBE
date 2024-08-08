@@ -79,7 +79,7 @@ reg unload "HKLM\NewOS"
 
 # Apply Latest CU
 Write-Host "Applying Latest Windows Updates"
-update-mywindowsimage -path c: -update all -
+update-mywindowsimage -path c: -update all
 
 # Drop a custom unattend.xml which runs a post-install script
 #New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
