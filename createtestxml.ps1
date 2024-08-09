@@ -34,7 +34,7 @@ $UnattendXml = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                 <Order>4</Order>
                 <Description>Start Windows Updates</Description>
-                <Path>PowerShell -Command "start-windowsupdate"</Path>
+                <Path>PowerShell -Command "start-windowsupdate" -windowstyle maximized</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
