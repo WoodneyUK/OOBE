@@ -85,6 +85,11 @@ start-sleep 5
 #set-location c:
 #update-mywindowsimage -path c: -update all
 
+# Create an Undo disk
+Write-Host "Create Undo now"
+pause
+
+
 # Drop a custom unattend.xml which runs a post-install script
 #New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
 #copy-item -path "X:\OSDCloud\Config\OOBEDeploy\OOBEDeploy.ps1" -destination "c:\Windows\system32\Linklaters\OOBE\OOBEDeploy.ps1"
