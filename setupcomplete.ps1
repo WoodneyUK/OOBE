@@ -43,10 +43,10 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbo
 
 # Install Feature on Demand
 
-cls
-Write-host "Running OOBE script"
+#cls
+#Write-host "Running OOBE script"
 
-pause
+#pause
 
 # Running Updates
 #Write-Host -ForegroundColor Green "SJW::Running start-windowsupdare"
