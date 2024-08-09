@@ -28,16 +28,21 @@ $UnattendXml = [xml] @'
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
-                    <Description>LL:Save Get-WindowsAutoPilotInfo</Description>
-                    <Path>PowerShell -Command "Install-Script -Name Get-WindowsAutoPilotInfo -Verbose -Force"</Path>
+                    <Description>LL:Download Audit Mode script</Description>
+                    <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/startAuditMode.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1" -force -encoding ascii"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
+                    <Description>LL:Execute Audit Mode script</Description>
+                    <Path>PowerShell -Command "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1"</Path>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>5</Order>
                     <Description>LL:Installing Windows Updates</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>5</Order>
+                    <Order>6</Order>
                     <Description>LL:Commit changes</Description>
                     <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /generalize</Path>
                 </RunSynchronousCommand>
