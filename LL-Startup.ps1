@@ -25,8 +25,34 @@ start-sleep 5
 # Download the MS ISO if needed
 #Update-OSDCloudUSB -driverpack Lenovo,wifi -OSName "Windows 11 22H2 x64" -OSLanguage "en-US" -OSLicense Volume
 
-# Get Update
-#Save-featureupdate -OSName "Windows 11 23H2 x64"
+
+
+#Variables to define the Windows OS / Edition etc to be applied during OSDCloud
+$OSName = 'Windows 11 23H2 x64'
+$OSEdition = 'Pro'
+$OSActivation = 'Retail'
+$OSLanguage = 'en-us'
+
+#Set OSDCloud Vars
+$Global:MyOSDCloud = [ordered]@{
+    Restart = [bool]$True
+    RecoveryPartition = [bool]$true
+    OEMActivation = [bool]$True
+    WindowsUpdate = [bool]$true
+    WindowsUpdateDrivers = [bool]$false
+    WindowsDefenderUpdate = [bool]$true
+    SetTimeZone = [bool]$true
+    ClearDiskConfirm = [bool]$False
+    ShutdownSetupComplete = [bool]$false
+    SyncMSUpCatDriverUSB = [bool]$true
+    CheckSHA1 = [bool]$true
+}
+
+#Launch OSDCloud
+Write-Host "Starting OSDCloud" -ForegroundColor Green
+write-host "Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage"
+
+#Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 Start-OSDCloud -findimagefile -ZTI
@@ -86,8 +112,8 @@ start-sleep 5
 #update-mywindowsimage -path c: -update all
 
 # Create an Undo disk
-Write-Host "Create Undo now"
-pause
+#Write-Host "Create Undo now"
+#pause
 
 
 # Drop a custom unattend.xml which runs a post-install script
@@ -98,7 +124,7 @@ pause
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/setupcomplete.cmd | out-file "c:\osdcloud\scripts\setupcomplete\setupcomplete.cmd" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\windows\setup\scripts\oobe.ps1" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/oobe.cmd | out-file "c:\windows\setup\scripts\oobe.cmd" -force -encoding ascii
-Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
+#Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 #New-Item c:\windows\panther\unattend -force -ItemType Directory
@@ -107,10 +133,10 @@ Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createte
 #New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\temp\unattend.xml -InputLocale "en-GB" -SystemLocale "en-US" -UILanguage "en-GB" -UserLocale "en-GB"
 
 
-& "c:\windows\setup\scripts\createtestxml.ps1"
+#& "c:\windows\setup\scripts\createtestxml.ps1"
 
 
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
 #Write-Host "so i'll just pause and allow you develop some more or restart yourself"
-Restart-Computer -Force
+#Restart-Computer -Force
 #pause
