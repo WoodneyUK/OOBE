@@ -106,6 +106,9 @@ Start-Sleep -Seconds 3
 Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
 `$WscriptShell.SendKeys("+({F10})")
 
+Write-Host "Sendkeys script finishing in 10 secs..."
+start-sleep 10
+
 Stop-Transcript -Verbose | Out-File
 "@
 
