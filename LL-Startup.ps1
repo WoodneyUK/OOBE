@@ -98,6 +98,7 @@ pause
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/setupcomplete.cmd | out-file "c:\osdcloud\scripts\setupcomplete\setupcomplete.cmd" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\windows\setup\scripts\oobe.ps1" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/oobe.cmd | out-file "c:\windows\setup\scripts\oobe.cmd" -force -encoding ascii
+Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 #New-Item c:\windows\panther\unattend -force -ItemType Directory
@@ -105,26 +106,8 @@ pause
 #Install-Module -Name WindowsImageTools -force
 #New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\temp\unattend.xml -InputLocale "en-GB" -SystemLocale "en-US" -UILanguage "en-GB" -UserLocale "en-GB"
 
-$XMLPath = "c:\windows\panther\unattend\unattend.xml"
 
-$UnattendXml = [xml] @'
-<?xml version="1.0" encoding="utf-8"?>
-<unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <settings pass="auditSystem">
-        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <Reseal>
-                <Mode>Audit</Mode>
-            </Reseal>
-        </component>
-    </settings>
-    <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
-</unattend>
-'@
-
-md c:\windows\panther\unattend -Force
-
-$UnattendXml.Save($XMLPath)
-
+& "c:\windows\setup\scripts\createtestxml.ps1"
 
 
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
