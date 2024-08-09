@@ -62,14 +62,14 @@ write-host "Windows Restore complete"
 start-sleep 5
 
 # Install Feature On Demand Fonts
-#Write-Host "Installing Feature on Demand Fonts"
-#md c:\temp
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
-#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+Write-Host "Installing Feature on Demand Fonts"
+md c:\temp
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
 # Load the offline registry hive from the OS volume
 #Write-Host "writing to offline registry"
@@ -124,7 +124,7 @@ start-sleep 5
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/setupcomplete.cmd | out-file "c:\osdcloud\scripts\setupcomplete\setupcomplete.cmd" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\windows\setup\scripts\oobe.ps1" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/oobe.cmd | out-file "c:\windows\setup\scripts\oobe.cmd" -force -encoding ascii
-#Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
+Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 #New-Item c:\windows\panther\unattend -force -ItemType Directory
@@ -132,8 +132,8 @@ start-sleep 5
 #Install-Module -Name WindowsImageTools -force
 #New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\temp\unattend.xml -InputLocale "en-GB" -SystemLocale "en-US" -UILanguage "en-GB" -UserLocale "en-GB"
 
-
-#& "c:\windows\setup\scripts\createtestxml.ps1"
+#Create the custom unattend.xml
+& "c:\windows\setup\scripts\createtestxml.ps1"
 
 
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
