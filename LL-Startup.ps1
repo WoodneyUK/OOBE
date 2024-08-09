@@ -123,11 +123,11 @@ $UnattendXml = [xml] @'
 
 md c:\windows\panther\unattend -Force
 
-#$UnattendXml.Save($XMLPath)
+$UnattendXml.Save($XMLPath)
 
 
 
-Write-Host "I would normally Restart Computer now, but not during development :-)"
-Write-Host "so i'll just pause and allow you develop some more or restart yourself"
-#Restart-Computer -Force
-pause
+#Write-Host "I would normally Restart Computer now, but not during development :-)"
+#Write-Host "so i'll just pause and allow you develop some more or restart yourself"
+Restart-Computer -Force
+#pause
