@@ -36,6 +36,11 @@ $UnattendXml = [xml] @'
                     <Description>Installing Windows Updates</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
                 </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>5</Order>
+                    <Description>Commit changes</Description>
+                    <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /generalize</Path>
+                </RunSynchronousCommand>
             </RunSynchronous>
         </component>
     </settings>
