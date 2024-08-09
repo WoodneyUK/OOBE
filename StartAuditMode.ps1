@@ -1,2 +1,9 @@
 write-host "This is a custom Audit Mode script"
-start-sleep 30
+
+Write-Host "Setting Reg"
+Set-ItemProperty -Path HKLM:\SYSTEM\Setup\Status -Name AuditBoot -Value 0
+
+start-sleep 5
+
+Write-Host "restarting"
+restart-computer -force
