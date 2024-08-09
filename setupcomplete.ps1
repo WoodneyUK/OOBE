@@ -44,8 +44,8 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbo
 # Install Feature on Demand
 
 #cls
-#Write-host "Running OOBE script"
-
+Write-host "Running OOBE script, closing in 10 secs"
+start-sleep 10
 #pause
 
 # Running Updates
