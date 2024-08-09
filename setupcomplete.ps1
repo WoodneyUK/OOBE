@@ -105,6 +105,9 @@ cls
 Write-Host "I'm done!"
 pause
 
+# Updates
+start-windowsupdate
+
 Stop-Transcript -Verbose | Out-File
 "@
 
