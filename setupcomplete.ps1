@@ -1,4 +1,4 @@
-(Get-Date) | out-file c:\osdcloud\testfromPS.txt -force
+#(Get-Date) | out-file c:\osdcloud\testfromPS.txt -force
 
 # net user administrator /active:yes
 
@@ -36,10 +36,10 @@ Write-Host -ForegroundColor DarkGray "Installing OSD PS Module"
 Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbose" -Wait
 
 # Install Language Pack
-install-language en-GB
+#install-language en-GB
 #install-language fr-FR
-$InstallLangPack = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOfficeLang).LLOfficeLang)
-install-language $InstallLangPack
+#$InstallLangPack = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOfficeLang).LLOfficeLang)
+#install-language $InstallLangPack
 
 # Install Feature on Demand
 
@@ -98,7 +98,12 @@ Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
 `$WscriptShell.SendKeys("+({F10})")
 
 # Bring to Front
-Set-ForegroundWindow (Get-Process PowerShell).MainWindowHandle
+#Set-ForegroundWindow (Get-Process PowerShell).MainWindowHandle
+
+# More Tasks here
+cls
+Write-Host "I'm done!"
+pause
 
 Stop-Transcript -Verbose | Out-File
 "@
