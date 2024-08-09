@@ -18,27 +18,27 @@ $UnattendXml = [xml] @'
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <Description>Set ExecutionPolicy Bypass</Description>
+                    <Description>LL:Set ExecutionPolicy Bypass</Description>
                     <Path>PowerShell -WindowStyle Hidden -Command "Set-ExecutionPolicy Bypass -Force"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <Description>WaitWebConnection</Description>
+                    <Description>LL:WaitWebConnection</Description>
                     <Path>PowerShell -Command "Wait-WebConnection powershellgallery.com -Verbose"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
-                    <Description>Save Get-WindowsAutoPilotInfo</Description>
+                    <Description>LL:Save Get-WindowsAutoPilotInfo</Description>
                     <Path>PowerShell -Command "Install-Script -Name Get-WindowsAutoPilotInfo -Verbose -Force"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
-                    <Description>Installing Windows Updates</Description>
+                    <Description>LL:Installing Windows Updates</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>5</Order>
-                    <Description>Commit changes</Description>
+                    <Description>LL:Commit changes</Description>
                     <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /generalize</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
