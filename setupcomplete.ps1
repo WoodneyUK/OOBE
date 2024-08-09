@@ -43,10 +43,14 @@ Start-Process PowerShell -ArgumentList "-NoL -C Install-Module OSD -Force -Verbo
 
 # Install Feature on Demand
 
+cls
+Write-host "Running OOBE script"
+
+pause
 
 # Running Updates
-Write-Host -ForegroundColor Green "SJW::Running start-windowsupdare"
-Start-Process PowerShell -ArgumentList "-NoL -C start-WindowsUpdate" -Wait
+#Write-Host -ForegroundColor Green "SJW::Running start-windowsupdare"
+#Start-Process PowerShell -ArgumentList "-NoL -C start-WindowsUpdate" -Wait
 
 
 #Write-Host -ForegroundColor DarkGray "Executing Keyboard Language Skript"
@@ -72,13 +76,18 @@ Write-Host -ForegroundColor DarkGray "Unregistering Scheduled Tasks"
 Unregister-ScheduledTask -TaskName "Scheduled Task for SendKeys" -Confirm:`$false
 Unregister-ScheduledTask -TaskName "Scheduled Task for OSDCloud post installation" -Confirm:`$false
 
-Write-Host -ForegroundColor DarkGray "Restarting Computer"
-Start-Process PowerShell -ArgumentList "-NoL -C Restart-Computer -Force" -Wait
+#Write-Host -ForegroundColor DarkGray "Restarting Computer"
+#Start-Process PowerShell -ArgumentList "-NoL -C Restart-Computer -Force" -Wait
 
 Stop-Transcript -Verbose | Out-File
 "@
 
 Out-File -FilePath $ScriptPathOOBE -InputObject $OOBEScript -Encoding ascii
+
+
+
+
+
 
 $SendKeysScript = @"
 `$Global:Transcript = "`$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-SendKeys.log"
@@ -96,17 +105,6 @@ Start-Sleep -Seconds 3
 # Shift + F10
 Write-Host -ForegroundColor DarkGray "SendKeys: SHIFT + F10"
 `$WscriptShell.SendKeys("+({F10})")
-
-# Bring to Front
-#Set-ForegroundWindow (Get-Process PowerShell).MainWindowHandle
-
-# More Tasks here
-cls
-Write-Host "I'm done!"
-pause
-
-# Updates
-start-windowsupdate
 
 Stop-Transcript -Verbose | Out-File
 "@
