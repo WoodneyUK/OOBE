@@ -46,6 +46,7 @@ $Global:MyOSDCloud = [ordered]@{
     ShutdownSetupComplete = [bool]$false
     SyncMSUpCatDriverUSB = [bool]$true
     CheckSHA1 = [bool]$true
+    ImageName = "Windows 11 Enterprise"
 }
 
 #Launch OSDCloud
