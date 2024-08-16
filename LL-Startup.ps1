@@ -42,7 +42,7 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 $OSName = 'Windows 11 23H2 x64'
 $OSEdition = 'Pro'
 $OSActivation = 'Retail'
-$OSLanguage = 'en-us'
+$OSLanguage = $desiredkb
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
