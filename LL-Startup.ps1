@@ -44,8 +44,10 @@ $OSEdition = 'Pro'
 $OSActivation = 'Retail'
 $OSLanguage = $desiredkb
 
+
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
+    OSImageIndex = 6
     Restart = [bool]$True
     RecoveryPartition = [bool]$true
     OEMActivation = [bool]$True
