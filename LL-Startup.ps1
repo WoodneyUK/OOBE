@@ -15,6 +15,17 @@ write-host "Supported Device check complete"
 
 start-sleep 5
 
+## Lenovo Keyboard layout
+Write-Host "looking up keyboard layout"
+$lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
+$desiredkb = $lenovolookup | Where-Object {((gwmi win32_computersystem).model) -eq $_.PartNumber} | Select-Object Keyboard -ExpandProperty Keyboard
+if ($desiredkb -eq $null) { 
+    Write-Host "Partnumber not found in lookup table, setting keyboard to en-US"
+    $desiredkb = "en-US" 
+    }
+Else { Write-Host "Keyboard detected as $desiredkb" }
+
+
 ## Linklaters Office UI
 #start-process "X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\x64\UI++64.exe" -argumentlist "/config:X:\OSDCloud\Config\Scripts\Startup\3.0.3.0\UI++.xml" -Wait
 #$LLOffice = ((get-itemproperty -Path HKLM:Software\Linklaters -Name LLOffice).LLOffice)
