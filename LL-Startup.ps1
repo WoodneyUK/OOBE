@@ -144,7 +144,7 @@ Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createte
 #New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\temp\unattend.xml -InputLocale "en-GB" -SystemLocale "en-US" -UILanguage "en-GB" -UserLocale "en-GB"
 
 #Create the custom unattend.xml
-& "c:\windows\setup\scripts\createtestxml.ps1"
+#& "c:\windows\setup\scripts\createtestxml.ps1"
 
 
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
