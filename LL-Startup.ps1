@@ -57,7 +57,6 @@ $Global:MyOSDCloud = [ordered]@{
     ShutdownSetupComplete = [bool]$false
     SyncMSUpCatDriverUSB = [bool]$true
     CheckSHA1 = [bool]$true
-    OSImageIndex = 6
 }
 
 #Launch OSDCloud
