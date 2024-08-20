@@ -42,12 +42,12 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 $OSName = 'Windows 11 23H2 x64'
 $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
+$OSImageIndex = 6
 $OSLanguage = $desiredkb
 
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
-    OSImageIndex = 6
     Restart = [bool]$True
     RecoveryPartition = [bool]$true
     OEMActivation = [bool]$True
@@ -57,7 +57,7 @@ $Global:MyOSDCloud = [ordered]@{
     SetTimeZone = [bool]$true
     ClearDiskConfirm = [bool]$False
     ShutdownSetupComplete = [bool]$false
-    SyncMSUpCatDriverUSB = [bool]$true
+    SyncMSUpCatDriverUSB = [bool]$false
     CheckSHA1 = [bool]$true
 }
 
