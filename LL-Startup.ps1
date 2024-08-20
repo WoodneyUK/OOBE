@@ -40,8 +40,8 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 
 #Variables to define the Windows OS / Edition etc to be applied during OSDCloud
 $OSName = 'Windows 11 23H2 x64'
-$OSEdition = 'Pro'
-$OSActivation = 'Retail'
+$OSEdition = 'Enterprise'
+$OSActivation = 'Volume'
 $OSLanguage = $desiredkb
 
 
