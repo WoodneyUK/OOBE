@@ -68,7 +68,8 @@ write-host "Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $
 #Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
-Start-OSDCloud -findimagefile -ZTI
+invoke-osdcloud
+#Start-OSDCloud -findimagefile -ZTI
 #pause
 
 write-host "Windows Restore complete"
