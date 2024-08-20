@@ -50,6 +50,7 @@ $OSLanguage = $desiredkb
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
     ImageFileName = 'D:\OSDCloud\OS\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd'
+    ImageFileSource = 'D:\OSDCloud\OS'
     Restart = [bool]$True
     RecoveryPartition = [bool]$true
     OEMActivation = [bool]$True
