@@ -39,6 +39,7 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 
 
 #Variables to define the Windows OS / Edition etc to be applied during OSDCloud
+
 $OSName = 'Windows 11 23H2 x64'
 $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
@@ -48,6 +49,7 @@ $OSLanguage = $desiredkb
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
+    ImageFileName = 'D:\OSDCloud\OS\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd'
     Restart = [bool]$True
     RecoveryPartition = [bool]$true
     OEMActivation = [bool]$True
