@@ -1,3 +1,13 @@
+[CmdletBinding()]
+    param (
+        [String]$userlocale = "en-US"
+    )
+
+$SysLocale = "en-US"
+
+write-host "UserLocale:$($userlocale)"
+Write-host "SystemLocale:$($SysLocale)"
+
 $XMLPath = "c:\windows\panther\unattend\unattend.xml"
 
 $UnattendXml = [xml] @'
@@ -23,6 +33,22 @@ $UnattendXml = [xml] @'
 </unattend>
 '@
 
-md c:\windows\panther\unattend -Force
 
-$UnattendXml.Save($XMLPath)
+$result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
+
+
+foreach ($setting in $unattendXml.Unattend.Settings) {
+    #Write-host "Checking Setting:$($setting) in Unattend"
+    foreach ($component in $setting.Component) {
+        #write-host "Checking component:$($component) in Unattend"
+        if (($setting.'Pass' -eq 'oobeSystem') -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
+            #Write-Host "Updating Locale settings"
+            $component.InputLocale = $userlocale
+            $component.SystemLocale = $SysLocale
+            $component.UILanguage = $userlocale
+            $component.UserLocale = $userlocale
+        }
+    } #end foreach setting.Component
+} #end foreach unattendXml.Unattend.Settings
+
+$unattendXml.Save($XMLPath)
