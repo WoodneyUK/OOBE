@@ -49,7 +49,7 @@ $OSLanguage = $desiredkb
 
 Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
-    Restart = [bool]$True
+    Restart = [bool]$False
     RecoveryPartition = [bool]$true
     OEMActivation = [bool]$True
     WindowsUpdate = [bool]$true
