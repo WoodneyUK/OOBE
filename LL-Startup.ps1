@@ -20,8 +20,8 @@ Write-Host "looking up keyboard layout"
 $lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
 $desiredkb = $lenovolookup | Where-Object {((gwmi win32_computersystem).model) -eq $_.PartNumber} | Select-Object Keyboard -ExpandProperty Keyboard
 if ($desiredkb -eq $null) { 
-    Write-Host "Partnumber not found in lookup table, setting keyboard to en-US"
-    $desiredkb = "en-US" 
+    Write-Host "Partnumber not found in lookup table, setting keyboard to en-GB"
+    $desiredkb = "en-GB" 
     }
 Else { Write-Host "Keyboard detected as $desiredkb" }
 
