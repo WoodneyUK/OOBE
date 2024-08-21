@@ -3,7 +3,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.2"
+Write-host "LL startup v1.4"
 start-sleep 5
 
 ## Approved Device Checks
@@ -45,7 +45,7 @@ $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
 $OSImageIndex = 6
 $OSLanguage = $desiredkb
-$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
+#$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
