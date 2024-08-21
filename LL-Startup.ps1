@@ -48,19 +48,19 @@ $OSLanguage = $desiredkb
 #$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 #Set OSDCloud Vars
-$Global:MyOSDCloud = [ordered]@{
-    Restart = [bool]$True
-    RecoveryPartition = [bool]$true
-    OEMActivation = [bool]$True
-    WindowsUpdate = [bool]$true
-    WindowsUpdateDrivers = [bool]$false
-    WindowsDefenderUpdate = [bool]$true
-    SetTimeZone = [bool]$true
-    ClearDiskConfirm = [bool]$False
-    ShutdownSetupComplete = [bool]$false
-    SyncMSUpCatDriverUSB = [bool]$false
-    CheckSHA1 = [bool]$true
-}
+#$Global:MyOSDCloud = [ordered]@{
+#    Restart = [bool]$True
+#    RecoveryPartition = [bool]$true
+#    OEMActivation = [bool]$True
+#    WindowsUpdate = [bool]$true
+#    WindowsUpdateDrivers = [bool]$false
+#    WindowsDefenderUpdate = [bool]$true
+#    SetTimeZone = [bool]$true
+#    ClearDiskConfirm = [bool]$False
+#    ShutdownSetupComplete = [bool]$false
+#    SyncMSUpCatDriverUSB = [bool]$false
+#    CheckSHA1 = [bool]$true
+#}
 
 #Launch OSDCloud
 Write-Host "Starting OSDCloud" -ForegroundColor Green
@@ -88,19 +88,19 @@ dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\Fo
 dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
 # Load the offline registry hive from the OS volume
-#Write-Host "writing to offline registry"
-#$HivePath = "c:\Windows\System32\config\SOFTWARE"
-#reg load "HKLM\NewOS" $HivePath 
-#Start-Sleep -Seconds 5
+Write-Host "writing to offline registry"
+$HivePath = "c:\Windows\System32\config\SOFTWARE"
+reg load "HKLM\NewOS" $HivePath 
+Start-Sleep -Seconds 5
 
 # Set LL Office Info
-#$RegistryKey = "HKLM:\NewOS\Linklaters" 
-#$Result = New-Item -Path $RegistryKey -ItemType Directory -Force
-#$Result.Handle.Close()
-#$RegistryValue = "LLOfficeLang"
-#$RegistryValueType = "String"
-#$RegistryValueData = $LLOffice
-#$Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
+$RegistryKey = "HKLM:\NewOS\Linklaters" 
+$Result = New-Item -Path $RegistryKey -ItemType Directory -Force
+$Result.Handle.Close()
+$RegistryValue = "LLOfficeLang"
+$RegistryValueType = "String"
+$RegistryValueData = $LLOffice
+$Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
 
 # Set OOBE wallpaper
 #md c:\windows\system32\oobe\info\backgrounds
@@ -112,13 +112,64 @@ dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\Fo
 #$Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -Value $RegistryValueData -Force -PropertyType $RegistryValueType
 
 # Cleanup (to prevent access denied issue unloading the registry hive)
-#Remove-Variable Result
-#Get-Variable Registry* | Remove-Variable
+Remove-Variable Result
+Get-Variable Registry* | Remove-Variable
 #Start-Sleep -Seconds 5
 
 # Unload the registry hive
-#Set-Location X:\
-#reg unload "HKLM\NewOS"
+Set-Location X:\
+reg unload "HKLM\NewOS"
+
+$OOBEDeployJson = @'
+{
+    "AddNetFX3":  {
+                      "IsPresent":  false
+                  },
+    "Autopilot":  {
+                      "IsPresent":  false
+                  },
+    "RemoveAppx":  [
+                    "MicrosoftTeams",
+                    "Microsoft.BingWeather",
+                    "Microsoft.BingNews",
+                    "Microsoft.GamingApp",
+                    "Microsoft.GetHelp",
+                    "Microsoft.Getstarted",
+                    "Microsoft.Messaging",
+                    "Microsoft.MicrosoftOfficeHub",
+                    "Microsoft.MicrosoftSolitaireCollection",
+                    "Microsoft.MicrosoftStickyNotes",
+                    "Microsoft.MSPaint",
+                    "Microsoft.People",
+                    "Microsoft.PowerAutomateDesktop",
+                    "Microsoft.StorePurchaseApp",
+                    "Microsoft.Todos",
+                    "microsoft.windowscommunicationsapps",
+                    "Microsoft.WindowsFeedbackHub",
+                    "Microsoft.WindowsMaps",
+                    "Microsoft.WindowsSoundRecorder",
+                    "Microsoft.Xbox.TCUI",
+                    "Microsoft.XboxGameOverlay",
+                    "Microsoft.XboxGamingOverlay",
+                    "Microsoft.XboxIdentityProvider",
+                    "Microsoft.XboxSpeechToTextOverlay",
+                    "Microsoft.YourPhone",
+                    "Microsoft.ZuneMusic",
+                    "Microsoft.ZuneVideo"
+                   ],
+    "UpdateDrivers":  {
+                          "IsPresent":  false
+                      },
+    "UpdateWindows":  {
+                          "IsPresent":  true
+                      }
+}
+'@
+If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+    New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
+}
+$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
+
 
 # Apply Latest CU
 #Write-Host "Applying Latest Windows Updates"
