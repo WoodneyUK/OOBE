@@ -207,3 +207,6 @@ New-UnattendXml -TimeZone 'GMT Standard Time' -path c:\temp\unattend.xml -InputL
 #Write-Host "so i'll just pause and allow you develop some more or restart yourself"
 #Restart-Computer -Force
 #pause
+
+write-host "LL Startup script completed, waiting 10 seconds..."
+start-sleep 10
