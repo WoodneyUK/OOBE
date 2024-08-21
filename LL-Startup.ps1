@@ -45,7 +45,7 @@ $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
 $OSImageIndex = 6
 $OSLanguage = $desiredkb
-#$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
+$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
@@ -67,11 +67,11 @@ Write-Host "Starting OSDCloud" -ForegroundColor Green
 write-host "Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage"
 
 #Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage
-#start-osdcloudcli -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage -imagefileurl $imagefilelocation
+start-osdcloudcli -zti -OSActivation $OSActivation -imagefileurl $imagefilelocation -OSImageIndex = 6
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 #invoke-osdcloud
-Start-OSDCloud -findimagefile -ZTI
+#Start-OSDCloud -findimagefile -ZTI
 #pause
 
 write-host "Windows Restore complete"
