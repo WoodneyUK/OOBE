@@ -101,8 +101,8 @@ dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Wi
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 '@
-md c:\windows\Setup\Scripts
-$setupcomplete | out-file c:\osdcloud\scripts\setupcomplete\SetupComplete.cmd
+#md c:\windows\Setup\Scripts
+#$setupcomplete | out-file c:\osdcloud\scripts\setupcomplete\SetupComplete.cmd
 
 
 # Load the offline registry hive from the OS volume
