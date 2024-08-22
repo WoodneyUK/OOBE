@@ -3,7 +3,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.4"
+Write-host "LL startup v1.5"
 start-sleep 5
 
 ## Approved Device Checks
@@ -13,7 +13,7 @@ $computermodel=$model.Model.substring(0,4)
 #If (($model.Manufacturer -eq "Lenovo") -and ($approveddevices -notcontains $computermodel)) { Write-Warning "This Lenovo Device is Not Approved, please exit" }
 write-host "Supported Device check complete"
 
-start-sleep 5
+#start-sleep 5
 
 ## Lenovo Keyboard layout
 Write-Host "looking up keyboard layout"
@@ -40,30 +40,29 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 
 #Variables to define the Windows OS / Edition etc to be applied during OSDCloud
 
-$OSName = 'Windows 11 23H2 x64'
-$OSEdition = 'Enterprise'
-$OSActivation = 'Volume'
+#$OSName = 'Windows 11 23H2 x64'
+#$OSEdition = 'Enterprise'
+#$OSActivation = 'Volume'
 #$OSImageIndex = 6
-$OSLanguage = $desiredkb
+#$OSLanguage = $desiredkb
 #$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 #Set OSDCloud Vars
-#$Global:MyOSDCloud = [ordered]@{
-#    ImageFileFullName = "D:\OSDCloud\OS\install.wim"
-#    ImageFileItem = "install.wim"
-#    ImageFileName = "install.wim"
-#    Restart = [bool]$False
-#    RecoveryPartition = [bool]$true
-#    OEMActivation = [bool]$True
-#    WindowsUpdate = [bool]$true
-#    WindowsUpdateDrivers = [bool]$false
-#    WindowsDefenderUpdate = [bool]$true
-#    SetTimeZone = [bool]$true
-#    ClearDiskConfirm = [bool]$False
-#    ShutdownSetupComplete = [bool]$false
-#    SyncMSUpCatDriverUSB = [bool]$false
-#    CheckSHA1 = [bool]$false
-#}
+$Global:MyOSDCloud = [ordered]@{
+    ImageFileItem = "D:\OSDCloud\OS\install.wim"
+    OSImageIndex = 3
+    Restart = [bool]$False
+    RecoveryPartition = [bool]$true
+    OEMActivation = [bool]$True
+    WindowsUpdate = [bool]$true
+    WindowsUpdateDrivers = [bool]$false
+    WindowsDefenderUpdate = [bool]$true
+    SetTimeZone = [bool]$true
+    ClearDiskConfirm = [bool]$False
+    ShutdownSetupComplete = [bool]$false
+    SyncMSUpCatDriverUSB = [bool]$false
+    CheckSHA1 = [bool]$false
+}
 
 #Launch OSDCloud
 Write-Host "Starting OSDCloud" -ForegroundColor Green
