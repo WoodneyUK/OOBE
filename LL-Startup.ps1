@@ -45,7 +45,7 @@ $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
 $OSImageIndex = 6
 $OSLanguage = $desiredkb
-$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
+#$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
@@ -83,8 +83,8 @@ start-sleep 5
 
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts"
-md c:\temp
-copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\temp
+#md c:\temp
+#copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\temp
 
 $setupcomplete = @'
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
@@ -186,22 +186,15 @@ $OOBEDeployJson = @'
 If (!(Test-Path "C:\ProgramData\OSDeploy")) {
     New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
 }
-$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
+#$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
-
-# Apply Latest CU
-#Write-Host "Applying Latest Windows Updates"
-#md c:\temp
-#$env:temp = "c:\temp"
-#set-location c:
-#update-mywindowsimage -path c: -update all
 
 # Create an Undo disk
 #Write-Host "Create Undo now"
 #pause
 
 
-# Drop a custom unattend.xml which runs a post-install script
+# Download custom file(s)
 #New-Item c:\Windows\system32\Linklaters\OOBE -force -ItemType Directory
 #copy-item -path "X:\OSDCloud\Config\OOBEDeploy\OOBEDeploy.ps1" -destination "c:\Windows\system32\Linklaters\OOBE\OOBEDeploy.ps1"
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\OOBEDeploy.ps1" -force -encoding ascii
