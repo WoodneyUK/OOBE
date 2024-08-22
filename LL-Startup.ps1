@@ -48,21 +48,21 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 #$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 #Set OSDCloud Vars
-$Global:MyOSDCloud = [ordered]@{
-    ImageFileItem = "D:\OSDCloud\OS\install.wim"
-    OSImageIndex = 3
-    Restart = [bool]$False
-    RecoveryPartition = [bool]$true
-    OEMActivation = [bool]$True
-    WindowsUpdate = [bool]$true
-    WindowsUpdateDrivers = [bool]$false
-    WindowsDefenderUpdate = [bool]$true
-    SetTimeZone = [bool]$true
-    ClearDiskConfirm = [bool]$False
-    ShutdownSetupComplete = [bool]$false
-    SyncMSUpCatDriverUSB = [bool]$false
-    CheckSHA1 = [bool]$false
-}
+#$Global:MyOSDCloud = [ordered]@{
+#    ImageFileItem = "D:\OSDCloud\OS\install.wim"
+#    OSImageIndex = 3
+#    Restart = [bool]$False
+#    RecoveryPartition = [bool]$true
+#    OEMActivation = [bool]$True
+#    WindowsUpdate = [bool]$true
+#    WindowsUpdateDrivers = [bool]$false
+#    WindowsDefenderUpdate = [bool]$true
+#    SetTimeZone = [bool]$true
+#    ClearDiskConfirm = [bool]$False
+#    ShutdownSetupComplete = [bool]$false
+#    SyncMSUpCatDriverUSB = [bool]$false
+#    CheckSHA1 = [bool]$false
+#}
 
 #Launch OSDCloud
 Write-Host "Starting OSDCloud" -ForegroundColor Green
