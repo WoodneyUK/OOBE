@@ -43,24 +43,27 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 $OSName = 'Windows 11 23H2 x64'
 $OSEdition = 'Enterprise'
 $OSActivation = 'Volume'
-$OSImageIndex = 6
+#$OSImageIndex = 6
 $OSLanguage = $desiredkb
 #$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
-Set OSDCloud Vars
-$Global:MyOSDCloud = [ordered]@{
-    Restart = [bool]$False
-    RecoveryPartition = [bool]$true
-    OEMActivation = [bool]$True
-    WindowsUpdate = [bool]$true
-    WindowsUpdateDrivers = [bool]$false
-    WindowsDefenderUpdate = [bool]$true
-    SetTimeZone = [bool]$true
-    ClearDiskConfirm = [bool]$False
-    ShutdownSetupComplete = [bool]$false
-    SyncMSUpCatDriverUSB = [bool]$false
-    CheckSHA1 = [bool]$false
-}
+#Set OSDCloud Vars
+#$Global:MyOSDCloud = [ordered]@{
+#    ImageFileFullName = "D:\OSDCloud\OS\install.wim"
+#    ImageFileItem = "install.wim"
+#    ImageFileName = "install.wim"
+#    Restart = [bool]$False
+#    RecoveryPartition = [bool]$true
+#    OEMActivation = [bool]$True
+#    WindowsUpdate = [bool]$true
+#    WindowsUpdateDrivers = [bool]$false
+#    WindowsDefenderUpdate = [bool]$true
+#    SetTimeZone = [bool]$true
+#    ClearDiskConfirm = [bool]$False
+#    ShutdownSetupComplete = [bool]$false
+#    SyncMSUpCatDriverUSB = [bool]$false
+#    CheckSHA1 = [bool]$false
+#}
 
 #Launch OSDCloud
 Write-Host "Starting OSDCloud" -ForegroundColor Green
@@ -143,9 +146,6 @@ $OOBEDeployJson = @'
     "AddNetFX3":  {
                       "IsPresent":  false
                   },
-    "Autopilot":  {
-                      "IsPresent":  false
-                  },
     "RemoveAppx":  [
                     "MicrosoftTeams",
                     "Microsoft.BingWeather",
@@ -186,7 +186,7 @@ $OOBEDeployJson = @'
 If (!(Test-Path "C:\ProgramData\OSDeploy")) {
     New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
 }
-#$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
+$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
 
 # Create an Undo disk
