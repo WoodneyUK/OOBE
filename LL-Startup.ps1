@@ -84,12 +84,26 @@ start-sleep 5
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts"
 md c:\temp
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\temp
+
+$setupcomplete = @'
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
+dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+'@
+md c:\windows\Setup\Scripts
+$setupcomplete | out-file c:\windows\Setup\Scripts\SetupComplete.cmd
+
 
 # Load the offline registry hive from the OS volume
 Write-Host "writing to offline registry"
