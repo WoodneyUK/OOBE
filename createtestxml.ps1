@@ -41,9 +41,6 @@ $boottowindows = [xml] @'
                 <Mode>Audit</Mode>
             </Reseal>
         </component>
-        <component name="Microsoft-Windows-International-Core" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <SystemLocale>en-US</SystemLocale>
-        </component>
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <OOBE>
                 <HideEULAPage>true</HideEULAPage>
@@ -90,20 +87,20 @@ $boottowindows = [xml] @'
         </component>
     </settings>
     <settings pass="auditSystem">
-        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
                 <Password>
-                    <Value>P@55w0rd</Value>
-                    <PlainText>true</PlainText>
+                    <Value>UABAADUANQB3ADAAcgBkAFAAYQBzAHMAdwBvAHIAZAA=</Value>
+                    <PlainText>false</PlainText>
                 </Password>
-                <LogonCount>5</LogonCount>
                 <Enabled>true</Enabled>
+                <LogonCount>5</LogonCount>
                 <Username>administrator</Username>
             </AutoLogon>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>P@55w0rd</Value>
-                    <PlainText>true</PlainText>
+                    <Value>UABAADUANQB3ADAAcgBkAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
         </component>
