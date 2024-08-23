@@ -9,6 +9,7 @@ write-host "UserLocale:$($userlocale)"
 Write-host "SystemLocale:$($SysLocale)"
 
 $XMLPath = "c:\windows\panther\unattend\unattend.xml"
+$OOBEPath = "c:\windows\panther\unattend\oobe.xml"
 
 $UnattendXml = [xml] @'
 <?xml version="1.0" encoding="utf-8"?>
@@ -66,17 +67,12 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
                     <Description>LL:Download Audit Mode script</Description>
-                    <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/startAuditMode.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1" -force -encoding ascii"</Path>
+                    <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/StartWinUpdate.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\StartWinUpdate.ps1" -force -encoding ascii"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
-                    <Description>LL:Installing Windows Updates</Description>
-                    <Path>PowerShell -Command "start-windowsupdate"</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>5</Order>
-                    <Description>LL:Execute Audit Mode script</Description>
-                    <Path>PowerShell -Command "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1"</Path>
+                    <Description>LL:Restart</Description>
+                    <Path>PowerShell -Command "c:\Windows\system32\Linklaters\OOBE\StartWinUpdate.ps1"</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -127,5 +123,5 @@ foreach ($setting in $unattendXml.Unattend.Settings) {
     } #end foreach setting.Component
 } #end foreach unattendXml.Unattend.Settings
 
-#$unattendXml.Save($XMLPath)
+$unattendXml.Save($OOBEPath)
 $boottowindows.save($xmlpath)
