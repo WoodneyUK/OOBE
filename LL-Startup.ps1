@@ -48,19 +48,19 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 #$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
 
 #Set OSDCloud Vars
-$Global:MyOSDCloud = [ordered]@{
-    Restart = [bool]$False
-    RecoveryPartition = [bool]$true
-    OEMActivation = [bool]$True
-    WindowsUpdate = [bool]$true
-    WindowsUpdateDrivers = [bool]$false
-    WindowsDefenderUpdate = [bool]$true
-    SetTimeZone = [bool]$true
-    ClearDiskConfirm = [bool]$False
-    ShutdownSetupComplete = [bool]$false
-    SyncMSUpCatDriverUSB = [bool]$false
-    CheckSHA1 = [bool]$false
-}
+#$Global:MyOSDCloud = [ordered]@{
+#    Restart = [bool]$False
+#    RecoveryPartition = [bool]$true
+#    OEMActivation = [bool]$True
+#    WindowsUpdate = [bool]$true
+#    WindowsUpdateDrivers = [bool]$false
+#    WindowsDefenderUpdate = [bool]$true
+#    SetTimeZone = [bool]$true
+#    ClearDiskConfirm = [bool]$False
+#    ShutdownSetupComplete = [bool]$false
+#    SyncMSUpCatDriverUSB = [bool]$false
+#    CheckSHA1 = [bool]$false
+#}
 
 #Launch OSDCloud
 #Write-Host "Starting OSDCloud" -ForegroundColor Green
@@ -86,7 +86,7 @@ Write-Host "Installing Feature on Demand Fonts"
 #md c:\temp
 #copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\temp
 
-$setupcomplete = @'
+
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
@@ -94,6 +94,7 @@ $setupcomplete = @'
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
 #dism /image:c:\ /scratchdir:c:\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
+$setupcomplete = @'
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
@@ -183,7 +184,7 @@ $OOBEDeployJson = @'
 If (!(Test-Path "C:\ProgramData\OSDeploy")) {
     New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
 }
-$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
+#$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
 
 # Create an Undo disk
@@ -212,11 +213,11 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 
 
 # Add a 2 mins delay into Setupcomplete to allow drivers to install before Updates start
-$setupcompletecmd = @'
-timeout 120
-%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\Windows\Setup\scripts\SetupComplete.ps1
-'@
-$setupcompletecmd | Out-File -FilePath "C:\Windows\Setup\Scripts\SetupComplete.cmd" -Encoding ascii -Force
+#$setupcompletecmd = @'
+#timeout 120
+#%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\Windows\Setup\scripts\SetupComplete.ps1
+#'@
+#$setupcompletecmd | Out-File -FilePath "C:\Windows\Setup\Scripts\SetupComplete.cmd" -Encoding ascii -Force
 
 
 
