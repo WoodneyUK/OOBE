@@ -188,8 +188,8 @@ If (!(Test-Path "C:\ProgramData\OSDeploy")) {
 
 
 # Create an Undo disk
-#Write-Host "Create Undo now"
-#pause
+Write-Host "Create Undo now"
+pause
 
 
 # Download custom file(s)
