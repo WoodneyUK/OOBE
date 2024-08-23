@@ -211,6 +211,15 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 & "c:\windows\setup\scripts\createtestxml.ps1" -userlocale $desiredKB
 
 
+# Add a 2 mins delay into Setupcomplete to allow drivers to install before Updates start
+$setupcompletecmd = @'
+timeout 120
+%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\Windows\Setup\scripts\SetupComplete.ps1
+'@
+$setupcompletecmd | Out-File -FilePath "C:\Windows\Setup\Scripts\SetupComplete.cmd" -Encoding ascii -Force
+
+
+
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
 #Write-Host "so i'll just pause and allow you develop some more or restart yourself"
 #Restart-Computer -Force
