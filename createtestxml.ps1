@@ -62,40 +62,45 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
                     <Description>LL:WaitWebConnection</Description>
-                    <Path>PowerShell -Command "Wait-WebConnection powershellgallery.com -Verbose"</Path>
+                    <Path>PowerShell -Command "Start-OOBE.wifi"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
+                    <Description>LL:WaitWebConnection</Description>
+                    <Path>PowerShell -Command "Wait-WebConnection powershellgallery.com -Verbose"</Path>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>4</Order>
                     <Description>LL:Download Audit Mode script</Description>
                     <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/startAuditMode.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1" -force -encoding ascii"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>4</Order>
+                    <Order>5</Order>
                     <Description>LL:Installing Windows Updates</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>5</Order>
+                    <Order>6</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>PowerShell -Command "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>6</Order>
+                    <Order>7</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>shutdown.exe /r /t 00</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>7</Order>
+                    <Order>8</Order>
                     <Description>LL:Rename Unattend.xml</Description>
                     <Path>rename c:\windows\panther\unattend\unattend.xml c:\windows\panther\unattend.old</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>8</Order>
+                    <Order>9</Order>
                     <Description>LL:Rename OOBE.xml</Description>
                     <Path>rename c:\windows\panther\unattend\oobe.xml c:\windows\panther\unattend.xml</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>9</Order>
+                    <Order>10</Order>
                     <Description>LL:Run Sysprep</Description>
                     <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet</Path>
                 </RunSynchronousCommand>
