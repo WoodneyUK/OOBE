@@ -84,22 +84,6 @@ $boottowindows = [xml] @'
                     <Order>6</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
-                    <WillReboot>OnRequest</WillReboot>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>8</Order>
-                    <Description>LL:Rename Unattend.xml</Description>
-                    <Path>rename c:\windows\panther\unattend\unattend.xml unattend.old</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>9</Order>
-                    <Description>LL:Rename OOBE.xml</Description>
-                    <Path>rename c:\windows\panther\unattend\oobe.xml unattend.xml</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>10</Order>
-                    <Description>LL:Run Sysprep</Description>
-                    <Path>c:\windows\system32\sysprep\sysprep.exe /quiet /oobe /reboot /unattend:c:\windows\panther\unattend\unattend.xml</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
