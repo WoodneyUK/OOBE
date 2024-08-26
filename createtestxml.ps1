@@ -100,7 +100,7 @@ $boottowindows = [xml] @'
                     <Order>10</Order>
                     <Description>LL:Run Sysprep</Description>
                     <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet /unattend:c:\windows\panther\unattend.xml</Path>
-                    <WillReboot>OnRequest</WillReboot>
+                    <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
