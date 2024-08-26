@@ -78,16 +78,19 @@ $boottowindows = [xml] @'
                     <Order>5</Order>
                     <Description>LL:Installing Windows Updates</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
+                    <WillReboot>OnRequest</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>6</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
+                    <WillReboot>OnRequest</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>7</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>shutdown.exe /r /t 00</Path>
+                    <WillReboot>OnRequest</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>8</Order>
@@ -103,6 +106,7 @@ $boottowindows = [xml] @'
                     <Order>10</Order>
                     <Description>LL:Run Sysprep</Description>
                     <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet /unattend:c:\windows\panther\unattend.xml</Path>
+                    <WillReboot>OnRequest</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
