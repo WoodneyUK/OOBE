@@ -72,7 +72,7 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
                     <Description>LL:Download Audit Mode script</Description>
-                    <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/startAuditMode.ps1 | out-file "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1" -force -encoding ascii"</Path>
+                    <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/startAuditMode.ps1 | out-file "c:\OSDCloud\startAuditMode.ps1" -force -encoding ascii"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>5</Order>
@@ -82,7 +82,7 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>6</Order>
                     <Description>LL:Execute Audit Mode script</Description>
-                    <Path>PowerShell -Command "c:\Windows\system32\Linklaters\OOBE\startAuditMode.ps1"</Path>
+                    <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>7</Order>
@@ -102,7 +102,7 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>10</Order>
                     <Description>LL:Run Sysprep</Description>
-                    <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet</Path>
+                    <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet /unattend:c:\windows\panther\unattend.xml</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
