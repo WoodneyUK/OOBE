@@ -84,7 +84,7 @@ $boottowindows = [xml] @'
                     <Order>6</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
-                    <WillReboot>Always</WillReboot>
+                    <WillReboot>OnRequest</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>8</Order>
