@@ -99,7 +99,7 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>10</Order>
                     <Description>LL:Run Sysprep</Description>
-                    <Path>c:\windows\system32\sysprep\sysprep.exe /oobe /reboot /quiet /unattend:c:\windows\panther\unattend\unattend.xml</Path>
+                    <Path>c:\windows\system32\sysprep\sysprep.exe /quiet /oobe /reboot /unattend:c:\windows\panther\unattend\unattend.xml</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
