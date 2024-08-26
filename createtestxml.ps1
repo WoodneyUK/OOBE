@@ -89,12 +89,12 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>8</Order>
                     <Description>LL:Rename Unattend.xml</Description>
-                    <Path>rename c:\windows\panther\unattend\unattend.xml c:\windows\panther\unattend\unattend.old</Path>
+                    <Path>rename c:\windows\panther\unattend\unattend.xml unattend.old</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>9</Order>
                     <Description>LL:Rename OOBE.xml</Description>
-                    <Path>rename c:\windows\panther\unattend\unattend\oobe.xml c:\windows\panther\unattend\unattend.xml</Path>
+                    <Path>rename c:\windows\panther\unattend\oobe.xml unattend.xml</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>10</Order>
