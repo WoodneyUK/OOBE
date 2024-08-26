@@ -224,10 +224,7 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 netsh wlan export profile key=clear folder=c:\osdcloud\configs
 
 
-#Write-Host "I would normally Restart Computer now, but not during development :-)"
-#Write-Host "so i'll just pause and allow you develop some more or restart yourself"
-#Restart-Computer -Force
-#pause
-
-write-host "LL Startup script completed, waiting 10 seconds..."
+write-host "LL Startup script completed, waiting 10 seconds then restarting..."
 start-sleep 10
+
+Restart-Computer -Force
