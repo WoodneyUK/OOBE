@@ -3,7 +3,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.6"
+Write-host "LL startup v1.7"
 start-sleep 5
 
 ## Approved Device Checks
@@ -219,6 +219,8 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 #'@
 #$setupcompletecmd | Out-File -FilePath "C:\Windows\Setup\Scripts\SetupComplete.cmd" -Encoding ascii -Force
 
+#Save the wifi profile for use later
+netsh wlan export profile key=clear folder=c:\osdcloud\configs
 
 
 #Write-Host "I would normally Restart Computer now, but not during development :-)"
