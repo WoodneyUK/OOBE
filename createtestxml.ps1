@@ -33,7 +33,7 @@ $UnattendXml = [xml] @'
 </unattend>
 '@
 
-$boottowindows_old = [xml] @'
+$boottowindows = [xml] @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="oobeSystem">
@@ -61,8 +61,8 @@ $boottowindows_old = [xml] @'
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <Description>LL:WaitWebConnection</Description>
-                    <Path>PowerShell -Command "Start-OOBE.wifi"</Path>
+                    <Description>LL:Start Wifi</Description>
+                    <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect.ps1"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
@@ -135,7 +135,7 @@ $boottowindows_old = [xml] @'
 </unattend>
 '@
 
-$boottowindows = [xml] @'
+$boottowindows_old = [xml] @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="oobeSystem">
