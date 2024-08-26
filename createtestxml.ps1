@@ -87,12 +87,6 @@ $boottowindows = [xml] @'
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>7</Order>
-                    <Description>LL:Execute Manual Reboot</Description>
-                    <Path>shutdown.exe /r /t 00</Path>
-                    <WillReboot>Always</WillReboot>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
                     <Order>8</Order>
                     <Description>LL:Rename Unattend.xml</Description>
                     <Path>rename c:\windows\panther\unattend\unattend.xml c:\windows\panther\unattend.old</Path>
