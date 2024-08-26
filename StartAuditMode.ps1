@@ -14,7 +14,9 @@ write-host "This is a custom Audit Mode script"
 rename-item -path c:\windows\panther\unattend\unattend.xml -newname unattend.old
 rename-item -path c:\windows\panther\unattend\oobe.xml -newname unattend.xml
 
-c:\windows\system32\sysprep\sysprep.exe /quiet /reboot /oobe /unattend:c:\windows\panther\unattend\unattend.xml
+start-process -filepath "c:\windows\system32\sysprep\sysprep.exe" -argumentlist "/quiet /reboot /oobe /unattend:c:\windows\panther\unattend\unattend.xml" -wait
+
+
 
 #without reboot
 #exit 0
