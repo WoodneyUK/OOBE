@@ -5,9 +5,17 @@ write-host "This is a custom Audit Mode script"
 
 start-sleep 30
 
+
+
+# with reboot
 # Shell out to reboot
-Start-Process -FilePath "cmd.exe" -ArgumentList '/c "timeout /t 3 /nobreak && shutdown -r -f -t 0"' -WindowStyle Hidden
+#Start-Process -FilePath "cmd.exe" -ArgumentList '/c "timeout /t 3 /nobreak && shutdown -r -f -t 0"' -WindowStyle Hidden
 
 # set exit code 1 so that Windows knows it needs a reboot
 # https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-deployment-runsynchronous-runsynchronouscommand-willreboot#values
-Exit 1
+#Exit 1
+
+
+
+#without reboot
+exit 0
