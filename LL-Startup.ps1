@@ -11,12 +11,14 @@ $lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OO
 #$ApprovedDevices = Get-Content "X:\OSDCloud\Config\Scripts\Startup\approveddevices.txt"
 #$model=Get-CimInstance -ClassName Win32_ComputerSystem
 #$computermodel=$model.Model.substring(0,4)
-$model=Get-CimInstance -ClassName Win32_ComputerSystem | select model -ExpandProperty Model  
+$ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
+$model= $ComputerWMI | select model -ExpandProperty Model
+$manufactuer = $computerWMI | select manufacturer -expandproperty manufacturer
 
-If (($model.Manufacturer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $model)) { 
+If (($manufactuer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $model)) { 
     Write-Warning "This Lenovo Device is Not Approved, please contact EUDM with the part number : [$($model)]"
     Write-Warning "Exiting Script in 5 mins"
-    start-sleep 300
+    start-sleep 30
     exit
     }
 Else { write-host "Supported Device check complete" }
