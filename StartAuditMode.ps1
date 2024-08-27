@@ -5,7 +5,9 @@ write-host "This is a custom Audit Mode script"
 
 #start-sleep 30
 
-
+#Download and execute the cleanup script
+Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/CleanUp.ps1 | out-file "c:\windows\setup\scripts\Cleanup.ps1" -force -encoding ascii
+& "c:\windows\setup\scripts\Cleanup.ps1"
 
 # with reboot
 # Shell out to reboot
