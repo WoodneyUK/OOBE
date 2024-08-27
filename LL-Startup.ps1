@@ -7,17 +7,24 @@ Write-host "LL startup v1.7"
 start-sleep 5
 
 ## Approved Device Checks
-$ApprovedDevices = Get-Content "X:\OSDCloud\Config\Scripts\Startup\approveddevices.txt"
-$model=Get-CimInstance -ClassName Win32_ComputerSystem
-$computermodel=$model.Model.substring(0,4)
-#If (($model.Manufacturer -eq "Lenovo") -and ($approveddevices -notcontains $computermodel)) { Write-Warning "This Lenovo Device is Not Approved, please exit" }
-write-host "Supported Device check complete"
+$lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
+#$ApprovedDevices = Get-Content "X:\OSDCloud\Config\Scripts\Startup\approveddevices.txt"
+#$model=Get-CimInstance -ClassName Win32_ComputerSystem
+#$computermodel=$model.Model.substring(0,4)
+$model=Get-CimInstance -ClassName Win32_ComputerSystem | select model -ExpandProperty Model  
+
+If (($model.Manufacturer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $model)) { 
+    Write-Warning "This Lenovo Device is Not Approved, please contact EUDM with the part number"
+    Write-Warning "Exiting Script in 5 mins"
+    start-sleep 300
+    exit
+    }
+Else { write-host "Supported Device check complete" }
 
 #start-sleep 5
 
 ## Lenovo Keyboard layout
 Write-Host "looking up keyboard layout"
-$lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
 $desiredkb = $lenovolookup | Where-Object {((gwmi win32_computersystem).model) -eq $_.PartNumber} | Select-Object Keyboard -ExpandProperty Keyboard
 if ($desiredkb -eq $null) { 
     Write-Host "Partnumber not found in lookup table, setting keyboard to en-GB"
