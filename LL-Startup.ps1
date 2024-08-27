@@ -18,7 +18,7 @@ $manufactuer = $computerWMI | select manufacturer -expandproperty manufacturer
 If (($manufactuer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $model)) { 
     Write-Warning "This Lenovo Device is Not Approved, please contact EUDM with the part number : [$($model)]"
     Write-Warning "Exiting Script in 5 mins"
-    start-sleep 30
+    start-sleep 300
     exit
     }
 Else { write-host "Supported Device check complete" }
