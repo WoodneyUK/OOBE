@@ -25,7 +25,9 @@ If (($manufactuer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $mod
 Else { write-host "Supported Device check complete" }
 
 If ($manufacturer -eq "Lenovo"){
-    Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1 | &
+    $BIOSScript = Invoke-RestMethod 'https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1'
+    $BIOSScriptBlock = [scriptblock]::Create($BIOSScript.Content)
+    Invoke-Command -ScriptBlock $BIOSScriptBlock
     }
 
 ## Lenovo Keyboard layout
