@@ -37,11 +37,11 @@ $Get_Settings = @(
 $BIOSPWStatus = gwmi win32_computersystem | select adminpasswordstatus -expandproperty adminpasswordstatus
 If ($BIOSPWStatus -eq 0) {
 	cls
- 	write-warning "IMPORTANT : BIOS Password is not set"
+ 	write-warning "IMPORTANT : BIOS Supervisor Password is not set"
 	write-warning "This process will not continue"
  	Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
-  	write-Warning "And Enable the standard BIOS password."
-   	write-Warning "Contact EUDM team for details of the BIOS password"
+  	write-Warning "And enable the standard BIOS Supervisor password."
+   	write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
     	write-Warning "This computer will now restart"
     	pause
      	restart-computer
