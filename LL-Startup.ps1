@@ -4,7 +4,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.7"
+Write-host "LL startup v1.8"
 start-sleep 5
 
 ## Approved Device Checks
