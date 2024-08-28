@@ -8,7 +8,7 @@ Write-host "LL startup v1.8"
 start-sleep 5
 
 ## Approved Device Checks
-$lenovolookup = 'Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv' | ConvertFrom-Csv
+$lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
 $ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
 $model= $ComputerWMI | select model -ExpandProperty Model
 $manufacturer = $computerWMI | select manufacturer -expandproperty manufacturer
@@ -22,7 +22,7 @@ If (($manufacturer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $mo
 Else { write-host "Supported Device check complete" }
 
 If ($manufacturer -eq "Lenovo"){
-    $BIOSScript = Invoke-RestMethod 'https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1'
+    $BIOSScript = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1
     $BIOSScriptBlock = [scriptblock]::Create($BIOSScript.Content)
     Invoke-Command -ScriptBlock $BIOSScriptBlock
     }
