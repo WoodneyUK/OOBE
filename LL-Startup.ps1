@@ -24,7 +24,9 @@ If (($manufactuer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $mod
     }
 Else { write-host "Supported Device check complete" }
 
-#start-sleep 5
+If ($manufacturer -eq "Lenovo"){
+    Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1 | &
+    }
 
 ## Lenovo Keyboard layout
 Write-Host "looking up keyboard layout"
