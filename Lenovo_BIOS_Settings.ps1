@@ -56,6 +56,7 @@ If ($BIOSPWStatus -eq 0) {
     write-Warning "This computer will now restart"
     pause
     restart-computer
+    start-sleep 5
     exit 1    
 }
 Else{ 
@@ -74,7 +75,8 @@ Else{
     	write-Warning "This computer will now restart"
     	pause
      	restart-computer
-        exit 1
+        start-sleep 5
+	exit 1
     }
 }
         
