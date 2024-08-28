@@ -18,7 +18,6 @@ ForEach($OldSecPW in $Json.OldPasswords.OldPasswords){
 
 # Define custom settings
 $Get_Settings = @(
-
 [pscustomobject]@{
 	Setting = 'UserPresenceSensing'
 	Value = 'Disable'
@@ -35,7 +34,7 @@ $Get_Settings = @(
 	}
 
 [pscustomobject]@{
-	Setting = 'MacAddressPassThru'
+	Setting = 'MacAddressPassThrough'
 	Value = 'Enable'
 	}
 
