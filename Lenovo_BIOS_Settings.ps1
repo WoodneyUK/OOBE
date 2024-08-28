@@ -5,6 +5,16 @@ If($Get_Manufacturer_Info -notlike "*lenovo*")
 		EXIT 1			
 	}
 
+## Read Passwords
+[Byte[]]$key = (1..16)
+$json = Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/biossec.json
+$CurrentPW = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($json.CurrentPassword | ConvertTo-SecureString -key $key)))
+$OldPWArray = @()
+ForEach($OldSecPW in $Json.OldPasswords.OldPasswords){
+    $OldPW = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($OldSecPW | ConvertTo-SecureString -key $key)))
+    #$SecureOldPassword = ($OldPassword | ConvertTo-SecureString -AsPlainText -Force) | ConvertFrom-SecureString -Key $key 
+    $OldPWArray += $OldPW
+}
 
 # Define custom settings
 $Get_Settings = @(
