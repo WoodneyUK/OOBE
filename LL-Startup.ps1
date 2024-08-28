@@ -92,17 +92,17 @@ write-host "Windows Restore complete"
 start-sleep 5
 
 # Install Feature On Demand Fonts
-Write-Host "Installing Feature on Demand Fonts"
-md c:\OSDCloud\temp
+#Write-Host "Installing Feature on Demand Fonts"
+#md c:\OSDCloud\temp
 #copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\OSDCloud\temp
 
 
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
+#dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
 $setupcomplete = @'
 dism /online /scratchdir:c:\temp /add-package /packagepath="d:\Temp\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
