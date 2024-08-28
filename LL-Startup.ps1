@@ -8,6 +8,7 @@ Write-host "LL startup v1.8"
 start-sleep 5
 
 ## Approved Device Checks
+$lenovolookup = 'Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv' | ConvertFrom-Csv
 $ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
 $model= $ComputerWMI | select model -ExpandProperty Model
 $manufacturer = $computerWMI | select manufacturer -expandproperty manufacturer
