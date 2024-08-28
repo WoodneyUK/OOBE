@@ -23,9 +23,9 @@ Else { write-host "Supported Device check complete" }
 
 If ($manufacturer -eq "Lenovo"){
     Write-Host "Running BIOS Script"
-    $BIOSScript = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1
-    $BIOSScriptBlock = [scriptblock]::Create($BIOSScript.Content)
-    Invoke-Command -ScriptBlock $BIOSScriptBlock
+    new-item X:\Temp -itemtype Directory
+    $BIOSScript = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1 | out-file "X:\Temp\Lenovo_BIOS_Settings.ps1" -force -encoding ascii
+    & X:\temp\Lenovo_BIOS_Settings.ps1
     }
 
 ## Lenovo Keyboard layout
