@@ -19,11 +19,6 @@ ForEach($OldSecPW in $Json.OldPasswords.OldPasswords){
 # Define custom settings
 $Get_Settings = @(
 [pscustomobject]@{
-	Setting = 'UserPresenceSensing'
-	Value = 'Disable'
-	}
-
-[pscustomobject]@{
 	Setting = 'BIOSUpdateByEndUsers'
 	Value = 'Enable'
 	}
