@@ -110,3 +110,5 @@ Else
 		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"
   		pause
 	}
+
+start-sleep 30
