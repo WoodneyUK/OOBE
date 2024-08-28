@@ -22,8 +22,8 @@ If (($manufacturer -eq "Lenovo") -and ($lenovolookup.partnumber -notcontains $mo
 Else { write-host "Supported Device check complete" }
 
 If ($manufacturer -eq "Lenovo"){
-    Write-Host "Running BIOS Script"
-    new-item X:\Temp -itemtype Directory
+    Write-Host "Checking Lenovo BIOS Settings..."
+    $quiet = new-item X:\Temp -itemtype Directory -force
     $BIOSScript = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1 | out-file "X:\Temp\Lenovo_BIOS_Settings.ps1" -force -encoding ascii
     & X:\temp\Lenovo_BIOS_Settings.ps1
     }
