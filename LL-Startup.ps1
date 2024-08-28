@@ -30,7 +30,7 @@ If ($manufacturer -eq "Lenovo"){
     Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createlenhta.ps1 | out-file "x:\temp\createlenhta.ps1" -force -encoding ascii
     & "x:\temp\createlenhta.ps1"
 
-    X:\Temp\ThinkBiosConfig.hta "file=x:\temp\LenBioSettings.ini" "pass=CzuLf65Qv3CDlEnb"
+    X:\Temp\ThinkBiosConfig.hta '"file=x:\temp\LenBioSettings.ini"' '"pass=CzuLf65Qv3CDlEnb"'
     
     }
 
