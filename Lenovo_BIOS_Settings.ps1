@@ -77,36 +77,51 @@ Else{
     }
 }
         
-
+# Current BIOS Settings
+$currentSettings = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) } | select currentsetting
 
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
 ForEach($Settings in $Get_Settings)
     {
+        
         $MySetting = $Settings.Setting
-        $NewValue = $Settings.Value				
-        $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+        $NewValue = $Settings.Value
 
-        If(($Change_Return_Code) -eq "Success")        								
-            {
-                Write-Host "New value for $($MySetting) is $($NewValue)"  											
-            }
+        $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
+        $currentvalue = ($currentsetting -split ",")[1]
+        
+        If ($currentvalue -eq $NewValue){
+            Write-Host "$($MySetting) is already set to $($NewValue), no change needed"
+        }
         Else
-            {
-                Write-Warning "Cannot change setting $($MySetting) (Return code $($Change_Return_Code))"  											
-            }								
+        {
+        	$SaveNeeded = $true		
+            $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+
+            If(($Change_Return_Code) -eq "Success")        								
+                {
+                    Write-Host "New value for $($MySetting) is $($NewValue)"  											
+                }
+            Else
+                {
+                    Write-Warning "Cannot change setting $($MySetting) (Return code $($Change_Return_Code))"  											
+                }
+        }								
     }
 
 
 
 # Save BIOS change part
-$Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
-$Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
-If(($Save_Change_Return_Code) -eq "Success")
-	{
-		Write-Host "BIOS settings have been saved"																
-	}
-Else
-	{
-		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
-	}
+If ($SaveNeeded -eq $true){
+    $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
+    $Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
+    If(($Save_Change_Return_Code) -eq "Success")
+	    {
+		    Write-Host "BIOS settings have been saved"																
+	    }
+    Else
+	    {
+		    Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
+	    }
+}
