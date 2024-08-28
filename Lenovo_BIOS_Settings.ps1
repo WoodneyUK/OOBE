@@ -24,11 +24,6 @@ $Get_Settings = @(
 	}
 
 [pscustomobject]@{
-	Setting = 'WindowsUEFIFirmwareUpdate'
-	Value = 'Enable'
-	}
-
-[pscustomobject]@{
 	Setting = 'MacAddressPassThrough'
 	Value = 'Enable'
 	}
