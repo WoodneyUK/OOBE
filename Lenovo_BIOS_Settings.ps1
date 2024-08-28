@@ -79,7 +79,22 @@ $Get_Settings = @(
 	Setting = 'WindowsUEFIFirmwareUpdate'
 	Value = 'Enable'
 	}
-)	
+)
+
+$BIOSPWStatus = gwmi win32_computersystem | select adminpasswordstatus -expandproperty adminpasswordstatus
+If ($BIOSPWStatus -eq 0) {
+	cls
+ 	write-warning "IMPORTANT : BIOS Password is not set"
+	write-warning "This process will not continue"
+ 	Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
+  	write-Warning "And Enable the standard BIOS password."
+   	write-Warning "Contact EUDM team for details of the BIOS password"
+    	write-Warning "This computer will now restart"
+    	pause
+     	restart-computer
+}
+
+
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
 ForEach($Settings in $Get_Settings)
