@@ -46,6 +46,7 @@ If ($BIOSPWStatus -eq 0) {
     	pause
      	restart-computer
 }
+Else	{ Write-Host "BIOS password is set"}
 
 
 # Change BIOS settings
