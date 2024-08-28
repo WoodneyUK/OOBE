@@ -18,16 +18,7 @@ ForEach($OldSecPW in $Json.OldPasswords.OldPasswords){
 
 # Define custom settings
 $Get_Settings = @(
-[pscustomobject]@{
-    Setting = 'BootOrder'
-    Value = 'NVMe0:USBHDD'
-    }
 
-[pscustomobject]@{
-    Setting = 'BootOrderLock'
-    Value = 'Enable'
-    }
-	
 [pscustomobject]@{
 	Setting = 'UserPresenceSensing'
 	Value = 'Disable'
@@ -42,6 +33,16 @@ $Get_Settings = @(
 	Setting = 'WindowsUEFIFirmwareUpdate'
 	Value = 'Enable'
 	}
+
+[pscustomobject]@{
+	Setting = 'MacAddressPassThru'
+	Value = 'Enable'
+	}
+
+[pscustomobject]@{
+	Setting = 'PhysicalPresenceForTpmClear'
+	Value = 'Disable'
+	}
 )
 
 $BIOSPWStatus = gwmi win32_computersystem | select adminpasswordstatus -expandproperty adminpasswordstatus
@@ -52,11 +53,31 @@ If ($BIOSPWStatus -eq 0) {
  	Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
   	write-Warning "And enable the standard BIOS Supervisor password."
    	write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
+    write-Warning "This computer will now restart"
+    pause
+    restart-computer
+    exit 1    
+}
+Else{ 
+    
+    # Attempt to check if password is correct
+    $returnpap = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordType:pap")
+    $returnPW = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordCurrent01:$CurrentPW") | select Return -ExpandProperty Return
+    If ($returnPW -ne "Success"){
+        #Wrong Password
+        cls
+ 	    write-warning "IMPORTANT : A BIOS Supervisor Password is set, but is **WRONG**"
+	    write-warning "This process will not continue"
+ 	    Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
+  	    write-Warning "And enable the standard BIOS Supervisor password."
+   	    write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
     	write-Warning "This computer will now restart"
     	pause
      	restart-computer
+        exit 1
+    }
 }
-Else	{ Write-Host "BIOS password is set"}
+        
 
 
 # Change BIOS settings
@@ -65,7 +86,7 @@ ForEach($Settings in $Get_Settings)
     {
         $MySetting = $Settings.Setting
         $NewValue = $Settings.Value				
-        $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+        $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$CurrentPW,ascii,us").Return
 
         If(($Change_Return_Code) -eq "Success")        								
             {
@@ -79,12 +100,13 @@ ForEach($Settings in $Get_Settings)
 
 # Save BIOS change part
 $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
-$Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
+$Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings("$CurrentPW,ascii,US").Return		
 If(($Save_Change_Return_Code) -eq "Success")
 	{
 		Write-Host "BIOS settings have been saved"																
 	}
 Else
 	{
-		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
+		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"
+  		pause
 	}
