@@ -56,15 +56,19 @@ If ($BIOSPWStatus -eq 0) {
     write-Warning "This computer will now restart"
     pause
     restart-computer
-    start-sleep 5
-    exit 1    
+    exit    
 }
 Else{ 
     
-    # Attempt to check if password is correct
-    $returnpap = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordType:pap")
-    $returnPW = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordCurrent01:$CurrentPW") | select Return -ExpandProperty Return
-    If ($returnPW -ne "Success"){
+    # Use WMIOpCodeInterface to specify SuperVisor Password
+    # https://docs.lenovocdrt.com/ref/bios/wmi/wmi_guide/#password-authentication
+    #
+    $returnOP = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW") | select Return -ExpandProperty Return
+    If(($returnOP) -eq "Success")
+	    {
+		    Write-Host "BIOS SuperVisor Password is correct"																
+	    }
+    Else{
         #Wrong Password
         cls
  	    write-warning "IMPORTANT : A BIOS Supervisor Password is set, but is **WRONG**"
@@ -75,8 +79,7 @@ Else{
     	write-Warning "This computer will now restart"
     	pause
      	restart-computer
-        start-sleep 5
-	exit 1
+        exit
     }
 }
         
@@ -88,7 +91,7 @@ ForEach($Settings in $Get_Settings)
     {
         $MySetting = $Settings.Setting
         $NewValue = $Settings.Value				
-        $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$CurrentPW,ascii,us").Return
+        $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
 
         If(($Change_Return_Code) -eq "Success")        								
             {
@@ -100,17 +103,16 @@ ForEach($Settings in $Get_Settings)
             }								
     }
 
+
+
 # Save BIOS change part
 $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
-$Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings("$CurrentPW,ascii,US").Return		
+$Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
 If(($Save_Change_Return_Code) -eq "Success")
 	{
 		Write-Host "BIOS settings have been saved"																
 	}
 Else
 	{
-		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"
-  		pause
+		Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
 	}
-
-start-sleep 30
