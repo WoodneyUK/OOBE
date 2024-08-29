@@ -62,9 +62,9 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 #$OSName = 'Windows 11 23H2 x64'
 #$OSEdition = 'Enterprise'
 #$OSActivation = 'Volume'
-#$OSImageIndex = 6
+$OSImageIndex = 3
 #$OSLanguage = $desiredkb
-#$imagefilelocation = "d:\osdcloud\os\22631.2861.231204-0538.23H2_NI_RELEASE_SVC_REFRESH_CLIENTBUSINESS_VOL_x64FRE_en-us.esd"
+$Imagefileitem = "D:\osdcloud\os\install.wim"
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
