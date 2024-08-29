@@ -30,9 +30,12 @@ If ($manufacturer -eq "Lenovo"){
 
 ## Lenovo Keyboard layout
 Write-Host "looking up keyboard layout"
-$desiredkb = $lenovolookup | Where-Object {((gwmi win32_computersystem).model) -eq $_.PartNumber} | Select-Object Keyboard -ExpandProperty Keyboard
+$Partnum = ((gwmi win32_computersystem).model)
+$desiredkb = $lenovolookup | Where-Object {$Partnum -eq $_.PartNumber} | Select-Object Keyboard -ExpandProperty Keyboard
 if ($desiredkb -eq $null) { 
     Write-Host "Partnumber not found in lookup table, setting keyboard to en-GB"
+    Write-Host "Please request EUDM team to add the part number/keyboard mapping PN:[$($Partnum)]"
+    pause
     $desiredkb = "en-GB" 
     }
 Else { Write-Host "Keyboard detected as $desiredkb" }
