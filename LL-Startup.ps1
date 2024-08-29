@@ -62,9 +62,9 @@ Else { Write-Host "Keyboard detected as $desiredkb" }
 #$OSName = 'Windows 11 23H2 x64'
 #$OSEdition = 'Enterprise'
 #$OSActivation = 'Volume'
-$OSImageIndex = 3
+#$OSImageIndex = 3
 #$OSLanguage = $desiredkb
-$Imagefileitem = "D:\osdcloud\os\install.wim"
+#$Imagefileitem = "D:\osdcloud\os\install.wim"
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
@@ -79,6 +79,11 @@ $Global:MyOSDCloud = [ordered]@{
     ShutdownSetupComplete = [bool]$false
     SyncMSUpCatDriverUSB = [bool]$false
     CheckSHA1 = [bool]$false
+    OSImageIndex = [int32]6
+    ImageFileLocation = [string]"D:\osdcloud\os\install.wim"
+    OSVersion = [string]"Windows 11"
+    OSReleaseID = [string]"23H2"
+    OSActivation = [bool]$true
 }
 
 #Launch OSDCloud
