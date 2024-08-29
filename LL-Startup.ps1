@@ -182,9 +182,9 @@ $OOBEDeployJson = @'
                       }
 }
 '@
-If (!(Test-Path "C:\ProgramData\OSDeploy")) {
-    New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
-}
+#If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+#    New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
+#}
 #$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
 
 
@@ -202,7 +202,7 @@ If (!(Test-Path "C:\ProgramData\OSDeploy")) {
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/OOBEDeploy.ps1 | out-file "c:\windows\setup\scripts\oobe.ps1" -force -encoding ascii
 #Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/oobe.cmd | out-file "c:\windows\setup\scripts\oobe.cmd" -force -encoding ascii
 Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/createtestxml.ps1 | out-file "c:\windows\setup\scripts\createtestxml.ps1" -force -encoding ascii
-invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/wificonnect.ps1 | out-file "c:\windows\setup\scripts\wificonnect.ps1" -force -encoding ascii
+#invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/wificonnect.ps1 | out-file "c:\windows\setup\scripts\wificonnect.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 New-Item c:\windows\panther\unattend -force -ItemType Directory
