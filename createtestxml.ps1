@@ -65,11 +65,6 @@ $boottowindows = [xml] @'
                     <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect.ps1"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>3</Order>
-                    <Description>LL:WaitWebConnection</Description>
-                    <Path>PowerShell -Command "Wait-WebConnection powershellgallery.com -Verbose"</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
                     <Description>LL:Download Audit Mode script</Description>
                     <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/StartAuditMode.ps1 | out-file "c:\OSDCloud\startAuditMode.ps1" -force -encoding ascii"</Path>
