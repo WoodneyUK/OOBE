@@ -102,8 +102,8 @@ start-sleep 5
 
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts..."
-md c:\OSDCloud\temp
-md c:\Windows\system32\linklaters\logs
+new-item c:\OSDCloud\temp -itemtype directory -force
+new-item c:\Windows\system32\linklaters\logs -itemtype directory -force
 #copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\OSDCloud\temp
 
 dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab" /logpath:c:\Windows\system32\linklaters\logs
