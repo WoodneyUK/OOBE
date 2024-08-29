@@ -4,25 +4,7 @@
 
 
 
-write-host "This is a custom Audit Mode script"
-
-$logfilesroot = c:\windows\system32\linkfiles\logfiles
-new-item c:\windows\system32\linkfiles\logfiles -itemtype directory -force
-
-$FODs = @(
-"Language.Fonts.Arab~~~und-ARAB~0.0.1.0"
-"Language.Fonts.Hans~~~und-HANS~0.0.1.0"
-"Language.Fonts.Hant~~~und-HANT~0.0.1.0"
-"Language.Fonts.Jpan~~~und-JPAN~0.0.1.0"
-"Language.Fonts.Kore~~~und-KORE~0.0.1.0"
-"Language.Fonts.Thai~~~und-THAI~0.0.1.0"
-)
-
-foreach($FoDItem in $FODs) {
-
-    Add-WindowsCapability -Name $FoDItem -Online -LogPath "$LogFilesRoot\$FoDItem.log" -LogLevel WarningsInfo -ErrorAction Stop
-
-}
+write-host "TRunning the Audit Mode script..."
 
 
 #Download and execute the cleanup script
