@@ -23,6 +23,7 @@ If ($selection -eq 'q') {
     start-sleep 5
     restart-computer -force
 }ElseIf ($selection -eq  '2') {
+    # Call the get-windowsautopiliotinfo script
     Write-Host "Not yet implemented, sorry.  Now restarting"
     pause
     restart-computer -force
