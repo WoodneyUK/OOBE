@@ -1,4 +1,4 @@
-# Script goes here to cleanup the disk after OS installation
+##  Script runs in full Windows11 Audit mode
 
 try { stop-transcript }
 catch { Write-host "Transcript not running"}
