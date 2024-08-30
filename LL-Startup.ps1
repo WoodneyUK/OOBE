@@ -88,6 +88,7 @@ $Global:MyOSDCloud = [ordered]@{
     ImageFileFullName = [string]"D:\osdcloud\os\install.wim"
     ImageFileItem = @{fullname = "D:\osdcloud\os\install.wim"}
     ImageFileName = [string]"install.wim"
+    ZTI = $true
 }
 
 #Launch OSDCloud
