@@ -259,10 +259,7 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 #$setupcompletecmd | Out-File -FilePath "C:\Windows\Setup\Scripts\SetupComplete.cmd" -Encoding ascii -Force
 
 #Save the wifi profile for use later
-#netsh wlan export profile key=clear folder=c:\osdcloud\configs
-
-set-setupcompletesetwifi
-start-sleep 30
+netsh wlan export profile key=clear folder=c:\osdcloud\configs
 
 write-host "LL Startup script completed, waiting 10 seconds then restarting..."
 start-sleep 10
