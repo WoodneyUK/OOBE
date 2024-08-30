@@ -96,7 +96,7 @@ $Global:MyOSDCloud = [ordered]@{
 
 #Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage
 
-start-osdcloudcli
+invoke-osdcloud
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 
