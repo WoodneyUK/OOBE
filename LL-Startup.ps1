@@ -2,12 +2,15 @@
 ## edit-osdcloudwinpe -StartURL https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LL-Startup.ps1
 ## update-osdcloudusb
 
+##  Script runs in WINPE
+
+
 ## Run from URL
 Write-Host "Running from Github"
 Write-host "LL startup v1.9"
 start-sleep 5
 
-$global:ScriptRootURL = "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/"
+$Global:ScriptRootURL = "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/"
 
 ## Approved Device Checks
 $lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
@@ -126,13 +129,13 @@ $HivePath = "c:\Windows\System32\config\SOFTWARE"
 reg load "HKLM\NewOS" $HivePath 
 Start-Sleep -Seconds 5
 
-# Set LL Office Info
+# Set ScriptRootURL
 $RegistryKey = "HKLM:\NewOS\Linklaters" 
 $Result = New-Item -Path $RegistryKey -ItemType Directory -Force
 $Result.Handle.Close()
-$RegistryValue = "LLOfficeLang"
+$RegistryValue = "LLScriptRootURL"
 $RegistryValueType = "String"
-$RegistryValueData = $LLOffice
+$RegistryValueData = $ScriptRootURL
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
 
 # Set OOBE wallpaper
@@ -147,7 +150,7 @@ $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
 Get-Variable Registry* | Remove-Variable
-#Start-Sleep -Seconds 5
+Start-Sleep -Seconds 5
 
 # Unload the registry hive
 Set-Location X:\
