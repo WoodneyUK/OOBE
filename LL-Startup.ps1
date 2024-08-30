@@ -10,6 +10,25 @@ Write-Host "Running from Github"
 Write-host "LL startup v1.9.1"
 start-sleep 5
 
+
+## Basic Menu
+Clear-Host
+Write-Host "1 - Install Windows 11"
+Write-Host "2 - Gather Intune Hardware Hash"
+Write-Host "Q - quit and restart"
+$selection = Read-Host "Enter selection [1,2,Q]"
+
+If ($selection -eq 'q') {
+    Write-Host "restarting"
+    start-sleep 5
+    restart-computer -force
+}ElseIf ($selection -eq  '2') {
+    Write-Host "Not yet implemented, sorry.  Now restarting"
+    pause
+    restart-computer -force
+}
+Write-Host "Continuing to Install Windows..."
+
 $Global:ScriptRootURL = "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/"
 
 ## Approved Device Checks
