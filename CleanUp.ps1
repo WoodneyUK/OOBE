@@ -7,4 +7,5 @@ new-item c:\windows\system32\linklaters\logs -itemtype directory -force
 
 copy-item -path c:\osdcloud\logs\*.* -destination c:\windows\system32\linklaters\logs -recurse
 
-remove-item c:\osdcloud -force -recurse
+Get-ChildItem -Path c:\osdcloud -Recurse | Remove-Item -force -recurse
+remove-item c:\osdcloud -force
