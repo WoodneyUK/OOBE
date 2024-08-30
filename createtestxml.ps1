@@ -56,7 +56,7 @@ $boottowindows = [xml] @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
                     <Description>LL:Start Wifi</Description>
-                    <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect_old.ps1"</Path>
+                    <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect.ps1"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
