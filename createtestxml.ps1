@@ -1,3 +1,5 @@
+##  Script runs in WINPE
+
 [CmdletBinding()]
     param (
         [String]$userlocale = "en-US"
