@@ -20,7 +20,7 @@ Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/CleanUp.
 
 
 # Finalize the device and return to OOBE
-
+Set-ExecutionPolicy Restricted -Force
 rename-item -path c:\windows\panther\unattend\unattend.xml -newname unattend.old
 rename-item -path c:\windows\panther\unattend\oobe.xml -newname unattend.xml
 start-process -filepath "c:\windows\system32\sysprep\sysprep.exe" -argumentlist "/quiet /reboot /oobe /unattend:c:\windows\panther\unattend\unattend.xml" -wait
