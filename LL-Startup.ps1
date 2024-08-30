@@ -245,4 +245,4 @@ netsh wlan export profile key=clear folder=c:\osdcloud\configs
 write-host "LL Startup script completed, waiting 10 seconds then restarting..."
 start-sleep 10
 
-#Restart-Computer -Force
+Restart-Computer -Force
