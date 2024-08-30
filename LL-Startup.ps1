@@ -7,6 +7,8 @@ Write-Host "Running from Github"
 Write-host "LL startup v1.9"
 start-sleep 5
 
+$global:ScriptRootURL = "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/"
+
 ## Approved Device Checks
 $lenovolookup = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv | ConvertFrom-Csv
 $ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
