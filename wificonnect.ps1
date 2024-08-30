@@ -1,4 +1,4 @@
-##  Script runs in full Windows 11
+##  Script is accessed in WinPE, copied to device and executed in full Windows 11 during Audit mode
 
 $connection = Get-Content "C:\OSDCloud\configs\WiFi.JSON" -raw | Convertfrom-json
 
