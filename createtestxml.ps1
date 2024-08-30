@@ -50,29 +50,30 @@ $boottowindows = [xml] @'
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <Description>LL:Set ExecutionPolicy Bypass</Description>
-                    <Path>PowerShell -WindowStyle Hidden -Command "Set-ExecutionPolicy Bypass -Force"</Path>
+                    <Description>LL:Start Wifi</Description>
+                    <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect.ps1" -executionpolicy bypass</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <Description>LL:Start Wifi</Description>
-                    <Path>PowerShell -Command "c:\windows\setup\scripts\wificonnect.ps1"</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>3</Order>
                     <Description>LL:Download Audit Mode script</Description>
                     <Path>PowerShell -Command "Invoke-restmethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/StartAuditMode.ps1 | out-file "c:\OSDCloud\startAuditMode.ps1" -force -encoding ascii"</Path>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <Description>LL:Installing Windows Updates - Run 1</Description>
+                    <Path>PowerShell -Command "start-windowsupdate"</Path>
+                    <WillReboot>Always</WillReboot>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
-                    <Description>LL:Installing Windows Updates</Description>
+                    <Description>LL:Installing Windows Updates - Run 2</Description>
                     <Path>PowerShell -Command "start-windowsupdate"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>5</Order>
                     <Description>LL:Execute Audit Mode script</Description>
-                    <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
+                    <Path>PowerShell -Command "c:\OSDCloud\startAuditMode.ps1" -executionpolicy bypass</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
