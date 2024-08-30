@@ -1,3 +1,5 @@
+##  Script runs in WINPE
+
 $Get_Manufacturer_Info = (Get-WmiObject win32_computersystem).Manufacturer
 If($Get_Manufacturer_Info -notlike "*lenovo*")	
 	{
