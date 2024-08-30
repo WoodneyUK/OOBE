@@ -47,10 +47,17 @@ If ($BIOSPWStatus -eq 0) {
  	Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
   	write-Warning "And enable the standard BIOS Supervisor password."
    	write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
-    write-Warning "This computer will now restart"
-    pause
-    restart-computer
-    exit    
+	$BIOSinput = read-host -Prompt "Computer will now restart, unless you type CONTINUE"
+
+	If ($BIOSinput -ne "CONTINUE"){ 
+ 		Write-host "now restarting..."
+       		restart-computer -force
+    		start-sleep 5  
+   	}
+    	Else {
+     		Write-Host "This is for testing only.  Production devices should have a BIOS supervisor password"
+        	pause
+	}
 }
 Else{ 
     
@@ -70,10 +77,16 @@ Else{
  	    Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
   	    write-Warning "And enable the standard BIOS Supervisor password."
    	    write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
-    	write-Warning "This computer will now restart"
-    	pause
-     	restart-computer
-        exit
+	    $BIOSinput = read-host -Prompt "Computer will now restart, unless you type CONTINUE"
+ 	    If ($BIOSinput -ne "CONTINUE"){ 
+ 	        Write-host "now restarting..."
+       		restart-computer -force
+    		start-sleep 5  
+   	    }
+    	    Else {
+     		Write-Host "Please contact EUDM team to have them update the BIOS password DB"
+        	pause
+	    }    	
     }
 }
         
