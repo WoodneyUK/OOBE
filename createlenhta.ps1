@@ -1,3 +1,5 @@
+##  Script runs in WINPE
+
 $code=@'
 <!--
   --Filename: 		ThinkBiosConfig.hta
