@@ -84,11 +84,10 @@ $Global:MyOSDCloud = [ordered]@{
     ShutdownSetupComplete = [bool]$false
     SyncMSUpCatDriverUSB = [bool]$false
     CheckSHA1 = [bool]$false
-    OSImageIndex = [int32]6
-    ImageFileLocation = [string]"D:\osdcloud\os\install.wim"
-    OSVersion = [string]"Windows 11"
-    OSReleaseID = [string]"23H2"
-    OSActivation = [bool]$true
+    OSImageIndex = [int32]3
+    ImageFileFullName = [string]"D:\osdcloud\os\install.wim"
+    ImageFileItem = @{fullname = "D:\osdcloud\os\install.wim"}
+    ImageFileName = [string]"install.wim"
 }
 
 #Launch OSDCloud
@@ -96,7 +95,8 @@ $Global:MyOSDCloud = [ordered]@{
 #write-host "Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage"
 
 #Start-OSDCloud -OSName $OSName -OSEdition $OSEdition -OSActivation $OSActivation -OSLanguage $OSLanguage
-#start-osdcloudcli -zti -OSActivation $OSActivation -imagefileurl $imagefilelocation -OSImageIndex = 6
+
+start-osdcloudcli
 
 #Start-OSDCloud -OSName "Windows 11 23H2 x64" -OSLanguage en-US -OSEdition Enterprise -OSActivation Volume
 
@@ -104,7 +104,7 @@ $Global:MyOSDCloud = [ordered]@{
 #Start-OSDCloud -ImagefileURL $isofilelocation -ZTI -OSImageIndex 6
 
 #Use this with an .esd file - SJW latest
-Start-OSDCloud -findimagefile -ZTI
+#Start-OSDCloud -findimagefile -ZTI
 
 
 write-host "Windows Restore complete"
