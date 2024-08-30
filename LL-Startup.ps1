@@ -7,7 +7,7 @@
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.9"
+Write-host "LL startup v1.9.1"
 start-sleep 5
 
 $Global:ScriptRootURL = "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/"
@@ -30,7 +30,7 @@ If ($manufacturer -eq "Lenovo"){
     Write-Host "Checking Lenovo BIOS Settings..."
     $quiet = new-item X:\Temp -itemtype Directory -force
     $BIOSScript = Invoke-RestMethod https://raw.githubusercontent.com/WoodneyUK/OOBE/main/Lenovo_BIOS_Settings.ps1 | out-file "X:\Temp\Lenovo_BIOS_Settings.ps1" -force -encoding ascii
-  # & X:\temp\Lenovo_BIOS_Settings.ps1
+    & X:\temp\Lenovo_BIOS_Settings.ps1
     }
 
 ## Lenovo Keyboard layout
