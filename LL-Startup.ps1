@@ -21,14 +21,12 @@ $selection = Read-Host "Enter selection [1,2,Q]"
 If ($selection -eq 'q') {
     Write-Host "restarting"
     start-sleep 5
-    restart-computer -force
-    exit
+    wpeutil reboot
 }ElseIf ($selection -eq  '2') {
     # Call the get-windowsautopiliotinfo script
     Write-Host "Not yet implemented, sorry.  Now restarting"
     pause
-    restart-computer -force
-    exit
+    wpeutil reboot
 }
 Write-Host "Continuing to Install Windows..."
 
