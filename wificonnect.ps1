@@ -1,3 +1,5 @@
+##  Script runs in full Windows 11
+
 $connection = Get-Content "C:\OSDCloud\configs\WiFi.JSON" -raw | Convertfrom-json
 
 Get-ChildItem c:\osdcloud\configs\*.xml | foreach {
