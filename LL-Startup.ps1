@@ -14,7 +14,7 @@ start-sleep 5
 ## Basic Menu
 Clear-Host
 Write-Host "1 - Install Windows 11"
-Write-Host "2 - Gather Intune Hardware Hash"
+Write-Host "2 - Gather Intune Hardware Hash for Physical Devices (not supported on VMs)"
 Write-Host "Q - quit and restart"
 $selection = Read-Host "Enter selection [1,2,Q]"
 
@@ -24,8 +24,10 @@ If ($selection -eq 'q') {
     wpeutil reboot
 }ElseIf ($selection -eq  '2') {
     # Call the get-windowsautopiliotinfo script
-    Write-Host "Not yet implemented, sorry.  Now restarting"
-    pause
+    Invoke-RestMethod https://st2uupbw11seuwq01.blob.core.windows.net/oobe/hh/gethh.ps1 | out-file $env:temp\gethh1.ps1
+    & $env:temp\gethh1.ps1
+    #Write-Host "Not yet implemented, sorry.  Now restarting"
+    #pause
     wpeutil reboot
 }
 Write-Host "Continuing to Install Windows..."
