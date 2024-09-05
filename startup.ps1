@@ -1,5 +1,5 @@
 ## To update the Boot WIM
-## edit-osdcloudwinpe -StartURL https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LL-Startup.ps1
+## edit-osdcloudwinpe -StartURL https://st2uupbw11seuwq01.blob.core.windows.net/oobe/ll-startup.ps1
 ## update-osdcloudusb
 
 ##  Script runs in WINPE
