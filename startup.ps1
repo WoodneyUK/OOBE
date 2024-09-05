@@ -13,15 +13,13 @@ start-sleep 5
 
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
-#$USBDriveLetter = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud')} | Select-Object -First 1 | select -expand DriveLetter
-#$USBVersiontxt = "$($USBDriveLetter):\OSDCloud\MediaVersion.txt"
-#[decimal]$usbver = get-content $USBVersiontxt -ErrorAction SilentlyContinue
-#If ($usbver -lt $minimumusb){
-#    Write-Warning "USB version is too low, please rebuild this using latest USB iso"
-#    Write-Warning "Cannot continue, restarting"
-#    pause
-#    }
-#Else{ Write-Host "USB version check completed" }
+[decimal]$usbver = get-content "D:\OSDCloud\MediaVersion.txt" -ErrorAction SilentlyContinue
+If ($usbver -lt $minimumusb){
+    Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumver)], please rebuild this using latest USB iso"
+    Write-Warning "Cannot continue, restarting"
+    pause
+    }
+Else{ Write-Host "USB version check completed" }
 
 
 ## Basic Menu
