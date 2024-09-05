@@ -4,7 +4,7 @@
 
 ##  Script runs in WINPE
 
-$minimumusb = 1.0
+[decimal]$minimumusb = 1.0
 
 ## Run from URL
 Write-host "LL startup v1.9.2"
@@ -15,7 +15,7 @@ start-sleep 5
 #Use a decimal var so that it will be 0 if version.txt does not exist
 [decimal]$usbver = get-content "D:\OSDCloud\MediaVersion.txt" -ErrorAction SilentlyContinue
 If ($usbver -lt $minimumusb){
-    Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumver)], please rebuild this using latest USB iso"
+    Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumusb)], please rebuild this using latest USB iso"
     Write-Warning "Cannot continue, restarting"
     pause
     }
