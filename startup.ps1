@@ -16,6 +16,7 @@ start-sleep 5
 [decimal]$usbver = get-content "D:\OSDCloud\MediaVersion.txt" -ErrorAction SilentlyContinue
 If ($usbver -lt $minimumusb){
     Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumusb)], please rebuild this using latest USB iso"
+    Write-Warning "Latest ISO is available : [\\acopfs05\sccm$\OSD\LL_W11_BootUSB]"
     Write-Warning "Cannot continue, restarting"
     pause
     }
