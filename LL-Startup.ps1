@@ -9,7 +9,7 @@ $minimumusb = 1.0
 ## Run from URL
 Write-Host "Running from Github"
 Write-host "LL startup v1.9.2"
-start-sleep 5
+#start-sleep 5
 
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
