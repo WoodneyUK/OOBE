@@ -4,11 +4,22 @@
 
 ##  Script runs in WINPE
 
+$minimumusb = 1.0
 
 ## Run from URL
 Write-Host "Running from Github"
-Write-host "LL startup v1.9.1"
+Write-host "LL startup v1.9.2"
 start-sleep 5
+
+## USB version check
+#Use a decimal var so that it will be 0 if version.txt does not exist
+[decimal]$usbver = get-content C:\temp\version.txt -ErrorAction SilentlyContinue
+If ($usbver -lt $minimumusb){
+    Write-Warning "USB version is too low, please rebuild this using latest USB iso"
+    Write-Warning "Cannot continue, restarting"
+    pause
+    }
+Else{ Write-Host "USB version check completed" }
 
 
 ## Basic Menu
