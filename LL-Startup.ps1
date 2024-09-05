@@ -13,7 +13,9 @@ Write-host "LL startup v1.9.2"
 
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
-[decimal]$usbver = get-content C:\temp\version.txt -ErrorAction SilentlyContinue
+$USBDriveLetter = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') | Select-Object -First 1 | select -expand DriveLetter
+$USBVersiontxt = "$($USBDriveLetter):\OSDCloud\MediaVersion.txt"
+[decimal]$usbver = get-content $USBVersiontxt -ErrorAction SilentlyContinue
 If ($usbver -lt $minimumusb){
     Write-Warning "USB version is too low, please rebuild this using latest USB iso"
     Write-Warning "Cannot continue, restarting"
