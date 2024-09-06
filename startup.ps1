@@ -153,6 +153,7 @@ reg unload "HKLM\NewOS"
 # Download custom file(s)
 Invoke-restmethod -uri "$($Global:ScriptRootURL)/createxml.ps1" | out-file "c:\windows\setup\scripts\createxml.ps1" -force -encoding ascii
 invoke-restmethod -uri "$($Global:ScriptRootURL)/wificonnect.ps1" | out-file "c:\windows\setup\scripts\wificonnect.ps1" -force -encoding ascii
+Invoke-restmethod -uri "$($Global:ScriptRootURL)/CleanUp.ps1" | out-file "c:\windows\setup\scripts\LLCleanup.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 New-Item c:\windows\panther\unattend -force -ItemType Directory
