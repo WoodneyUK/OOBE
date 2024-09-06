@@ -88,17 +88,17 @@ $boottowindows = [xml] @'
     <settings pass="auditSystem">
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
-                <Password>
-                    <Value>UABAADUANQB3ADAAcgBkAFAAYQBzAHMAdwBvAHIAZAA=</Value>
-                    <PlainText>false</PlainText>
-                </Password>
                 <Enabled>true</Enabled>
                 <LogonCount>5</LogonCount>
                 <Username>administrator</Username>
+                <Password>
+                    <Value>aABhAC4ANwBmAHoANgApAFAAagB3AHAAIQBxACUAYwA7AFMALQB9AFYANQBQAGEAcwBzAHcAbwByAGQA</Value>
+                    <PlainText>false</PlainText>
+                </Password>
             </AutoLogon>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>UABAADUANQB3ADAAcgBkAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <Value>aABhAC4ANwBmAHoANgApAFAAagB3AHAAIQBxACUAYwA7AFMALQB9AFYANQBBAGQAbQBpAG4AaQBzAHQAcgBhAHQAbwByAFAAYQBzAHMAdwBvAHIAZAA=</Value>
                     <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
