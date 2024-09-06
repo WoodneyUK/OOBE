@@ -36,7 +36,7 @@ $UnattendXml = [xml] @'
 </unattend>
 '@
 
-$boottowindows = [xml] @"
+$boottowindows = [xml] @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="oobeSystem">
@@ -106,53 +106,8 @@ $boottowindows = [xml] @"
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
-"@
-
-$boottowindows_old = [xml] @'
-<?xml version="1.0" encoding="utf-8"?>
-<unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <settings pass="oobeSystem">
-        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <Reseal>
-                <Mode>Audit</Mode>
-            </Reseal>
-        </component>
-        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <OOBE>
-                <HideEULAPage>true</HideEULAPage>
-                <HideLocalAccountScreen>true</HideLocalAccountScreen>
-                <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
-                <ProtectYourPC>3</ProtectYourPC>
-            </OOBE>
-        </component>
-    </settings>
-    <settings pass="specialize">
-        <component name="Microsoft-Windows-International-Core" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <SystemLocale>en-US</SystemLocale>
-        </component>
-    </settings>
-    <settings pass="auditSystem">
-        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <AutoLogon>
-                <Password>
-                    <Value>UABAADUANQB3ADAAcgBkAFAAYQBzAHMAdwBvAHIAZAA=</Value>
-                    <PlainText>false</PlainText>
-                </Password>
-                <Enabled>true</Enabled>
-                <LogonCount>5</LogonCount>
-                <Username>administrator</Username>
-            </AutoLogon>
-            <UserAccounts>
-                <AdministratorPassword>
-                    <Value>UABAADUANQB3ADAAcgBkAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
-                    <PlainText>false</PlainText>
-                </AdministratorPassword>
-            </UserAccounts>
-        </component>
-    </settings>
-    <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
-</unattend>
 '@
+
 
 $result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
 
