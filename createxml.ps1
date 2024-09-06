@@ -69,7 +69,7 @@ $boottowindows = [xml] @"
                 <RunSynchronousCommand wcm:action="add">
                     <Order>4</Order>
                     <Description>LL:Execute Audit Mode script</Description>
-                    <Path>PowerShell -executionpolicy bypass -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
+                    <Path>PowerShell -executionpolicy bypass -Command "c:\windows\setup\scripts\startauditmode.ps1"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
