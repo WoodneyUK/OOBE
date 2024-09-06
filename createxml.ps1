@@ -36,7 +36,7 @@ $UnattendXml = [xml] @'
 </unattend>
 '@
 
-$boottowindows = [xml] @'
+$boottowindows = [xml] @"
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="oobeSystem">
@@ -106,7 +106,7 @@ $boottowindows = [xml] @'
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
-'@
+"@
 
 
 $result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
