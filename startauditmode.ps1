@@ -7,10 +7,6 @@
 
 
 write-host "TRunning the Audit Mode script..."
-
-
-#Download and execute the cleanup script
-Invoke-restmethod "$($Global:ScriptRootURL)/CleanUp.ps1" | out-file "c:\windows\setup\scripts\LLCleanup.ps1" -force -encoding ascii
 & "c:\windows\setup\scripts\LLCleanup.ps1"
 
 
