@@ -56,23 +56,18 @@ $boottowindows = [xml] @"
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <Description>LL:Download Audit Mode script</Description>
-                    <Path>PowerShell -executionpolicy bypass -Command "Invoke-restmethod -uri $($auditmodescript) | out-file "c:\OSDCloud\startAuditMode.ps1" -force -encoding ascii"</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>3</Order>
                     <Description>LL:Installing Windows Updates - Run 1</Description>
                     <Path>PowerShell -executionpolicy bypass -Command "start-windowsupdate"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>4</Order>
+                    <Order>3</Order>
                     <Description>LL:Installing Windows Updates - Run 2</Description>
                     <Path>PowerShell -executionpolicy bypass -Command "start-windowsupdate"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Order>5</Order>
+                    <Order>4</Order>
                     <Description>LL:Execute Audit Mode script</Description>
                     <Path>PowerShell -executionpolicy bypass -Command "c:\OSDCloud\startAuditMode.ps1"</Path>
                     <WillReboot>Always</WillReboot>
