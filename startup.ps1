@@ -91,17 +91,20 @@ $Global:MyOSDCloud = [ordered]@{
     WindowsUpdate = [bool]$false
     WindowsUpdateDrivers = [bool]$false
     WindowsDefenderUpdate = [bool]$true
-    ApplyCatalogFirmware = $true
+    ApplyCatalogFirmware = [bool]$true
     SetTimeZone = [bool]$true
     ClearDiskConfirm = [bool]$False
     ShutdownSetupComplete = [bool]$false
     SyncMSUpCatDriverUSB = [bool]$false
+    updateDiskDrivers = [bool]$false
+    updateNetworkDrivers =  [bool]$false
+    updateSCSIDrivers =[bool]$false
     CheckSHA1 = [bool]$false
     OSImageIndex = [int32]3
     ImageFileFullName = [string]"D:\osdcloud\os\install.wim"
     ImageFileItem = @{fullname = "D:\osdcloud\os\install.wim"}
     ImageFileName = [string]"install.wim"
-    ZTI = $true
+    ZTI = [bool]$true
 }
 
 
