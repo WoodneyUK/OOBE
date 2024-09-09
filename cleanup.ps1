@@ -3,7 +3,7 @@
 try { stop-transcript }
 catch { Write-host "Transcript not running"}
 
-new-item c:\windows\system32\linklaters\logs -itemtype directory -force
+new-item c:\windows\system32\linklaters\logfiles -itemtype directory -force
 
 copy-item -path c:\osdcloud\logs\*.* -destination c:\windows\system32\linklaters\logfiles -recurse
 
