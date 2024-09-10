@@ -11,9 +11,12 @@ Write-host "LL startup v1.9.2"
 Write-Host "Running from [$($Global:ScriptRootURL)]"
 start-sleep 5
 
+$USBBootVol = get-volume -filesystemlabel WINPE
+$USBDataVol = get-volume -filesystemlabel OSDCloudUSB
+
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
-[decimal]$usbver = get-content "D:\OSDCloud\MediaVersion.txt" -ErrorAction SilentlyContinue
+[decimal]$usbver = get-content "$($USBDataVol.driveletter):\OSDCloud\mediaversion.txt" -ErrorAction SilentlyContinue
 If ($usbver -lt $minimumusb){
     Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumusb)], please rebuild this using latest USB iso"
     Write-Warning "Latest ISO is available : [\\acopfs05\sccm$\OSD\LL_W11_BootUSB]"
@@ -101,8 +104,8 @@ $Global:MyOSDCloud = [ordered]@{
     MSCatalogSCSIDrivers =[bool]$false
     CheckSHA1 = [bool]$false
     OSImageIndex = [int32]3
-    ImageFileFullName = [string]"D:\osdcloud\os\install.wim"
-    ImageFileItem = @{fullname = "D:\osdcloud\os\install.wim"}
+    ImageFileFullName = [string]"$($USBDataVol.driveletter):\OSDCloud\os\install.wim"
+    ImageFileItem = @{fullname = "$($USBDataVol.driveletter):\OSDCloud\os\install.wim"}
     ImageFileName = [string]"install.wim"
     ZTI = [bool]$true
 }
@@ -117,14 +120,14 @@ start-sleep 5
 # Install Feature On Demand Fonts
 Write-Host "Installing Feature on Demand Fonts..."
 new-item c:\OSDCloud\temp -itemtype directory -force
-#copy d:\OSDCloud\OS\FoDCoreFonts\*.* c:\OSDCloud\temp
+#copy $($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\*.* c:\OSDCloud\temp
 
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
-dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="d:\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Arab-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hans-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Hant-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Jpan-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
+dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
 
 # Load the offline registry hive from the OS volume
