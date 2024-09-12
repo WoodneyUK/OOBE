@@ -5,7 +5,7 @@
 ##  Script runs in WINPE
 
 [decimal]$minimumusb = 1.0
-
+$OSDCloud_StartTimeUTC = $(Get-Date ([System.DateTime]::UtcNow) -Format $DateFormat)
 ## Run from URL
 Write-host "LL startup v1.9.2"
 Write-Host "Running from [$($Global:ScriptRootURL)]"
@@ -145,7 +145,28 @@ $RegistryValueType = "String"
 $RegistryValueData = $ScriptRootURL
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
 
+#Create registry build hive
+$BuildRegistryKey = "$RegistryKey\Engineering\Build"
+$null = New-Item -Path $BuildRegistryKey -ItemType Directory -Force
+#Set OSDCloud USB version
+$null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_Version' -PropertyType String -Value $usbver -Force
+#Set OSDCLoud start time
+$null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_StartTimeUTC' -PropertyType String -Value $OSDCloud_StartTimeUTC -Force
+#Set FoD requied keys for BuildState detection (temporary until FoD phase removed from BuildState)
+$FoDs = @('Language.Fonts.Arab~~~und-ARAB~0.0.1.0',
+        'Language.Fonts.Hans~~~und-HANS~0.0.1.0',
+        'Language.Fonts.Hant~~~und-HANT~0.0.1.0',
+        'Language.Fonts.Jpan~~~und-JPAN~0.0.1.0',
+        'Language.Fonts.Kore~~~und-KORE~0.0.1.0',
+        'Language.Fonts.Thai~~~und-THAI~0.0.1.0' )
 
+foreach($food in $FoDs)
+    {
+    $FoDPath = "$($BuildRegistryKey)\FoD\$($food)"
+    $null = New-Item -Path $FoDPath -ItemType Directory -Force
+    $null = New-ItemProperty -Path $FoDPath -Name State -PropertyType String -Value 'Installed' -Force
+    }
+    
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
 Get-Variable Registry* | Remove-Variable
