@@ -3,9 +3,9 @@
 try { stop-transcript }
 catch { Write-host "Transcript not running"}
 
-new-item c:\windows\system32\linklaters\logfiles -itemtype directory -force
+new-item C:\Windows\System32\Linklaters\Logfiles -itemtype directory -force
 
-copy-item -path c:\osdcloud\logs\*.* -destination c:\windows\system32\Linklaters\Logfiles -recurse
+copy-item -path c:\osdcloud\logs\*.* -destination C:\Windows\System32\Linklaters\Logfiles -recurse
 
 Get-ChildItem -Path c:\osdcloud -Recurse | Remove-Item -force -recurse
 remove-item c:\osdcloud -force
