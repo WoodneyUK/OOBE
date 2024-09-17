@@ -11,8 +11,8 @@ Write-host "LL startup v1.9.2"
 Write-Host "Running from [$($Global:ScriptRootURL)]"
 start-sleep 5
 
-$USBBootVol = get-volume -filesystemlabel WINPE
-$USBDataVol = get-volume -filesystemlabel OSDCloudUSB
+$USBBootVol = get-volume | where-object {$_.filesystemlabel -match 'WINPE'}
+$USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud'}
 
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
