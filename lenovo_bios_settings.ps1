@@ -39,6 +39,12 @@ $Get_Settings = @(
 	Setting = 'PhysicalPresenceForTpmClear'
 	Value = 'Disable'
 	}
+
+[pscustomobject]@{
+	Setting = 'SecureBoot'
+	Value = 'Enable'
+	}
+ 
 )
 
 $BIOSPWStatus = gwmi win32_computersystem | select adminpasswordstatus -expandproperty adminpasswordstatus
