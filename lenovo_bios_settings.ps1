@@ -98,7 +98,7 @@ ForEach($Settings in $Get_Settings)
         $currentvalue = ($currentsetting -split ",")[1]
         
         If ($currentvalue -eq $NewValue){
-            Write-Host "[$($MySetting)] is already set to [$($NewValue)], no change needed" -ForegroundColor Green -Backgroundcolor DarkGray
+            Write-Host "[$($MySetting)] is already set to [$($NewValue)], no change needed" -ForegroundColor Green
         }
         Else
         {
