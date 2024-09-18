@@ -99,7 +99,7 @@ ForEach($Settings in $Get_Settings)
         $currentvalue = ($currentsetting -split ",")[1]
         
         If ($currentvalue -eq $NewValue){
-            Write-Host "$($MySetting) is already set to $($NewValue), no change needed"
+            Write-Host "[$($MySetting)] is already set to [$($NewValue)], no change needed" -ForegroundColor Green -Backgroundcolor DarkGray
         }
         Else
         {
@@ -110,7 +110,7 @@ ForEach($Settings in $Get_Settings)
             If(($Change_Return_Code) -eq "Success")        								
                 {
                     If ($modernbios -eq $FALSE) Write-Host "*********************"
-		    Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Green -Backgroundcolor DarkGray
+		    Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
       		    If ($modernbios -eq $FALSE) Write-Host "*********************"
                 }
             Else
