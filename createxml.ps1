@@ -30,7 +30,7 @@ $UnattendXml = [xml] @'
             <OOBE>
                 <ProtectYourPC>3</ProtectYourPC>
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
-                <HideEULAPage>true</HideEULAPage> 
+                <HideEULAPage>true</HideEULAPage>
             </OOBE>
         </component>
     </settings>
