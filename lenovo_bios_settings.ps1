@@ -109,7 +109,7 @@ ForEach($Settings in $Get_Settings)
 
             If(($Change_Return_Code) -eq "Success")        								
                 {
-                    Write-Host "New value for $($MySetting) is $($NewValue)"  											
+                    Write-Host "New value for $($MySetting) is $($NewValue)"
                 }
             Else
                 {
@@ -135,7 +135,7 @@ If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE) -and ($modernbios -e
 		    Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
 	    }
 }
-elseif ($ManualSetBIOS -eq $TRUE){
+elseif (($ManualSetBIOS -eq $TRUE) -or (($modernbios = $FALSE) -and ($SaveNeeded -eq $true)){
 	Write-Warning "You MUST now reboot and press F1 to enter the BIOS and set the above settings manually"
  	Write-Warning "These must be set before Continuing to install Windows"
   	Write-Warning "This PC will now reboot"
