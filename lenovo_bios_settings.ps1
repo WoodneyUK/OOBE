@@ -108,9 +108,9 @@ ForEach($Settings in $Get_Settings)
 
             If(($Change_Return_Code) -eq "Success")        								
                 {
-                    If ($modernbios -eq $FALSE) Write-Host "*********************"
+                    If ($modernbios -eq $FALSE) {Write-Host "*********************"}
 		    Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
-      		    If ($modernbios -eq $FALSE) Write-Host "*********************"
+      		    If ($modernbios -eq $FALSE) {Write-Host "*********************"}
                 }
             Else
                 {
