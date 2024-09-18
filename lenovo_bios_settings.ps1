@@ -59,11 +59,10 @@ If ($BIOSPWStatus -eq 0) {
 
 	If ($BIOSinput -ne "CONTINUE"){ 
  		Write-host "now restarting..."
-       		restart-computer -force
-    		start-sleep 5  
+       		wpeutil reboot 
    	}
     	Else {
-     		Write-Host "This is for testing only.  Production devices should have a BIOS supervisor password"
+     		Write-Host "This is for testing only.  Production devices MUST have a BIOS supervisor password" -ForegroundColor Yellow -Backgroundcolor DarkGray
         	pause
 	}
 }
