@@ -123,7 +123,7 @@ ForEach($Settings in $Get_Settings)
 
 
 # Save BIOS change part
-If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE){
+If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE)){
     $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
     $Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
     If(($Save_Change_Return_Code) -eq "Success")
