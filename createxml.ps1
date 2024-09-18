@@ -2,13 +2,15 @@
 
 [CmdletBinding()]
     param (
-        [String]$userlocale = "en-US"
+        [String]$userlocale = "en-US",
+        [String]$TimeZone = 'Eastern Standard Time'
     )
 
 $SysLocale = "en-US"
 
 write-host "UserLocale:$($userlocale)"
 Write-host "SystemLocale:$($SysLocale)"
+Write-host "TimeZone:$($TimeZone)"
 
 $auditmodescript = "$($Global:ScriptRootURL)/StartAuditMode.ps1"
 $XMLPath = "c:\windows\panther\unattend\unattend.xml"
@@ -28,7 +30,7 @@ $UnattendXml = [xml] @'
             <OOBE>
                 <ProtectYourPC>3</ProtectYourPC>
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
-                <HideEULAPage>true</HideEULAPage>
+                <HideEULAPage>true</HideEULAPage> 
             </OOBE>
         </component>
     </settings>
@@ -97,6 +99,7 @@ $boottowindows = [xml] @"
                     <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
+            <TimeZone>$TimeZone</TimeZone>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
