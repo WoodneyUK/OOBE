@@ -123,7 +123,7 @@ ForEach($Settings in $Get_Settings)
 
 
 # Save BIOS change part
-If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE)){
+If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE) -and ($modernbios -eq $TRUE)){
     $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
     $Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
     If(($Save_Change_Return_Code) -eq "Success")
@@ -135,7 +135,7 @@ If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE)){
 		    Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
 	    }
 }
-elseif ($ManualSetBIOS -ne $TRUE){
+elseif ($ManualSetBIOS -eq $TRUE){
 	Write-Warning "You MUST now reboot and press F1 to enter the BIOS and set the above settings manually"
  	Write-Warning "These must be set before Continuing to install Windows"
   	Write-Warning "This PC will now reboot"
