@@ -109,11 +109,13 @@ ForEach($Settings in $Get_Settings)
 
             If(($Change_Return_Code) -eq "Success")        								
                 {
-                    Write-Host "New value for $($MySetting) is $($NewValue)"
+                    If ($modernbios -eq $FALSE) Write-Host "*********************"
+		    Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Green -Backgroundcolor DarkGray
+      		    If ($modernbios -eq $FALSE) Write-Host "*********************"
                 }
             Else
                 {
-                    Write-Warning "Cannot change setting $($MySetting) (Return code $($Change_Return_Code))"  											
+                    Write-Warning "Cannot change setting [$($MySetting)] (Return code [$($Change_Return_Code)])"  											
 		    Write-Warning "You must set this manually"
       		    $ManualSetBIOS = $TRUE
 		}
