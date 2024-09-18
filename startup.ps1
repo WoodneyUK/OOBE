@@ -47,7 +47,71 @@ If ($selection -eq 'q') {
 }
 Write-Host "Continuing to Install Windows..."
 
-
+## Country 
+Clear-Host
+Write-Host "Select Country"
+Write-Host "1 - Belgium"
+Write-Host "2 - Brazil"
+Write-Host "3 - China"
+Write-Host "4 - France"
+Write-Host "5 - Germany"
+Write-Host "6 - Hong Kong"
+Write-Host "7 - Indonesia"
+Write-Host "8 - Italy"
+Write-Host "9 - Japan"
+Write-Host "10 - Korea"
+Write-Host "11 - Luxembourg"
+Write-Host "12 - Netherlands"
+Write-Host "13 - Poland"
+Write-Host "14 - Portugal"
+Write-Host "15 - Russia"
+Write-Host "16 - Singapore"
+Write-Host "17 - Spain"
+Write-Host "18 - Sweden"
+Write-Host "19 - United Arab Emirates"
+Write-Host "20 - Thailand"
+Write-Host "21 - United Kingdom"
+Write-Host "22 - United States"
+Write-Host "Q - quit and restart"
+while(($CountrySelection -ne 'q') -and ($CountrySelection -notin 1..22))
+    {
+    $CountrySelection = Read-Host "Enter selection [1..22,q]"
+    }
+If ($selection -eq 'q') 
+    {
+    Write-Host "restarting"
+    start-sleep 5
+    wpeutil reboot
+    }
+else
+    {
+    switch($CountrySelection) 
+        {
+        1     {$Country = "Belgium";$TimeyWimey = 'Romance Standard Time'} # 21 - Kingdom of Belgium 
+        2     {$Country = "Brazil";$TimeyWimey = 'E. South America Standard Time'} # 32 - Federative Republic of Brazil
+        3     {$Country = "China";$TimeyWimey = 'China Standard Time'} # 45 - People's Republic of China 
+        4     {$Country = "France";$TimeyWimey = 'Romance Standard Time'} # 84 - French Republic 
+        5     {$Country = "Germany";$TimeyWimey = 'W. Europe Standard Time'} # 94 - Federal Republic of Germany
+        6     {$Country = "Hong Kong";$TimeyWimey = 'China Standard Time'} # 104 - Hong Kong Special Administrative Region
+        7     {$Country = "Indonesia ";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID'} # 111 - Republic of Indonesia
+        8     {$Country = "Italy";$TimeyWimey = 'W. Europe Standard Time'} # 118 - Italian Republic
+        9     {$Country = "Japan";$TimeyWimey = 'Tokyo Standard Time'} # 122 - Japan
+        10    {$Country = "Korea";$TimeyWimey = 'Korea Standard Time'} # 134 - Republic of Korea
+        11    {$Country = "Luxembourg";$TimeyWimey = 'W. Europe Standard Time'} # 147 - Grand Duchy of Luxembourg
+        12    {$Country = "Netherlands ";$TimeyWimey = 'W. Europe Standard Time'} # 176 - Kingdom of the Netherlands
+        13    {$Country = "Poland";$TimeyWimey = 'Central European Standard Time'} # 191 - Republic of Poland
+        14    {$Country = "Portugal";$TimeyWimey = 'GMT Standard Time'} # 193 - Portuguese Republic
+        15    {$Country = "Russia";$TimeyWimey = 'Russian Standard Time'} # 203 - Russian Federation
+        16    {$Country = "Singapore";$TimeyWimey = 'Singapore Standard Time';$CCulture = 'en-SG'} # 215 - Republic of Singapore
+        17    {$Country = "Spain";$TimeyWimey = 'Romance Standard Time'} # 217 - Kingdom of Spain
+        18    {$Country = "Sweden";$TimeyWimey = 'W. Europe Standard Time'} # 221 - Kingdom of Sweden
+        19    {$Country = "UAE";$TimeyWimey = 'Arabian Standard Time';$CCulture = 'ar-AE'} # 224 - United Arab Emirates
+        20    {$Country = "Thailand";$TimeyWimey = 'SE Asia Standard Time'} # 227 - Kingdom of Thailand
+        21    {$Country = "UK";$TimeyWimey = 'GMT Standard Time'} # 242 - United Kingdom
+        22    {$Country = "US";$TimeyWimey = 'Eastern Standard Time'} # 244 - United States
+        }
+    }
+    
 ## Approved Device Checks
 $lenovolookup = Invoke-RestMethod -uri "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv" | ConvertFrom-Csv
 $ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
@@ -84,7 +148,6 @@ ElseIf ($desiredkb -eq $null -and $manufacturer -ne "Lenovo") {
     $desiredkb = "en-GB" 
     }
 Else { Write-Host "Keyboard detected as $desiredkb" }
-
 
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
@@ -129,6 +192,12 @@ dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDa
 dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Kore-Package~31bf3856ad364e35~amd64~~.cab"
 dism /image:c:\ /scratchdir:c:\OSDCloud\temp /add-package /packagepath="$($USBDataVol.driveletter):\OSDCloud\OS\FoDCoreFonts\Microsoft-Windows-LanguageFeatures-Fonts-Thai-Package~31bf3856ad364e35~amd64~~.cab"
 
+# Set Country for MPO to configure
+
+$ConfigFilesDir = 'C:\Windows\System32\Linklaters\Engineering\UsersRegionAndCulture'
+$ConfigFile = 'Country.config'
+New-Item $ConfigFilesDir -ItemType Directory -Force
+Set-Content $ConfigFilesDir\$ConfigFile -Value $Country -Force
 
 # Load the offline registry hive from the OS volume
 Write-Host "writing to offline registry"
