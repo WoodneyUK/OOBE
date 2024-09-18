@@ -73,30 +73,15 @@ Else{
     # https://docs.lenovocdrt.com/ref/bios/wmi/wmi_guide/#password-authentication
     #
     $returnOP = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW") | select Return -ExpandProperty Return
-    If(($returnOP) -eq "Success")
-	    {
-		    Write-Host "BIOS WMI interface connection successful"																
-	    }
-    Else{
+    If(($returnOP) -eq "Success"){
+	Write-Host "BIOS WMI interface connection successful"
+      	$modernbios = $TRUE
+    }Else{
         #BIOS is too old to support modern WMIopcodepassword
-        cls
- 	    write-warning "IMPORTANT : This script cannot automatically read the BIOS settings"
-	    write-warning ""
- 	    Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
-  	    write-Warning "And manually check the following settings:"
-   	    $Get_Settings | ft
-
-	    $BIOSinput = read-host -Prompt "Computer will now restart, unless you type CONTINUE"
- 	    If ($BIOSinput -ne "CONTINUE"){ 
- 	        Write-host "now restarting..."
-       		restart-computer -force
-    		start-sleep 5  
-   	    }
-    	    Else {
-     		Write-Host "Please contact EUDM team to have them update the BIOS password DB"
-        	pause
-	    }    	
-    }
+	Write-Warning "BIOS WMI interface connection unsuccessful"
+ 	Write-Warning "This script will not be able to update settings automatically"
+      	$modernbios = $FALSE
+    }    	
 }
         
 # Current BIOS Settings
@@ -118,7 +103,8 @@ ForEach($Settings in $Get_Settings)
         }
         Else
         {
-        	$SaveNeeded = $true		
+        
+	 	$SaveNeeded = $true		
             $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
 
             If(($Change_Return_Code) -eq "Success")        								
@@ -128,14 +114,16 @@ ForEach($Settings in $Get_Settings)
             Else
                 {
                     Write-Warning "Cannot change setting $($MySetting) (Return code $($Change_Return_Code))"  											
-                }
+		    Write-Warning "You must set this manually"
+      		    $ManualSetBIOS = $TRUE
+		}
         }								
     }
 
 
 
 # Save BIOS change part
-If ($SaveNeeded -eq $true){
+If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE){
     $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
     $Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
     If(($Save_Change_Return_Code) -eq "Success")
@@ -146,4 +134,11 @@ If ($SaveNeeded -eq $true){
 	    {
 		    Write-Warning "An issue occured while saving changes - $($Save_Change_Return_Code)"										
 	    }
+}
+elseif ($ManualSetBIOS -ne $TRUE){
+	Write-Warning "You MUST now reboot and press F1 to enter the BIOS and set the above settings manually"
+ 	Write-Warning "These must be set before Continuing to install Windows"
+  	Write-Warning "This PC will now reboot"
+   	pause
+    	wpeutil reboot
 }
