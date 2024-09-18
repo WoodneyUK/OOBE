@@ -75,16 +75,17 @@ Else{
     $returnOP = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW") | select Return -ExpandProperty Return
     If(($returnOP) -eq "Success")
 	    {
-		    Write-Host "BIOS SuperVisor Password is correct"																
+		    Write-Host "BIOS WMI interface connection successful"																
 	    }
     Else{
-        #Wrong Password
+        #BIOS is too old to support modern WMIopcodepassword
         cls
- 	    write-warning "IMPORTANT : A BIOS Supervisor Password is set, but is **WRONG**"
-	    write-warning "This process will not continue"
+ 	    write-warning "IMPORTANT : This script cannot automatically read the BIOS settings"
+	    write-warning ""
  	    Write-Warning "Please reboot into BIOS by pressing F1 at the startup screen"
-  	    write-Warning "And enable the standard BIOS Supervisor password."
-   	    write-Warning "Contact EUDM team for details of the BIOS Supervisor password"
+  	    write-Warning "And manually check the following settings:"
+   	    $Get_Settings | ft
+
 	    $BIOSinput = read-host -Prompt "Computer will now restart, unless you type CONTINUE"
  	    If ($BIOSinput -ne "CONTINUE"){ 
  	        Write-host "now restarting..."
