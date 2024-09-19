@@ -75,6 +75,17 @@ Else{
     If(($returnOP) -eq "Success"){
 	Write-Host "BIOS WMI interface connection successful"
       	$modernbios = $TRUE
+    }ElseIf ($returnOP -eq "Access Denied"){
+    	#BIOS password is wrong
+	Write-Warning "BIOS WMI interface connection unsuccessful due to Incorrect Password"
+ 	Write-Warning "This script cannot update the settings automatically"
+  	Write-Warning "********************************************************************"
+   	Write-Warning "**  Please set BIOS supervisor password to the known correct one  **"
+        Write-Warning "**         Contact EUDM team for details of this password         **"
+	Write-Warning "********************************************************************"
+ 	$continue = Read-Host -prompt "Press any key to reboot, or type CONTINUE to skip this"
+        If ($continue -eq "CONTINUE"){Write-host "Incorrect BIOS supervisor password is only for testing"}
+	Else { wpeutil reboot }
     }Else{
         #BIOS is too old to support modern WMIopcodepassword
 	Write-Warning "BIOS WMI interface connection unsuccessful"
