@@ -72,7 +72,8 @@ Else{
     # https://docs.lenovocdrt.com/ref/bios/wmi/wmi_guide/#password-authentication
     #
     $returnOP = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW") | select Return -ExpandProperty Return
-    If(($returnOP) -eq "Success"){
+    Write-Host "ReturnOp [$($returnOp)]"
+    If($returnOP -eq "Success"){
 	Write-Host "BIOS WMI interface connection successful"
       	$modernbios = $TRUE
     }ElseIf ($returnOP -eq "Access Denied"){
