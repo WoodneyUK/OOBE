@@ -41,9 +41,9 @@ If ($selection -eq 'q') {
     # Call the get-windowsautopiliotinfo script
     Invoke-RestMethod https://st2uupbw11seuwq01.blob.core.windows.net/oobe/hh/gethh.ps1 | out-file $env:temp\gethh1.ps1 -force -encoding ascii
     & $env:temp\gethh1.ps1
-    #Write-Host "Not yet implemented, sorry.  Now restarting"
+    Write-Host "Device will now shutdown"
     pause
-    wpeutil reboot
+    wpeutil shutdown
 }
 Write-Host "Continuing to Install Windows..."
 
