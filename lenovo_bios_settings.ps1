@@ -85,7 +85,10 @@ Else{
         Write-Warning "**         Contact EUDM team for details of this password         **"
 	Write-Warning "********************************************************************"
  	$continue = Read-Host -prompt "Press any key to reboot, or type CONTINUE to skip this"
-        If ($continue -eq "CONTINUE"){Write-host "Incorrect BIOS supervisor password is only for testing"}
+        If ($continue -eq "CONTINUE"){
+		Write-host "Incorrect BIOS supervisor password is only for testing"
+  		$modernbios = $FALSE   #This will prompt to set individual settings manually if needed
+   	}
 	Else { wpeutil reboot }
     }Else{
         #BIOS is too old to support modern WMIopcodepassword
