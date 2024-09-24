@@ -39,7 +39,8 @@ If ($selection -eq 'q') {
     wpeutil reboot
 }ElseIf ($selection -eq  '2') {
     # Call the get-windowsautopiliotinfo script
-    Invoke-RestMethod https://st2uupbw11seuwq01.blob.core.windows.net/oobe/hh/gethh.ps1 | out-file $env:temp\gethh1.ps1 -force -encoding ascii
+    #Invoke-RestMethod https://st2uupbw11seuwq01.blob.core.windows.net/oobe/hh/gethh.ps1 | out-file $env:temp\gethh1.ps1 -force -encoding ascii
+    Invoke-RestMethod "$($Global:ScriptRootURL)/hh/gethh.ps1" | out-file $env:temp\gethh1.ps1 -force -encoding ascii
     & $env:temp\gethh1.ps1
     Write-Host "Device will now shutdown"
     pause
