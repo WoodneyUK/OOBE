@@ -113,7 +113,8 @@ else
     }
     
 ## Approved Device Checks
-$lenovolookup = Invoke-RestMethod -uri "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv" | ConvertFrom-Csv
+#$lenovolookup = Invoke-RestMethod -uri "https://raw.githubusercontent.com/WoodneyUK/OOBE/main/LenLookup.csv" | ConvertFrom-Csv
+$lenovolookup = Invoke-RestMethod -uri "https://st2uupbw11seuwq01.blob.core.windows.net/oobe/lenlookup.csv" | ConvertFrom-Csv
 $ComputerWMI = Get-CimInstance -ClassName Win32_ComputerSystem
 $model= $ComputerWMI | select model -ExpandProperty Model
 $manufacturer = $computerWMI | select manufacturer -expandproperty manufacturer
