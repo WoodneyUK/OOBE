@@ -3,13 +3,12 @@ Write-Host "Running Get Hardware Hash script"
 $USBBootVol = get-volume | where-object {$_.filesystemlabel -match 'WINPE'}
 $USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud'}
 
-$outputfolder = "$USBDataVol:\HardwareHashes"
+$outputfolder = "$(($USBDataVol).driveletter):\HardwareHashes"
 new-item $outputfolder -ItemType directory -Force
 
-$hashfolder = "$USBDataVol:\osdcloud\hardwarehash"
-new-item $hashfolder -ItemType directory -Force
+$hashfolder = "$(($USBDataVol).driveletter):\osdcloud\hardwarehash"
 
-If ((test-path $outputfolder) -and (test-path $hashfolder) -ne $true) {
+If ((test-path -path $outputfolder) -and (test-path -path $hashfolder) -ne $true) {
     Write-Warning "Unable to create working folders, exiting"
     break
     }
@@ -21,6 +20,7 @@ if ($Serial.Contains(" ")) { $Serial = $Serial -replace " ", "" }
 $outputfile = "$outputfolder\$serial.csv"
 
 #Run OA3Tool
+If (test-path -path $hashfolder\oa3tool.exe -eq $false) { Write-Error "OA3Tool.exe is not accessible.  Cannot continue" }
 &$hashfolder\oa3tool.exe /Report /ConfigFile=$hashfolder\OA3.cfg /NoKeyCheck
 
 #Check if Hash was found
