@@ -1,9 +1,12 @@
 Write-Host "Running Get Hardware Hash script"
 
-$outputfolder = "d:\HardwareHashes"
+$USBBootVol = get-volume | where-object {$_.filesystemlabel -match 'WINPE'}
+$USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud'}
+
+$outputfolder = "$USBDataVol:\HardwareHashes"
 new-item $outputfolder -ItemType directory -Force
 
-$hashfolder = "d:\osdcloud\hardwarehash"
+$hashfolder = "$USBDataVol:\osdcloud\hardwarehash"
 new-item $hashfolder -ItemType directory -Force
 
 If ((test-path $outputfolder) -and (test-path $hashfolder) -ne $true) {
