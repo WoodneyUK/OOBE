@@ -20,7 +20,7 @@ if ($Serial.Contains(" ")) { $Serial = $Serial -replace " ", "" }
 $outputfile = "$outputfolder\$serial.csv"
 
 #Run OA3Tool
-If (test-path -path $hashfolder\oa3tool.exe -eq $false) { Write-Error "OA3Tool.exe is not accessible.  Cannot continue" }
+If (-not(test-path -path $hashfolder\oa3tool.exe)) { Write-Error "OA3Tool.exe is not accessible.  Cannot continue" }
 &$hashfolder\oa3tool.exe /Report /ConfigFile=$hashfolder\OA3.cfg /NoKeyCheck
 
 #Check if Hash was found
