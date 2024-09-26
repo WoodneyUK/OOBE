@@ -119,7 +119,8 @@ ForEach($Settings in $Get_Settings)
         {
         
 	 	$SaveNeeded = $true		
-            $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii").Return
+            #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii").Return
+	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
 
         If(($Change_Return_Code) -eq "Success")        								
                 {
