@@ -174,7 +174,12 @@ If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE) -and ($modernbios -e
 elseif (($ManualSetBIOS -eq $TRUE) -or (($modernbios -eq $FALSE) -and ($SaveNeeded -eq $true))){
 	Write-Warning "You MUST now reboot and press F1 to enter the BIOS and set the above settings manually"
  	Write-Warning "These must be set before Continuing to install Windows"
-  	Write-Warning "This PC will now reboot"
-   	pause
-    	wpeutil reboot
+  	$continue = Read-Host -prompt "Press any key to reboot, or type CONTINUE to skip this"
+        If ($continue -eq "CONTINUE"){
+		Write-host "Incorrect BIOS settings is only for testing"
+     	}
+	Else { wpeutil reboot }	
+    
+    	#pause
+    	#wpeutil reboot
 }
