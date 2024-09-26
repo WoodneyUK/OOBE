@@ -119,21 +119,26 @@ ForEach($Settings in $Get_Settings)
         {
         
 	 	$SaveNeeded = $true		
-            #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii").Return
+        #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii").Return
 	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+        
+        If(($Change_Return_Code) -eq "Invalid Parameter"){
+             #Its probably a OldSkool BIOS, so give it a try
+             $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii").Return
+        }
 
         If(($Change_Return_Code) -eq "Success")        								
-                {
-                    If ($modernbios -eq $FALSE) {Write-Host "*********************"}
+            {
+            If ($modernbios -eq $FALSE) {Write-Host "*********************"}
 		    Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
-      		    If ($modernbios -eq $FALSE) {Write-Host "*********************"}
-                }
+      		If ($modernbios -eq $FALSE) {Write-Host "*********************"}
+            }
          Else
-                {
-                    Write-Warning "Cannot change setting [$($MySetting)] (Return code [$($Change_Return_Code)])"  											
+            {
+            Write-Warning "Cannot change setting [$($MySetting)] (Return code [$($Change_Return_Code)])"  											
 		    Write-Warning "You must set this manually"
-      		    $ManualSetBIOS = $TRUE
-		}
+      		$ManualSetBIOS = $TRUE
+		    }
         }								
     }
 
