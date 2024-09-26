@@ -103,6 +103,8 @@ $currentSettings = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Ob
 
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
+If ($BIOS) {Write-Host "WMI Bios connection successful"}
+
 ForEach($Settings in $Get_Settings)
     {
         
@@ -120,9 +122,12 @@ ForEach($Settings in $Get_Settings)
         
 	    $SaveNeeded = $true		
             #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii,us").Return
-	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
 
-		write-host "Returned Response [$Change_Return_Code"
+	    Write-Host "Attempting to write setting [$($MySetting)] with value [$($NewValue)]"
+     		
+     	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+
+	    write-host "BIOS Returned Response [$Change_Return_Code]"
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                 #Its probably a OldSkool BIOS, so give it a try
