@@ -137,7 +137,7 @@ ForEach($Settings in $Get_Settings)
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                 #Its probably a OldSkool BIOS, so give it a try
-                Write-Host "Retrying with Old Skool Bios method"
+                Write-Host "Retrying with alternative. Attempting to write setting [$($MySetting)] with value [$($ValueOld)]"
 		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld").Return
             }
 
