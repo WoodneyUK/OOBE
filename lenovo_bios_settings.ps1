@@ -103,7 +103,7 @@ $currentSettings = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Ob
 
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
-If ($BIOS) {Write-Host "WMI Bios connection successful"}
+If ($BIOS) {Write-Host "WMI Bios connection response:[$($BIOS.active)]"}
 
 ForEach($Settings in $Get_Settings)
     {
