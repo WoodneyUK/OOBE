@@ -121,7 +121,9 @@ ForEach($Settings in $Get_Settings)
 	    $SaveNeeded = $true		
             #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii,us").Return
 	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
-        
+
+		write-host "Returned Response [$Change_Return_Code"
+ 
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                 #Its probably a OldSkool BIOS, so give it a try
                 Write-Host "Retrying with Old Skool Bios method, running cmd [$($BIOS).SetBiosSetting("$($MySetting),$($NewValue),$($currentPW),ascii,us")]"
