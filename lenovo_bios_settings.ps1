@@ -22,27 +22,32 @@ ForEach($OldSecPW in $Json.OldPasswords.OldPasswords){
 $Get_Settings = @(
 [pscustomobject]@{
 	Setting = 'BIOSUpdateByEndUsers'
-	Value = 'Enable'
+	ValueNew = 'Enable'
+ 	ValueOld = 'Enabled'
 	}
 
 [pscustomobject]@{
 	Setting = 'WindowsUEFIFirmwareUpdate'
-	Value = 'Enable'
+	ValueNew = 'Enable'
+ 	ValueOld = 'Enabled'
 	}
 
 [pscustomobject]@{
 	Setting = 'MACAddressPassThrough'
-	Value = 'Enable'
+	ValueNew = 'Enable'
+ 	ValueOld = 'Enabled'
 	}
 
 [pscustomobject]@{
 	Setting = 'PhysicalPresenceForTpmClear'
-	Value = 'Disable'
+	ValueNew = 'Disable'
+ 	ValueOld = 'Disabled'
 	}
 
 [pscustomobject]@{
 	Setting = 'SecureBoot'
-	Value = 'Enable'
+	ValueNew = 'Enable'
+ 	ValueOld = 'Enabled'
 	}
  
 )
@@ -109,36 +114,37 @@ ForEach($Settings in $Get_Settings)
     {
         
         $MySetting = $Settings.Setting
-        $NewValue = $Settings.Value
+        $ValueNew = $Settings.ValueNew
+	$ValueOld = $Settings.ValueOld
 
         $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
         $currentvalue = ($currentsetting -split ",")[1]
         
-        If ($currentvalue -eq $NewValue){
-            Write-Host "[$($MySetting)] is already set to [$($NewValue)], no change needed" -ForegroundColor Green
+        If (($currentvalue -eq $ValueNew) -or $currentvalue -eq $ValueOld){
+            Write-Host "[$($MySetting)] is already set to [$($ValueNew)], no change needed" -ForegroundColor Green
         }
         Else
         {
         
 	    $SaveNeeded = $true		
-            #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii,us").Return
+            #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew,$CurrentPW,ascii,us").Return
 
-	    Write-Host "Attempting to write setting [$($MySetting)] with value [$($NewValue)]"
+	    Write-Host "Attempting to write setting [$($MySetting)] with value [$($ValueNew)]"
      		
-     	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue").Return
+     	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew").Return
 
-	    write-host "BIOS Returned Response [$Change_Return_Code]"
+	    write-host "BIOS Returned Response [$($Change_Return_Code)]"
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                 #Its probably a OldSkool BIOS, so give it a try
-                Write-Host "Retrying with Old Skool Bios method, running cmd [$($BIOS).SetBiosSetting("$($MySetting),$($NewValue),$($currentPW),ascii,us")]"
-		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$NewValue,$currentPW,ascii,us").Return
+                Write-Host "Retrying with Old Skool Bios method"
+		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld").Return
             }
 
             If(($Change_Return_Code) -eq "Success")        								
                 {
                 If ($modernbios -eq $FALSE) {Write-Host "*********************"}
-		Write-Host "New value for [$($MySetting)] is [$($NewValue)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
+		Write-Host "New value for [$($MySetting)] is [$($ValueNew)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
       		If ($modernbios -eq $FALSE) {Write-Host "*********************"}
                 }
                 Else
