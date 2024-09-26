@@ -51,7 +51,7 @@ $Get_Settings = @(
 	}
  
 )
-<#
+
 $BIOSPWStatus = gwmi win32_computersystem | select adminpasswordstatus -expandproperty adminpasswordstatus
 If ($BIOSPWStatus -eq 0) {
 	cls
@@ -102,8 +102,7 @@ Else{
       	$modernbios = $FALSE
     }    	
 }
-#>
-	
+        
 # Current BIOS Settings
 $currentSettings = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) } | select currentsetting
 
@@ -121,7 +120,7 @@ ForEach($Settings in $Get_Settings)
         $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
         $currentvalue = ($currentsetting -split ",")[1]
         
-        If (($currentvalue -eq $ValueNew) -or $currentvalue -eq $ValueOld){
+        If (($currentvalue -eq $ValueNew) -or ($currentvalue -eq $ValueOld)){
             Write-Host "[$($MySetting)] is already set to [$($ValueNew)], no change needed" -ForegroundColor Green
         }
         Else
@@ -138,8 +137,8 @@ ForEach($Settings in $Get_Settings)
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                 #Its probably a OldSkool BIOS, so give it a try
-                Write-Host "Retrying with alternative. Attempting to write setting [$($MySetting)] with value [$($ValueOld)]"
-		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld").Return
+                Write-Host "Retrying with Old Skool Bios method"
+		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld,$CurrentPW,ascii,us").Return
             }
 
             If(($Change_Return_Code) -eq "Success")        								
@@ -161,10 +160,6 @@ ForEach($Settings in $Get_Settings)
 
 # Save BIOS change part
 If (($SaveNeeded -eq $true) -and ($ManualSetBIOS -ne $TRUE) -and ($modernbios -eq $TRUE)){
-
-    Write-Host "Running BIOS Connection"
-    (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW")
-    
     $Save_BIOS = (Get-WmiObject -class Lenovo_SaveBiosSettings -namespace root\wmi)
     $Save_Change_Return_Code = $SAVE_BIOS.SaveBiosSettings().Return		
     If(($Save_Change_Return_Code) -eq "Success")
