@@ -20,8 +20,16 @@ $USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud'}
 If ($usbver -lt $minimumusb){
     Write-Warning "USB version [$($usbver)] is lower than required version [$($minimumusb)], please rebuild this using latest USB iso"
     Write-Warning "Latest ISO is available : [\\acopfs05\sccm$\OSD\LL_W11_BootUSB]"
-    Write-Warning "Cannot continue, restarting"
-    pause
+    $verinput = read-host -Prompt "Computer will now shutdown, unless you type CONTINUE"
+
+	If ($verinput -ne "CONTINUE"){ 
+ 		    Write-host "now shutting down..."
+       	    wpeutil shutdown 
+   	    }
+        Else {
+     	    Write-Host "This is for testing only." -ForegroundColor Yellow -Backgroundcolor DarkGray
+            pause
+	    }
     }
 Else{ Write-Host "USB version check completed" }
 
