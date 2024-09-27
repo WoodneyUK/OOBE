@@ -94,12 +94,12 @@ else
         4     {$Country = "France";$TimeyWimey = 'Romance Standard Time'} # 84 - French Republic 
         5     {$Country = "Germany";$TimeyWimey = 'W. Europe Standard Time'} # 94 - Federal Republic of Germany
         6     {$Country = "Hong Kong";$TimeyWimey = 'China Standard Time'} # 104 - Hong Kong Special Administrative Region
-        7     {$Country = "Indonesia ";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID'} # 111 - Republic of Indonesia
+        7     {$Country = "Indonesia";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID'} # 111 - Republic of Indonesia
         8     {$Country = "Italy";$TimeyWimey = 'W. Europe Standard Time'} # 118 - Italian Republic
         9     {$Country = "Japan";$TimeyWimey = 'Tokyo Standard Time'} # 122 - Japan
         10    {$Country = "Korea";$TimeyWimey = 'Korea Standard Time'} # 134 - Republic of Korea
         11    {$Country = "Luxembourg";$TimeyWimey = 'W. Europe Standard Time'} # 147 - Grand Duchy of Luxembourg
-        12    {$Country = "Netherlands ";$TimeyWimey = 'W. Europe Standard Time'} # 176 - Kingdom of the Netherlands
+        12    {$Country = "Netherlands";$TimeyWimey = 'W. Europe Standard Time'} # 176 - Kingdom of the Netherlands
         13    {$Country = "Poland";$TimeyWimey = 'Central European Standard Time'} # 191 - Republic of Poland
         14    {$Country = "Portugal";$TimeyWimey = 'GMT Standard Time'} # 193 - Portuguese Republic
         15    {$Country = "Russia";$TimeyWimey = 'Russian Standard Time'} # 203 - Russian Federation
