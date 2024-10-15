@@ -32,6 +32,8 @@ $UnattendXml = [xml] @'
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
                 <HideEULAPage>true</HideEULAPage>
             </OOBE>
+            <RegisteredOrganization>Linklaters</RegisteredOrganization>
+            <RegisteredOwner>Linklaters User</RegisteredOwner>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
