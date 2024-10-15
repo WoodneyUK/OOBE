@@ -31,8 +31,6 @@ $UnattendXml = [xml] @'
                 <ProtectYourPC>3</ProtectYourPC>
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
                 <HideEULAPage>true</HideEULAPage>
-                <RegisteredOrganization>Linklaters</RegisteredOrganization>
-                <RegisteredOwner>Linklaters User</RegisteredOwner>
             </OOBE>
         </component>
     </settings>
