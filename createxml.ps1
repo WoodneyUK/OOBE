@@ -124,7 +124,7 @@ foreach ($setting in $unattendXml.Unattend.Settings) {
     #Write-host "Checking Setting:$($setting) in Unattend"
     foreach ($component in $setting.Component) {
         #write-host "Checking component:$($component) in Unattend"
-        if (($setting.'Pass' -eq 'oobeSystem') -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
+        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
             #Write-Host "Updating Locale settings"
             $component.InputLocale = $userlocale
             $component.SystemLocale = $SysLocale
