@@ -271,7 +271,14 @@ New-Item c:\windows\panther\unattend -force -ItemType Directory
 #Save the wifi profile for use later
 netsh wlan export profile key=clear folder=c:\osdcloud\configs
 
-write-host "LL Startup script completed, waiting 10 seconds then restarting..."
+cls
+
+write-host "LL Startup script completed"
+
+write-host  -foregroundcolor Green "****************************************************"
+write-host  -foregroundcolor Green "               Rebooting in 10 seconds"
+write-host  -foregroundcolor Green "  You can safely remove the USB after this reboot"
+Write-host  -foregroundcolor Green "****************************************************"
 start-sleep 10
 
 
