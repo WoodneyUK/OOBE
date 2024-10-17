@@ -15,6 +15,10 @@ Write-host "TimeZone:$($TimeZone)"
 $auditmodescript = "$($Global:ScriptRootURL)/StartAuditMode.ps1"
 $XMLPath = "c:\windows\panther\unattend\unattend.xml"
 $OOBEPath = "c:\windows\panther\unattend\oobe.xml"
+$RecoveryPath = "c:\recovery\autoapply\unattend.xml"
+
+$result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
+$result = New-Item c:\recovery\autoapply -ItemType Directory -Force
 
 $UnattendXml = [xml] @'
 <?xml version="1.0" encoding="utf-8"?>
@@ -112,8 +116,6 @@ $boottowindows = [xml] @"
 "@
 
 
-$result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
-
 
 foreach ($setting in $unattendXml.Unattend.Settings) {
     #Write-host "Checking Setting:$($setting) in Unattend"
@@ -144,4 +146,5 @@ foreach ($setting in $boottowindows.Unattend.Settings) {
 } #end foreach unattendXml.Unattend.Settings
 
 $unattendXml.Save($OOBEPath)
+$unattendXml.Save($RecoveryPath)
 $boottowindows.save($xmlpath)
