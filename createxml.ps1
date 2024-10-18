@@ -89,7 +89,6 @@ $boottowindows = [xml] @"
             <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
             <UserLocale>en-US</UserLocale>
-            <CopyProfile>true</CopyProfile>
         </component>
     </settings>
     <settings pass="auditSystem">
