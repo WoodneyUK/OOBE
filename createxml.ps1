@@ -112,6 +112,15 @@ $boottowindows = [xml] @"
             <TimeZone></TimeZone>
         </component>
     </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback></UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+    </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
 "@
@@ -119,6 +128,25 @@ $boottowindows = [xml] @"
 
 
 foreach ($setting in $unattendXml.Unattend.Settings) {
+    #Write-host "Checking Setting:$($setting) in Unattend"
+    foreach ($component in $setting.Component) {
+        #write-host "Checking component:$($component) in Unattend"
+        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
+            #Write-Host "Updating Locale settings"
+            $component.InputLocale = $userlocale
+            $component.SystemLocale = $SysLocale
+            $component.UILanguage = $userlocale
+            $component.UserLocale = $userlocale
+        }
+        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-Shell-Setup')) {
+            #Write-Host "Updating Locale settings"
+            $component.Timezone = $Timezone
+        }
+    } #end foreach setting.Component
+} #end foreach unattendXml.Unattend.Settings
+
+
+foreach ($setting in $boottowindows.Unattend.Settings) {
     #Write-host "Checking Setting:$($setting) in Unattend"
     foreach ($component in $setting.Component) {
         #write-host "Checking component:$($component) in Unattend"
