@@ -135,7 +135,7 @@ foreach ($setting in $unattendXml.Unattend.Settings) {
             #Write-Host "Updating Locale settings"
             $component.InputLocale = $userlocale
             $component.SystemLocale = $SysLocale
-            $component.UILanguage = $userlocale
+            $component.UILanguage = $SysLocale
             $component.UserLocale = $userlocale
         }
         if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-Shell-Setup')) {
@@ -154,7 +154,7 @@ foreach ($setting in $boottowindows.Unattend.Settings) {
             #Write-Host "Updating Locale settings"
             $component.InputLocale = $userlocale
             $component.SystemLocale = $SysLocale
-            $component.UILanguage = $userlocale
+            $component.UILanguage = $SysLocale
             $component.UserLocale = $userlocale
         }
         if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-Shell-Setup')) {
