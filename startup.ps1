@@ -5,6 +5,7 @@
 ##  Script runs in WINPE
 
 [decimal]$minimumusb = 1.0
+$DateFormat = 'dd-MM-yyyy HH:mm:ss'
 $OSDCloud_StartTimeUTC = $(Get-Date ([System.DateTime]::UtcNow) -Format $DateFormat)
 ## Run from URL
 Write-host "LL startup v1.9.2"
