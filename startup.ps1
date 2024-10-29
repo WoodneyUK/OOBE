@@ -13,7 +13,12 @@ Write-Host "Running from [$($Global:ScriptRootURL)]"
 start-sleep 5
 
 $USBBootVol = get-volume | where-object {$_.filesystemlabel -match 'WINPE'}
-$USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud'}
+$USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud' -and $_.DriveType -eq 'Removeable'}
+
+If (!$USBDataVol) {
+	#Its probably running from an .iso file, so grab the datavol
+ 	$USBDataVol = get-volume | where-object {$_.filesystemlabel -match 'OSDCloud' -and $_.DriveType -eq 'CD-ROM'} | select -first 1
+}
 
 ## USB version check
 #Use a decimal var so that it will be 0 if version.txt does not exist
