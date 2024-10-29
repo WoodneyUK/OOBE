@@ -1,6 +1,7 @@
 #region Vars and Initialise
-$HashInbox = 'PATH TO WHERE YOU WANT TO PUT THE HASH FILE'
-$stupiddir = 'C:\HWID'
+
+$HashInbox = "$(($USBDataVol).driveletter):\osdcloud\hardwarehash"
+$stupiddir = "$(($USBBootVol).driveletter):\HWID"
 $null = New-Item $stupiddir -ItemType Directory -Force
 $HashFile = "$stupiddir\$((Get-WmiObject -Class Win32_BIOS).SerialNumber).csv"
 #endregion Vars and Initialise
@@ -9,7 +10,7 @@ $HashFile = "$stupiddir\$((Get-WmiObject -Class Win32_BIOS).SerialNumber).csv"
 try
     {
     Push-Location
-    Set-Location -Path "C:\HWID"
+    Set-Location -Path $stupiddir
     $session = New-CimSession
     $serial = (Get-CimInstance -CimSession $session -Class Win32_BIOS).SerialNumber
     $devDetail = (Get-CimInstance -CimSession $session -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
