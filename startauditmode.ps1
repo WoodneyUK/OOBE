@@ -18,7 +18,23 @@ write-host "TRunning the Audit Mode script..."
 # Finalize the device and return to OOBE
 #Set-ExecutionPolicy Restricted -Force
 rename-item -path c:\windows\panther\unattend\unattend.xml -newname unattend.old
+start-sleep -Seconds 10 #Timing test
 rename-item -path c:\windows\panther\unattend\oobe.xml -newname unattend.xml
+start-sleep -Seconds 10 #Timing test
+write-host "Verifying regional settings from Unattend"
+$unfile = [xml](Get-Content "c:\windows\panther\unattend\unattend.xml")
+foreach($setting in $unfile.Unattend.Settings) 
+    {
+    foreach ($component in $setting.Component) {
+        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
+            "[$($component.InputLocale)] in [$($setting.'Pass')]"
+            "[$($component.SystemLocale)] in [$($setting.'Pass')]"
+            "[$($component.UILanguage)] in [$($setting.'Pass')]"
+            "[$($component.UserLocale)] in [$($setting.'Pass')]"
+        }
+    }
+}
+write-host "Starting Sysprep with Reboot"
 start-process -filepath "c:\windows\system32\sysprep\sysprep.exe" -argumentlist "/quiet /reboot /oobe /unattend:c:\windows\panther\unattend\unattend.xml" -wait
 
 #with reboot
