@@ -179,6 +179,7 @@ $Global:MyOSDCloud = [ordered]@{
     SyncMSUpCatDriverUSB = [bool]$false
     ApplyCatalogFirmware = [bool]$true
     ApplyCatalogDrivers = [bool]$false
+    DriverPackName = [string]"None"
     CheckSHA1 = [bool]$false
     OSImageIndex = [int32]3
     ImageFileFullName = [string]"$($USBDataVol.driveletter):\OSDCloud\os\install.wim"
