@@ -18,9 +18,9 @@ write-host "TRunning the Audit Mode script..."
 # Finalize the device and return to OOBE
 #Set-ExecutionPolicy Restricted -Force
 rename-item -path c:\windows\panther\unattend\unattend.xml -newname unattend.old
-start-sleep -Seconds 10 #Timing test
+start-sleep -Seconds 60 #Timing test
 rename-item -path c:\windows\panther\unattend\oobe.xml -newname unattend.xml
-start-sleep -Seconds 10 #Timing test
+start-sleep -Seconds 60 #Timing test
 write-host "Verifying regional settings from Unattend"
 $unfile = [xml](Get-Content "c:\windows\panther\unattend\unattend.xml")
 foreach($setting in $unfile.Unattend.Settings) 
