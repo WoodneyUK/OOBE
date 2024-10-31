@@ -35,7 +35,7 @@ foreach($setting in $unfile.Unattend.Settings)
     }
 }
 write-host "Starting Sysprep with Reboot"
-start-process -filepath "c:\windows\system32\sysprep\sysprep.exe" -argumentlist "/quiet /reboot /oobe /unattend:c:\windows\panther\unattend\unattend.xml" -wait
+start-process -filepath "c:\windows\system32\sysprep\sysprep.exe" -argumentlist "/quiet /reboot /oobe" -wait
 
 #with reboot
 exit 1
