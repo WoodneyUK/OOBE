@@ -13,47 +13,14 @@ Write-host "SystemLocale:$($SysLocale)"
 Write-host "TimeZone:$($TimeZone)"
 
 $auditmodescript = "$($Global:ScriptRootURL)/StartAuditMode.ps1"
-$XMLPath = "c:\windows\panther\unattend\unattend.xml"
-$OOBEPath = "c:\windows\panther\unattend\oobe.xml"
-$RecoveryPath = "c:\recovery\autoapply\unattend.xml"
+$AuditModeXMLPath = "c:\windows\panther\unattend\unattend.xml" # used during the setup as part of OSDCloud
+$SysprepXMLPath = "c:\windows\panther\unattend\oobe.xml" # used during Audit mode to finalise the settings
+$RecoveryXMLPath = "c:\recovery\autoapply\unattend.xml" # used for FreshStart recovery (TBC)
 
 $result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
 $result = New-Item c:\recovery\autoapply -ItemType Directory -Force
 
-$UnattendXml = [xml] @'
-<?xml version="1.0" encoding="utf-8"?>
-<unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <settings pass="oobeSystem">
-        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <OOBE>
-                <ProtectYourPC>3</ProtectYourPC>
-                <HideLocalAccountScreen>true</HideLocalAccountScreen>
-                <HideEULAPage>true</HideEULAPage>
-            </OOBE>
-            <RegisteredOrganization>Linklaters</RegisteredOrganization>
-            <RegisteredOwner>Linklaters User</RegisteredOwner>
-            <TimeZone>UTC</TimeZone>
-        </component>
-        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <InputLocale>en-US</InputLocale>
-            <SystemLocale>en-US</SystemLocale>
-            <UILanguage>en-US</UILanguage>
-            <UserLocale>en-US</UserLocale>
-        </component>
-    </settings>
-    <settings pass="specialize">
-        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <InputLocale>en-US</InputLocale>
-            <SystemLocale>en-US</SystemLocale>
-            <UILanguage>en-US</UILanguage>
-            <UserLocale>en-US</UserLocale>
-        </component>
-    </settings>
-    <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
-</unattend>
-'@
-
-$boottowindows = [xml] @"
+$AuditModeXml = [xml] @"
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
     <settings pass="oobeSystem">
@@ -112,22 +79,36 @@ $boottowindows = [xml] @"
             <TimeZone></TimeZone>
         </component>
     </settings>
-    <settings pass="specialize">
+    <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+</unattend>
+"@
+
+$SysprepXml = [xml] @'
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <OOBE>
+                <ProtectYourPC>3</ProtectYourPC>
+                <HideLocalAccountScreen>true</HideLocalAccountScreen>
+                <HideEULAPage>true</HideEULAPage>
+            </OOBE>
+            <RegisteredOrganization>Linklaters</RegisteredOrganization>
+            <RegisteredOwner>Linklaters User</RegisteredOwner>
+            <TimeZone>UTC</TimeZone>
+        </component>
         <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <InputLocale>en-US</InputLocale>
             <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UILanguageFallback></UILanguageFallback>
             <UserLocale>en-US</UserLocale>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/win11-unattend/sources/install.wim#Windows 11 Enterprise" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
-"@
+'@
 
-
-
-foreach ($setting in $unattendXml.Unattend.Settings) {
+foreach ($setting in $SysprepXml.Unattend.Settings) {
     #Write-host "Checking Setting:$($setting) in Unattend"
     foreach ($component in $setting.Component) {
         #write-host "Checking component:$($component) in Unattend"
@@ -145,26 +126,6 @@ foreach ($setting in $unattendXml.Unattend.Settings) {
     } #end foreach setting.Component
 } #end foreach unattendXml.Unattend.Settings
 
-
-foreach ($setting in $boottowindows.Unattend.Settings) {
-    #Write-host "Checking Setting:$($setting) in Unattend"
-    foreach ($component in $setting.Component) {
-        #write-host "Checking component:$($component) in Unattend"
-        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-International-Core')) {
-            #Write-Host "Updating Locale settings"
-            $component.InputLocale = $userlocale
-            $component.SystemLocale = $SysLocale
-            $component.UILanguage = $SysLocale
-            $component.UserLocale = $userlocale
-        }
-        if ((($setting.'Pass' -eq 'oobeSystem') -or ($setting.'Pass' -eq 'specialize')) -and ($component.'Name' -eq 'Microsoft-Windows-Shell-Setup')) {
-            #Write-Host "Updating Locale settings"
-            $component.Timezone = $Timezone
-        }
-    } #end foreach setting.Component
-} #end foreach unattendXml.Unattend.Settings
-
-
-$unattendXml.Save($OOBEPath)
-$unattendXml.Save($RecoveryPath)
-$boottowindows.save($xmlpath)
+$AuditModeXml.save($AuditModeXMLPath)
+$SysprepXml.Save($SysprepXMLPath)
+$SysprepXml.Save($RecoveryXMLPath)
