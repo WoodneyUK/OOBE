@@ -180,7 +180,6 @@ $Global:MyOSDCloud = [ordered]@{
     SyncMSUpCatDriverUSB = [bool]$false
     ApplyCatalogFirmware = [bool]$true
     ApplyCatalogDrivers = [bool]$false
-    Logs = [string]"C:\Windows\System32\Linklaters\Logfiles"
     CheckSHA1 = [bool]$false
     OSImageIndex = [int32]3
     ImageFileFullName = [string]"$($USBDataVol.driveletter):\OSDCloud\os\install.wim"
