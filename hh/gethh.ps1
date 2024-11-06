@@ -21,8 +21,9 @@ If ((test-path -path $outputfolder) -and (test-path -path $hashfolder) -ne $true
 Push-Location $hashfolder
 
 $Serial = $(Get-WmiObject win32_bios).SerialNumber
-if ($Serial.Contains(" ")) { $Serial = $Serial -replace " ", "" }
-$outputfile = "$outputfolder\$serial.csv"
+if ($Serial.Contains(" ")) { $Serialnum = $Serial -replace " ", "" }
+else { $serialnum = $serial }
+$outputfile = "$outputfolder\$serialnum.csv"
 
 #Run OA3Tool
 If (-not(test-path -path $hashfolder\oa3tool.exe)) { Write-Error "OA3Tool.exe is not accessible.  Cannot continue" }
