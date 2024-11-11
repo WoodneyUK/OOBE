@@ -138,14 +138,6 @@ $CPLXML = [xml] @"
         <gs:User UserID="Current" CopySettingsToDefaultUserAcct="true" CopySettingsToSystemAcct="true"/> 
     </gs:UserList>
 
-<!-- system locale -->
-    <gs:SystemLocale Name="$userlocale"/>
-
-<!--User Locale-->
-    <gs:UserLocale> 
-        <gs:Locale Name="$userlocale" SetAsCurrent="true" ResetAllSettings="false"/>
-    </gs:UserLocale>
-
 <!--location--> 
  <gs:LocationPreferences> 
         <gs:GeoID Value="$GeoID"/> 
