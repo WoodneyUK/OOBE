@@ -103,28 +103,28 @@ else
     {
     switch($CountrySelection) 
         {
-        1     {$Country = "Belgium";$TimeyWimey = 'Romance Standard Time'} # 21 - Kingdom of Belgium 
-        2     {$Country = "Brazil";$TimeyWimey = 'E. South America Standard Time'} # 32 - Federative Republic of Brazil
-        3     {$Country = "China";$TimeyWimey = 'China Standard Time'} # 45 - People's Republic of China 
-        4     {$Country = "France";$TimeyWimey = 'Romance Standard Time'} # 84 - French Republic 
-        5     {$Country = "Germany";$TimeyWimey = 'W. Europe Standard Time'} # 94 - Federal Republic of Germany
-        6     {$Country = "Hong Kong";$TimeyWimey = 'China Standard Time'} # 104 - Hong Kong Special Administrative Region
-        7     {$Country = "Indonesia";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID'} # 111 - Republic of Indonesia
-        8     {$Country = "Italy";$TimeyWimey = 'W. Europe Standard Time'} # 118 - Italian Republic
-        9     {$Country = "Japan";$TimeyWimey = 'Tokyo Standard Time'} # 122 - Japan
-        10    {$Country = "Korea";$TimeyWimey = 'Korea Standard Time'} # 134 - Republic of Korea
-        11    {$Country = "Luxembourg";$TimeyWimey = 'W. Europe Standard Time'} # 147 - Grand Duchy of Luxembourg
-        12    {$Country = "Netherlands";$TimeyWimey = 'W. Europe Standard Time'} # 176 - Kingdom of the Netherlands
-        13    {$Country = "Poland";$TimeyWimey = 'Central European Standard Time'} # 191 - Republic of Poland
-        14    {$Country = "Portugal";$TimeyWimey = 'GMT Standard Time'} # 193 - Portuguese Republic
-        15    {$Country = "Russia";$TimeyWimey = 'Russian Standard Time'} # 203 - Russian Federation
-        16    {$Country = "Singapore";$TimeyWimey = 'Singapore Standard Time';$CCulture = 'en-SG'} # 215 - Republic of Singapore
-        17    {$Country = "Spain";$TimeyWimey = 'Romance Standard Time'} # 217 - Kingdom of Spain
-        18    {$Country = "Sweden";$TimeyWimey = 'W. Europe Standard Time'} # 221 - Kingdom of Sweden
-        19    {$Country = "UAE";$TimeyWimey = 'Arabian Standard Time';$CCulture = 'ar-AE'} # 224 - United Arab Emirates
-        20    {$Country = "Thailand";$TimeyWimey = 'SE Asia Standard Time'} # 227 - Kingdom of Thailand
-        21    {$Country = "UK";$TimeyWimey = 'GMT Standard Time'} # 242 - United Kingdom
-        22    {$Country = "US";$TimeyWimey = 'Eastern Standard Time'} # 244 - United States
+        1     {$Country = "Belgium";$TimeyWimey = 'Romance Standard Time';$GeoID = '21'} # 21 - Kingdom of Belgium 
+        2     {$Country = "Brazil";$TimeyWimey = 'E. South America Standard Time';$GeoID = '32'} # 32 - Federative Republic of Brazil
+        3     {$Country = "China";$TimeyWimey = 'China Standard Time';$GeoID = '45'} # 45 - People's Republic of China 
+        4     {$Country = "France";$TimeyWimey = 'Romance Standard Time';$GeoID = '84'} # 84 - French Republic 
+        5     {$Country = "Germany";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '94'} # 94 - Federal Republic of Germany
+        6     {$Country = "Hong Kong";$TimeyWimey = 'China Standard Time';$GeoID = '104'} # 104 - Hong Kong Special Administrative Region
+        7     {$Country = "Indonesia";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID';$GeoID = '111'} # 111 - Republic of Indonesia
+        8     {$Country = "Italy";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '118'} # 118 - Italian Republic
+        9     {$Country = "Japan";$TimeyWimey = 'Tokyo Standard Time';$GeoID = '122'} # 122 - Japan
+        10    {$Country = "Korea";$TimeyWimey = 'Korea Standard Time';$GeoID = '134'} # 134 - Republic of Korea
+        11    {$Country = "Luxembourg";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '147'} # 147 - Grand Duchy of Luxembourg
+        12    {$Country = "Netherlands";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '176'} # 176 - Kingdom of the Netherlands
+        13    {$Country = "Poland";$TimeyWimey = 'Central European Standard Time';$GeoID = '191'} # 191 - Republic of Poland
+        14    {$Country = "Portugal";$TimeyWimey = 'GMT Standard Time';$GeoID = '193'} # 193 - Portuguese Republic
+        15    {$Country = "Russia";$TimeyWimey = 'Russian Standard Time';$GeoID = '203'} # 203 - Russian Federation
+        16    {$Country = "Singapore";$TimeyWimey = 'Singapore Standard Time';$CCulture = 'en-SG';$GeoID = '215'} # 215 - Republic of Singapore
+        17    {$Country = "Spain";$TimeyWimey = 'Romance Standard Time';$GeoID = '217'} # 217 - Kingdom of Spain
+        18    {$Country = "Sweden";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '221'} # 221 - Kingdom of Sweden
+        19    {$Country = "UAE";$TimeyWimey = 'Arabian Standard Time';$CCulture = 'ar-AE';$GeoID = '224'} # 224 - United Arab Emirates
+        20    {$Country = "Thailand";$TimeyWimey = 'SE Asia Standard Time';$GeoID = '227'} # 227 - Kingdom of Thailand
+        21    {$Country = "UK";$TimeyWimey = 'GMT Standard Time';$GeoID = '242'} # 242 - United Kingdom
+        22    {$Country = "US";$TimeyWimey = 'Eastern Standard Time';$GeoID = '244'} # 244 - United States
         }
     }
     
@@ -271,7 +271,7 @@ Invoke-restmethod -uri "$($Global:ScriptRootURL)/startauditmode.ps1" | out-file 
 New-Item c:\windows\panther\unattend -force -ItemType Directory
 
 #Create the custom unattend.xml
-& "c:\windows\setup\scripts\createxml.ps1" -userlocale $desiredKB -TimeZone $TimeyWimey
+& "c:\windows\setup\scripts\createxml.ps1" -userlocale $desiredKB -TimeZone $TimeyWimey -GeoID $GeoID
 
 #Save the wifi profile for use later
 netsh wlan export profile key=clear folder=c:\osdcloud\configs
