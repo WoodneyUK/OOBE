@@ -3,7 +3,8 @@
 [CmdletBinding()]
     param (
         [String]$userlocale = "en-US",
-        [String]$TimeZone = 'Eastern Standard Time'
+        [String]$TimeZone = 'Eastern Standard Time',
+        [String]$GeoID = '244'
     )
 
 $SysLocale = "en-US"
@@ -11,14 +12,17 @@ $SysLocale = "en-US"
 write-host "UserLocale:$($userlocale)"
 Write-host "SystemLocale:$($SysLocale)"
 Write-host "TimeZone:$($TimeZone)"
+Write-host "GeoID:$($GeoID)"
 
 $auditmodescript = "$($Global:ScriptRootURL)/StartAuditMode.ps1"
 $AuditModeXMLPath = "c:\windows\panther\unattend\unattend.xml" # used during the setup as part of OSDCloud
 $SysprepXMLPath = "c:\windows\panther\unattend\oobe.xml" # used during Audit mode to finalise the settings
 $RecoveryXMLPath = "c:\recovery\autoapply\unattend.xml" # used for FreshStart recovery (TBC)
+$IntlCPLXMLPath = "c:\Windows\System32\Linklaters\Engineering\Lang\$userlocale.xml" # used fduring Buildstate to apply Region formatting and other options (TBC)
 
 $result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
 $result = New-Item c:\recovery\autoapply -ItemType Directory -Force
+$result = New-Item c:\Windows\System32\Linklaters\Engineering\Lang -ItemType Directory -Force
 
 $AuditModeXml = [xml] @"
 <?xml version="1.0" encoding="utf-8"?>
@@ -126,6 +130,31 @@ foreach ($setting in $SysprepXml.Unattend.Settings) {
     } #end foreach setting.Component
 } #end foreach unattendXml.Unattend.Settings
 
+$CPLXML = [xml] @"
+<gs:GlobalizationServices xmlns:gs="urn:longhornGlobalizationUnattend">
+ 
+<!-- user list --> 
+    <gs:UserList>
+        <gs:User UserID="Current" CopySettingsToDefaultUserAcct="true" CopySettingsToSystemAcct="true"/> 
+    </gs:UserList>
+
+<!-- system locale -->
+    <gs:SystemLocale Name="$userlocale"/>
+
+<!--User Locale-->
+    <gs:UserLocale> 
+        <gs:Locale Name="$userlocale" SetAsCurrent="true" ResetAllSettings="false"/>
+    </gs:UserLocale>
+
+<!--location--> 
+ <gs:LocationPreferences> 
+        <gs:GeoID Value="$GeoID"/> 
+    </gs:LocationPreferences>
+    
+</gs:GlobalizationServices>
+"@
+
 $AuditModeXml.save($AuditModeXMLPath)
 $SysprepXml.Save($SysprepXMLPath)
 $SysprepXml.Save($RecoveryXMLPath)
+$CPLXML.Save($IntlCPLXMLPath)
