@@ -132,17 +132,15 @@ foreach ($setting in $SysprepXml.Unattend.Settings) {
 
 $CPLXML = [xml] @"
 <gs:GlobalizationServices xmlns:gs="urn:longhornGlobalizationUnattend">
- 
-<!-- user list --> 
-    <gs:UserList>
-        <gs:User UserID="Current" CopySettingsToDefaultUserAcct="true" CopySettingsToSystemAcct="true"/> 
-    </gs:UserList>
-
-<!--location--> 
+<gs:UserList>
+    <gs:User UserID="Current" CopySettingsToDefaultUserAcct="true" CopySettingsToSystemAcct="true"/> 
+</gs:UserList>
+  <gs:UserLocale>
+    <gs:Locale Name="$userlocale" SetAsCurrent="true" ResetAllSettings="false" />
+  </gs:UserLocale>
  <gs:LocationPreferences> 
         <gs:GeoID Value="$GeoID"/> 
     </gs:LocationPreferences>
-    
 </gs:GlobalizationServices>
 "@
 
