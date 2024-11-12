@@ -103,28 +103,28 @@ else
     {
     switch($CountrySelection) 
         {
-        1     {$Country = "Belgium";$TimeyWimey = 'Romance Standard Time';$GeoID = '21'} # 21 - Kingdom of Belgium 
-        2     {$Country = "Brazil";$TimeyWimey = 'E. South America Standard Time';$GeoID = '32'} # 32 - Federative Republic of Brazil
-        3     {$Country = "China";$TimeyWimey = 'China Standard Time';$GeoID = '45'} # 45 - People's Republic of China 
-        4     {$Country = "France";$TimeyWimey = 'Romance Standard Time';$GeoID = '84'} # 84 - French Republic 
-        5     {$Country = "Germany";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '94'} # 94 - Federal Republic of Germany
-        6     {$Country = "Hong Kong";$TimeyWimey = 'China Standard Time';$GeoID = '104'} # 104 - Hong Kong Special Administrative Region
-        7     {$Country = "Indonesia";$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID';$GeoID = '111'} # 111 - Republic of Indonesia
-        8     {$Country = "Italy";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '118'} # 118 - Italian Republic
-        9     {$Country = "Japan";$TimeyWimey = 'Tokyo Standard Time';$GeoID = '122'} # 122 - Japan
-        10    {$Country = "Korea";$TimeyWimey = 'Korea Standard Time';$GeoID = '134'} # 134 - Republic of Korea
-        11    {$Country = "Luxembourg";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '147'} # 147 - Grand Duchy of Luxembourg
-        12    {$Country = "Netherlands";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '176'} # 176 - Kingdom of the Netherlands
-        13    {$Country = "Poland";$TimeyWimey = 'Central European Standard Time';$GeoID = '191'} # 191 - Republic of Poland
-        14    {$Country = "Portugal";$TimeyWimey = 'GMT Standard Time';$GeoID = '193'} # 193 - Portuguese Republic
-        15    {$Country = "Russia";$TimeyWimey = 'Russian Standard Time';$GeoID = '203'} # 203 - Russian Federation
-        16    {$Country = "Singapore";$TimeyWimey = 'Singapore Standard Time';$CCulture = 'en-SG';$GeoID = '215'} # 215 - Republic of Singapore
-        17    {$Country = "Spain";$TimeyWimey = 'Romance Standard Time';$GeoID = '217'} # 217 - Kingdom of Spain
-        18    {$Country = "Sweden";$TimeyWimey = 'W. Europe Standard Time';$GeoID = '221'} # 221 - Kingdom of Sweden
-        19    {$Country = "UAE";$TimeyWimey = 'Arabian Standard Time';$CCulture = 'ar-AE';$GeoID = '224'} # 224 - United Arab Emirates
-        20    {$Country = "Thailand";$TimeyWimey = 'SE Asia Standard Time';$GeoID = '227'} # 227 - Kingdom of Thailand
-        21    {$Country = "UK";$TimeyWimey = 'GMT Standard Time';$GeoID = '242'} # 242 - United Kingdom
-        22    {$Country = "US";$TimeyWimey = 'Eastern Standard Time';$GeoID = '244'} # 244 - United States
+        1     {$Country = "Belgium";$Rootkeeby = '0813:00000813';$TimeyWimey = 'Romance Standard Time';$GeoID = '21'} # 21 - Kingdom of Belgium 
+        2     {$Country = "Brazil";$Rootkeeby = '0416:00000416';$TimeyWimey = 'E. South America Standard Time';$GeoID = '32'} # 32 - Federative Republic of Brazil
+        3     {$Country = "China";$Rootkeeby = '0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}';$TimeyWimey = 'China Standard Time';$GeoID = '45'} # 45 - People's Republic of China 
+        4     {$Country = "France";$Rootkeeby = '040C:0000040C';$TimeyWimey = 'Romance Standard Time';$GeoID = '84'} # 84 - French Republic 
+        5     {$Country = "Germany";$Rootkeeby = '0407:00000407';$TimeyWimey = 'W. Europe Standard Time';$GeoID = '94'} # 94 - Federal Republic of Germany
+        6     {$Country = "Hong Kong";$Rootkeeby = '3C09:00000409';$TimeyWimey = 'China Standard Time';$GeoID = '104'} # 104 - Hong Kong Special Administrative Region
+        7     {$Country = "Indonesia";$Rootkeeby = '0421:00000409';$TimeyWimey = 'SE Asia Standard Time';$CCulture = 'id-ID';$GeoID = '111'} # 111 - Republic of Indonesia
+        8     {$Country = "Italy";$Rootkeeby = '0410:00000410';$TimeyWimey = 'W. Europe Standard Time';$GeoID = '118'} # 118 - Italian Republic
+        9     {$Country = "Japan";$Rootkeeby = '0411:{03B5835F-F03C-411B-9CE2-AA23E1171E36}{A76C93D9-5523-4E90-AAFA-4DB112F9AC76}';$TimeyWimey = 'Tokyo Standard Time';$GeoID = '122'} # 122 - Japan
+        10    {$Country = "Korea";$Rootkeeby = '0412:{A028AE76-01B1-46C2-99C4-ACD9858AE02F}{B5FE1F02-D5F2-4445-9C03-C568F23C99A1}';$TimeyWimey = 'Korea Standard Time';$GeoID = '134'} # 134 - Republic of Korea
+        11    {$Country = "Luxembourg";$Rootkeeby = '046E:0000046E';$TimeyWimey = 'W. Europe Standard Time';$GeoID = '147'} # 147 - Grand Duchy of Luxembourg
+        12    {$Country = "Netherlands";$Rootkeeby = '0413:00020409';$TimeyWimey = 'W. Europe Standard Time';$GeoID = '176'} # 176 - Kingdom of the Netherlands
+        13    {$Country = "Poland";$Rootkeeby = '0415:00000415';$TimeyWimey = 'Central European Standard Time';$GeoID = '191'} # 191 - Republic of Poland
+        14    {$Country = "Portugal";$Rootkeeby = '0816:00000816';$TimeyWimey = 'GMT Standard Time';$GeoID = '193'} # 193 - Portuguese Republic
+        15    {$Country = "Russia";$Rootkeeby = '0419:00000419';$TimeyWimey = 'Russian Standard Time';$GeoID = '203'} # 203 - Russian Federation
+        16    {$Country = "Singapore";$Rootkeeby = '0409:00000409';$TimeyWimey = 'Singapore Standard Time';$CCulture = 'en-SG';$GeoID = '215'} # 215 - Republic of Singapore
+        17    {$Country = "Spain";$Rootkeeby = '0C0A:0000040A';$TimeyWimey = 'Romance Standard Time';$GeoID = '217'} # 217 - Kingdom of Spain
+        18    {$Country = "Sweden";$Rootkeeby = '041D:0000041D';$TimeyWimey = 'W. Europe Standard Time';$GeoID = '221'} # 221 - Kingdom of Sweden
+        19    {$Country = "UAE";$Rootkeeby = '0409:00000409';$TimeyWimey = 'Arabian Standard Time';$CCulture = 'ar-AE';$GeoID = '224'} # 224 - United Arab Emirates
+        20    {$Country = "Thailand";$Rootkeeby = '0409:00000409';$TimeyWimey = 'SE Asia Standard Time';$GeoID = '227'} # 227 - Kingdom of Thailand
+        21    {$Country = "UK";$Rootkeeby = '0809:00000809';$TimeyWimey = 'GMT Standard Time';$GeoID = '242'} # 242 - United Kingdom
+        22    {$Country = "US";$Rootkeeby = '0409:00000409';$TimeyWimey = 'Eastern Standard Time';$GeoID = '244'} # 244 - United States
         }
     }
     
