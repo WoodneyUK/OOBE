@@ -272,7 +272,7 @@ Invoke-restmethod -uri "$($Global:ScriptRootURL)/startauditmode.ps1" | out-file 
 New-Item c:\windows\panther\unattend -force -ItemType Directory
 
 #Create the custom unattend.xml
-& "c:\windows\setup\scripts\createxml.ps1" -userlocale $desiredKB -TimeZone $TimeyWimey -GeoID $GeoID
+& "c:\windows\setup\scripts\createxml.ps1" -userlocale $desiredKB -TimeZone $TimeyWimey -GeoID $GeoID -RKB $Rootkeeby
 
 #Save the wifi profile for use later
 netsh wlan export profile key=clear folder=c:\osdcloud\configs
