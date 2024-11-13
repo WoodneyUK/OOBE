@@ -4,7 +4,8 @@
     param (
         [String]$userlocale = "en-US",
         [String]$TimeZone = 'Eastern Standard Time',
-        [String]$GeoID = '244'
+        [String]$GeoID = '244',
+        [String]$RKB = '00409:00000409'
     )
 
 $SysLocale = "en-US"
@@ -135,16 +136,20 @@ $CPLXML = [xml] @"
 <gs:UserList>
     <gs:User UserID="Current" CopySettingsToDefaultUserAcct="true" CopySettingsToSystemAcct="true"/> 
 </gs:UserList>
-  <gs:UserLocale>
-    <gs:Locale Name="$userlocale" SetAsCurrent="true" ResetAllSettings="false" />
-  </gs:UserLocale>
- <gs:LocationPreferences> 
+    <gs:UserLocale>
+        <gs:Locale Name="$userlocale" SetAsCurrent="true" ResetAllSettings="false" />
+    </gs:UserLocale>
+    <gs:LocationPreferences> 
         <gs:GeoID Value="$GeoID"/> 
     </gs:LocationPreferences>
+    <gs:InputPreferences>
+        <gs:InputLanguageID Action="add" ID="$($RKB)" Default="true"/>
+        <gs:InputLanguageID Action="add" ID="0409:00000409"/>
+    </gs:InputPreferences>
 </gs:GlobalizationServices>
 "@
 
-$AuditModeXml.save($AuditModeXMLPath)
+$AuditModeXml.Save($AuditModeXMLPath)
 $SysprepXml.Save($SysprepXMLPath)
 $SysprepXml.Save($RecoveryXMLPath)
 $CPLXML.Save($IntlCPLXMLPath)
