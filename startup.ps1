@@ -166,6 +166,15 @@ ElseIf ($desiredkb -eq $null -and $manufacturer -ne "Lenovo") {
     }
 Else { Write-Host "Keyboard detected as $desiredkb" }
 
+######################DELETE ME###########################
+if((Get-CimInstance -ClassName Win32_BIOS).SerialNumber -eq 'PF1C544B')
+	{
+ 	$desiredkb = "en-US" 
+   	Write-Host "[TEMP]Keyboard detected as $desiredkb"
+	}
+##########################################################
+
+
 #Set OSDCloud Vars
 $Global:MyOSDCloud = [ordered]@{
     Restart = [bool]$False
