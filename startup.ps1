@@ -243,7 +243,6 @@ $BuildRegistryKey = "$RegistryKey\Engineering\Build"
 $null = New-Item -Path $BuildRegistryKey -ItemType Directory -Force
 #Set OSDCloud USB version
 $null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_Version' -PropertyType String -Value $usbver -Force
-$null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_RootKB' -PropertyType String -Value $Rootkeeby -Force
 #Set OSDCLoud start time
 $null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_StartTimeUTC' -PropertyType String -Value $OSDCloud_StartTimeUTC -Force
 #Set FoD requied keys for BuildState detection (temporary until FoD phase removed from BuildState)
