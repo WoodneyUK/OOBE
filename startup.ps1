@@ -61,7 +61,20 @@ If ($selection -eq 'q') {
     pause
     wpeutil shutdown
 }
-Write-Host "Continuing to Install Windows..."
+
+## Temporary Access Pass supercalifragilisticexpialidocious
+Clear-Host
+$TAP = read-host -Prompt "Type supercalifragilisticexpialidocious if Temporary Access Pass will be used on first login or Press Enter to continue"
+If(($TAP -eq "supercalifragilisticexpialidocious") -or ($TAP -eq "TAP"))
+    { 
+    $ConfigureTAP = $true
+    }
+Else 
+    {
+    Write-Host "Continue without TAP in full OS." -ForegroundColor Yellow -Backgroundcolor DarkGray
+    }
+
+Write-Host "Continuing to Country selection..."
 
 ## Country 
 Clear-Host
@@ -237,6 +250,11 @@ $RegistryValue = "LLScriptRootURL"
 $RegistryValueType = "String"
 $RegistryValueData = $ScriptRootURL
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
+
+#Configure WebSignIn 
+$AuthenticationPath = "HKLM:\NewOS\Microsoft\PolicyManager\current\device\Authentication"
+$null = New-Item -Path $AuthenticationPath -ItemType Directory -Force
+$null = New-ItemProperty -Path $AuthenticationPath -Name 'EnableWebSignIn' -PropertyType DWORD -Value '1' -Force
 
 #Create registry build hive
 $BuildRegistryKey = "$RegistryKey\Engineering\Build"
