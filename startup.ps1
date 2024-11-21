@@ -64,7 +64,8 @@ If ($selection -eq 'q') {
 
 ## Temporary Access Pass supercalifragilisticexpialidocious
 Clear-Host
-$TAP = read-host -Prompt "Type supercalifragilisticexpialidocious if Temporary Access Pass will be used on first login or Press Enter to continue"
+Write-Host "Would you TAP it ?." -ForegroundColor Yellow -Backgroundcolor DarkGray
+$TAP = read-host -Prompt "Type supercaLifragIlisticExpialidociouS for TAP`nor Press Enter to continue"
 If(($TAP.ToLower() -eq "supercalifragilisticexpialidocious") -or ($TAP.ToLower() -eq "tap"))
     { 
     $ConfigureTAP = $true
