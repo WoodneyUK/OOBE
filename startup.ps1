@@ -64,17 +64,44 @@ If ($selection -eq 'q') {
 
 ## Temporary Access Pass supercalifragilisticexpialidocious
 Clear-Host
-Write-Host "Would you TAP it ?." -ForegroundColor Yellow -Backgroundcolor DarkGray
-$TAP = read-host -Prompt "Type supercaLifragIlisticExpialidociouS for TAP`nor Press Enter to continue"
-If(($TAP.ToLower() -eq "supercalifragilisticexpialidocious") -or ($TAP.ToLower() -eq "tap"))
-    { 
-    $ConfigureTAP = $true
-    }
-Else 
+Write-Host "How often would you TAP it ?." -ForegroundColor Yellow -Backgroundcolor DarkGray
+Write-Host "1 - Once"
+Write-Host "2 - Always"
+Write-Host "N - Never"
+Write-Host "Q - quit and restart"
+while(($TAP -ne 'N') -and ($TAP -ne 'Q') -and ($TAP -notin 1..2))
     {
-    Write-Host "Continue without TAP in full OS." -ForegroundColor Yellow -Backgroundcolor DarkGray
+    $TAP = Read-Host "Enter selection [1,2,N or Q]"
+    }
+If($TAP.ToLower() -eq 'q') 
+    {
+    Write-Host "restarting"
+    start-sleep 5
+    wpeutil reboot
+    }
+else
+    {
+    switch($TAP)
+        {
+        1
+            {
+            $ConfigureTAP = 'Once'
+            }
+        2
+            {
+            $ConfigureTAP = 'Always'
+            }
+        }
     }
 
+if($ConfigureTAP)
+    {
+    Write-Host "Temporary Acces Pass will be configured [$($ConfigureTAP)]"
+    }
+else
+    {
+    Write-Host "Temporary Acces Pass will be NOT configured..."
+    }
 Write-Host "Continuing to Country selection..."
 
 ## Country 
@@ -252,14 +279,6 @@ $RegistryValueType = "String"
 $RegistryValueData = $ScriptRootURL
 $Result = New-ItemProperty -Path $RegistryKey -Name $RegistryValue -PropertyType $RegistryValueType -Value $RegistryValueData -Force
 
-#Configure WebSignIn 
-if($ConfigureTAP -eq $true)
-	{
-	$AuthenticationPath = "HKLM:\NewOS\Microsoft\PolicyManager\current\device\Authentication"
-	$null = New-Item -Path $AuthenticationPath -ItemType Directory -Force
-	$null = New-ItemProperty -Path $AuthenticationPath -Name 'EnableWebSignIn' -PropertyType DWORD -Value '1' -Force
-	}
-
 
 #Create registry build hive
 $BuildRegistryKey = "$RegistryKey\Engineering\Build"
@@ -282,6 +301,18 @@ foreach($food in $FoDs)
     $null = New-Item -Path $FoDPath -ItemType Directory -Force
     $null = New-ItemProperty -Path $FoDPath -Name State -PropertyType String -Value 'Installed' -Force
     }
+
+#Configure WebSignIn 
+if($ConfigureTAP)
+	{ 
+    $AuthenticationPath = "HKLM:\NewOS\Microsoft\PolicyManager\current\device\Authentication"
+	$null = New-Item -Path $AuthenticationPath -ItemType Directory -Force
+	$null = New-ItemProperty -Path $AuthenticationPath -Name 'EnableWebSignIn' -PropertyType DWORD -Value '1' -Force
+    if($ConfigureTAP -eq 'Always')
+        {
+        $null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_TAP' -PropertyType String -Value $ConfigureTAP -Force
+        }
+	}
     
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
