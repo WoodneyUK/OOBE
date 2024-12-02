@@ -46,13 +46,13 @@ $AuditModeXml = [xml] @"
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
                     <Description>LL:Installing Windows Updates - Run 1</Description>
-                    <Path>PowerShell -executionpolicy bypass -Command "start-windowsupdate"</Path>
+                    <Path>PowerShell -executionpolicy bypass -Command "write-output start-windowsupdate"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>3</Order>
                     <Description>LL:Installing Windows Updates - Run 2</Description>
-                    <Path>PowerShell -executionpolicy bypass -Command "start-windowsupdate"</Path>
+                    <Path>PowerShell -executionpolicy bypass -Command "write-output start-windowsupdate"</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
