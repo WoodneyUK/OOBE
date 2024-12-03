@@ -330,12 +330,16 @@ Invoke-restmethod -uri "$($Global:ScriptRootURL)/createxml.ps1" | out-file "c:\w
 invoke-restmethod -uri "$($Global:ScriptRootURL)/wificonnect.ps1" | out-file "c:\windows\setup\scripts\wificonnect.ps1" -force -encoding ascii
 Invoke-restmethod -uri "$($Global:ScriptRootURL)/cleanup.ps1" | out-file "c:\windows\setup\scripts\LLCleanup.ps1" -force -encoding ascii
 Invoke-restmethod -uri "$($Global:ScriptRootURL)/startauditmode.ps1" | out-file "c:\windows\setup\scripts\startauditmode.ps1" -force -encoding ascii
+Invoke-restmethod -uri "$($Global:ScriptRootURL)/createrestore.ps1" | out-file "c:\windows\setup\scripts\createrestore.ps1" -force -encoding ascii
 
 #Custom unattend.xml
 New-Item c:\windows\panther\unattend -force -ItemType Directory
 
 #Create the custom unattend.xml
 & "c:\windows\setup\scripts\createxml.ps1" -userlocale $desiredKB -TimeZone $TimeyWimey -GeoID $GeoID -RKB $Rootkeeby
+
+#Create the custom restore files
+& "c:\windows\setup\scripts\createrestore.ps1"
 
 #Save the wifi profile for use later
 netsh wlan export profile key=clear folder=c:\osdcloud\configs
