@@ -25,6 +25,7 @@ for /F "tokens=1,2,3 delims= " %%A in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\M
 rem Define %TARGETOSDRIVE% as the Windows partition (This later becomes C:)
 for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
+md "%TARGETOS%\system32\Linklaters\Engineering\Lang"
 xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\*.xml" "%TARGETOS%\system32\Linklaters\Engineering\Lang"
 "@
 
