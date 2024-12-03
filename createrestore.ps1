@@ -1,6 +1,6 @@
 ##  Script runs in WINPE
-# Requires [lang].xml to be present in c:\recovery\OEM\lang
-# Requires Country.Config to be present in c:\recovery\OEM\lang
+# Requires copy of C:\Windows\System32\Linklaters\Engineering\Lang\[lang].xml to be present in c:\recovery\OEM\lang
+# Requires copy of C:\Windows\System32\Linklaters\Engineering\UsersRegionAndCultureCountry.Config to be present in c:\recovery\OEM\lang
 
 
 $ResetConfigXMLPath = "c:\Recovery\OEM\ResetConfig.xml" # used during the setup as part of OSDCloud
