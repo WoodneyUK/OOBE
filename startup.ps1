@@ -317,7 +317,7 @@ else
     
 # Cleanup (to prevent access denied issue unloading the registry hive)
 Remove-Variable Result
-Get-Variable Registry* | Remove-Variable
+Get-Variable *Registry* | Remove-Variable
 Start-Sleep -Seconds 5
 
 # Unload the registry hive
