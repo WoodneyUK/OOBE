@@ -304,14 +304,15 @@ foreach($food in $FoDs)
 
 #Configure WebSignIn 
 if($ConfigureTAP)
-	{ 
-    $AuthenticationPath = "HKLM:\NewOS\Microsoft\PolicyManager\current\device\Authentication"
+	{
+	$null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_TAP' -PropertyType String -Value $ConfigureTAP -Force
+	$AuthenticationPath = "HKLM:\NewOS\Microsoft\PolicyManager\current\device\Authentication"
 	$null = New-Item -Path $AuthenticationPath -ItemType Directory -Force
 	$null = New-ItemProperty -Path $AuthenticationPath -Name 'EnableWebSignIn' -PropertyType DWORD -Value '1' -Force
-    if($ConfigureTAP -eq 'Always')
-        {
-        $null = New-ItemProperty -Path $BuildRegistryKey -Name 'OSDCloud_TAP' -PropertyType String -Value $ConfigureTAP -Force
-        }
+	}
+else
+	{
+	Read-Host -Prompt "No TAP enabled Press any key to continue" 
 	}
     
 # Cleanup (to prevent access denied issue unloading the registry hive)
