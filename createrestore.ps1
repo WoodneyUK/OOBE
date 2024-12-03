@@ -13,8 +13,10 @@ $ResetConfigXml = [xml] @"
          <Path>CopyFiles.cmd</Path>
          <Duration>2</Duration>
       </Run>
-      <!-- May be combined with Recovery Media Creator
-       configurations – insert SystemDisk element here -->
+      <Run Phase="FactoryReset_AfterImageApply">
+         <Path>CopyFiles.cmd</Path>
+         <Duration>2</Duration>
+      </Run>
    </Reset>
 "@
 
