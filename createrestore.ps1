@@ -29,6 +29,10 @@ for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
 md "%TARGETOS%\system32\Linklaters\Engineering\Lang"
 xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\*.xml" "%TARGETOS%\system32\Linklaters\Engineering\Lang"
+
+md "%TARGETOS%\Panther\Unattend"
+xcopy "%TARGETOSDRIVE%\Recovery\Unattend\unattend.xml" "%TARGETOS%\Panther\Unattend"
+
 "@
 
 $ResetConfigXml.Save($ResetConfigXMLPath)
