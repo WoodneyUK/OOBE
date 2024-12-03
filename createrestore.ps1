@@ -3,7 +3,8 @@
 # Requires copy of C:\Windows\System32\Linklaters\Engineering\UsersRegionAndCultureCountry.Config to be present in c:\recovery\OEM\lang
 
 
-$ResetConfigXMLPath = "c:\Recovery\OEM\ResetConfig.xml" # used during the setup as part of OSDCloud
+$ResetConfigXMLPath = "c:\Recovery\OEM\ResetConfig.xml"   # used during the setup as part of OSDCloud
+$ResetScriptPath = "c:\Recovery\OEM\copyfiles.cmd"
 $result = New-Item c:\recovery\OEM -ItemType Directory -Force
 
 $ResetConfigXml = [xml] @"
@@ -31,4 +32,4 @@ xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\Country.config" "%TARGETOS%\system32\Li
 "@
 
 $ResetConfigXml.Save($ResetConfigXMLPath)
-$CopyFiles | out-file $ResetConfigXMLPath -Force -encoding ascii
+$CopyFiles | out-file $ResetScriptPath -Force -encoding ascii
