@@ -263,6 +263,9 @@ $ConfigFilesDir = 'C:\Windows\System32\Linklaters\Engineering\UsersRegionAndCult
 $ConfigFile = 'Country.config'
 New-Item $ConfigFilesDir -ItemType Directory -Force
 Set-Content $ConfigFilesDir\$ConfigFile -Value $Country -Force
+$RestoreFilesDir = 'c:\Recovery\OEM\Lang\'
+New-Item $RestoreFilesDir -ItemType Directory -Force
+Set-Content $RestoreFilesDir\$ConfigFile -Value $Country -Force
 
 # Load the offline registry hive from the OS volume
 Write-Host "writing to offline registry"
