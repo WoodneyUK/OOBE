@@ -1,5 +1,6 @@
 ##  Script runs in WINPE
-# Requires copy of C:\Windows\System32\Linklaters\Engineering\Lang\[lang].xml to be present in c:\recovery\OEM\lang
+# Requires copy of C:\Windows\System32\Linklaters\Engineering\Lang\[lang].xml to be present in c:\recovery\OEM\lang  (main script creates this)
+# Requires copy of C:\Windows\System32\Linklaters\Engineering\UsersRegionAndCulture\Country.config to be present in c:\recovery\OEM\lang (main script creates this)
 
 $ResetConfigXMLPath = "c:\Recovery\OEM\ResetConfig.xml"   # used during the setup as part of OSDCloud
 $ResetScriptPath = "c:\Recovery\OEM\copyfiles.cmd"
@@ -29,6 +30,7 @@ for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
 md "%TARGETOS%\system32\Linklaters\Engineering\Lang"
 xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\*.xml" "%TARGETOS%\system32\Linklaters\Engineering\Lang"
+xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\country.config" "%TARGETOS%\system32\Linklaters\Engineering\UsersRegionAndCulture\"
 
 md "%TARGETOS%\Panther\Unattend"
 xcopy "%TARGETOSDRIVE%\Recovery\Unattend\unattend.xml" "%TARGETOS%\Panther\Unattend"
