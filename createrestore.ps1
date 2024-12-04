@@ -33,7 +33,7 @@ xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\*.xml" "%TARGETOS%\system32\Linklaters\
 xcopy "%TARGETOSDRIVE%\Recovery\OEM\Lang\country.config" "%TARGETOS%\system32\Linklaters\Engineering\UsersRegionAndCulture\"
 
 md "%TARGETOS%\Panther\Unattend"
-xcopy "%TARGETOSDRIVE%\Recovery\Unattend\unattend.xml" "%TARGETOS%\Panther\Unattend"
+xcopy "%TARGETOSDRIVE%\Recovery\AutoApply\unattend.xml" "%TARGETOS%\Panther\Unattend"
 
 "@
 
