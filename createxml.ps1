@@ -20,7 +20,7 @@ $AuditModeXMLPath = "c:\windows\panther\unattend\unattend.xml" # used during the
 $SysprepXMLPath = "c:\windows\panther\unattend\oobe.xml" # used during Audit mode to finalise the settings
 $RecoveryXMLPath = "c:\recovery\autoapply\unattend.xml" # used for FreshStart recovery (TBC)
 $IntlCPLXMLPath = "c:\Windows\System32\Linklaters\Engineering\Lang\$userlocale.xml" # used fduring Buildstate to apply Region formatting and other options (TBC)
-$IntlCPLRecoveryXMLPath = "c:\recovery\OEM\$userlocale.xml" # used fduring Buildstate to apply Region formatting and other options (TBC)
+$IntlCPLRecoveryXMLPath = "c:\recovery\OEM\lang\$userlocale.xml"  # used fduring Buildstate to apply Region formatting and other options (TBC)
 
 $result = New-Item c:\windows\panther\unattend -ItemType Directory -Force
 $result = New-Item c:\recovery\autoapply -ItemType Directory -Force
