@@ -16,7 +16,7 @@ Start-Sleep -Seconds 5
 
 # Set LockScreenImage reg
 $RegistryKey = "HKLM:\NewOS\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" 
-$Result = New-Item -Path $RegistryKey -ItemType Directory -Force
+$Result = New-Item -Path $RegistryKey -Force
 $Result.Handle.Close()
 $Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImagePath' -PropertyType String -Value $Picfile -Force
 $Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImageUrl' -PropertyType String -Value $Picfile -Force
