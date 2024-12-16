@@ -327,6 +327,9 @@ Start-Sleep -Seconds 5
 Set-Location X:\
 reg unload "HKLM\NewOS"
 
+# Set Phase0 Wallpaper
+Invoke-RestMethod "$($Global:ScriptRootURL)/phase0.ps1" | out-file $env:temp\phase0.ps1 -force -encoding ascii
+& $env:temp\phase0.ps1
 
 # Download custom file(s)
 Invoke-restmethod -uri "$($Global:ScriptRootURL)/createxml.ps1" | out-file "c:\windows\setup\scripts\createxml.ps1" -force -encoding ascii
