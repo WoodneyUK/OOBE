@@ -15,7 +15,7 @@ reg load "HKLM\NewOS" $RegistryHivePath
 Start-Sleep -Seconds 5
 
 # Set LockScreenImage reg
-$RegistryKey = "HKLM:\NewOS\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" 
+$RegistryKey = "HKLM:\NewOS\Microsoft\Windows\CurrentVersion\PersonalizationCSP" 
 $Result = New-Item -Path $RegistryKey -Force
 $Result.Handle.Close()
 $Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImagePath' -PropertyType String -Value $Picfile -Force
