@@ -19,8 +19,8 @@ $RegistryKey = "HKLM:\NewOS\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
 $Result = New-Item -Path $RegistryKey -Force
 $Result.Handle.Close()
 $Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImagePath' -PropertyType String -Value $Picfile -Force
-$Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImageUrl' -PropertyType String -Value $Picfile -Force
-$Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImageStatus ' -PropertyType DWord -Value 1 -Force
+#$Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImageUrl' -PropertyType String -Value $Picfile -Force
+#$Result = New-ItemProperty -Path $RegistryKey -Name 'LockScreenImageStatus' -PropertyType DWord -Value 1 -Force
 
 # Unload Reg
 Remove-Variable Result
