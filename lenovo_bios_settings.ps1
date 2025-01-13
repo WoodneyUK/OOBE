@@ -77,9 +77,9 @@ Else{
     # https://docs.lenovocdrt.com/ref/bios/wmi/wmi_guide/#password-authentication
     #
     $returnOP = (gwmi -class Lenovo_WmiOpcodeInterface -Namespace root\WMI).WmiOpCodeInterface("WmiOpCodePasswordAdmin:$CurrentPW") | select Return -ExpandProperty Return
-    Write-Host "ReturnOp [$($returnOp)]"
+    #Write-Host "ReturnOp [$($returnOp)]"
     If($returnOP -eq "Success"){
-	Write-Host "BIOS WMI interface connection successful"
+	Write-Verbose "BIOS WMI interface connection successful"
       	$modernbios = $TRUE
     }ElseIf ($returnOP -eq "Access Denied"){
     	#BIOS password is wrong
@@ -109,7 +109,7 @@ $currentSettings = @(gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-
 
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
-If ($BIOS) {Write-Host "WMI Bios connection response:[$($BIOS.active)]"}
+If ($BIOS) {Write-Verbose "WMI Bios connection response:[$($BIOS.active)]"}
 
 ForEach($Settings in $Get_Settings)
     {
@@ -124,7 +124,7 @@ ForEach($Settings in $Get_Settings)
         Else {
             $currentvalue = ($currentsetting -split "[,;]")[1]
         
-            Write-Host "[$($MySetting)] returned value [$($currentvalue)]" 
+            Write-Verbose "[$($MySetting)] returned value [$($currentvalue)]" 
 
             If (($currentvalue -eq $ValueNew) -or ($currentvalue -eq $ValueOld)){
                 Write-Host "[$($MySetting)] is already set to [$($ValueNew)], no change needed" -ForegroundColor Green
@@ -139,11 +139,11 @@ ForEach($Settings in $Get_Settings)
      		
      	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew").Return
 
-	        write-host "BIOS Returned Response [$($Change_Return_Code)]"
+	        write-verbose "BIOS Returned Response [$($Change_Return_Code)]"
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
                     #Its probably a OldSkool BIOS, so give it a try
-                    Write-Host "Retrying with Old Skool Bios method"
+                    Write-verbose "Retrying with Old Skool Bios method"
 		            $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld,$CurrentPW,ascii,us").Return
                 }
 
