@@ -104,7 +104,7 @@ Else{
 }
         
 # Current BIOS Settings
-$currentSettings = @(gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split("[,;]", [StringSplitOptions]::RemoveEmptyEntries) } | select -expandproperty currentsetting)
+$currentSettings = @(gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) } | select -expandproperty currentsetting)
 
 
 # Change BIOS settings
@@ -118,11 +118,11 @@ ForEach($Settings in $Get_Settings)
         $ValueNew = $Settings.ValueNew
 	    $ValueOld = $Settings.ValueOld
 
-        $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split("[,;]", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
+        $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
         
         If (-not $currentsetting) { Write-Host "[$($MySetting)] not found in this BIOS, skipping" }
         Else {
-            $currentvalue = ($currentsetting -split ",")[1]
+            $currentvalue = ($currentsetting -split "[,;]")[1]
         
             Write-Host "[$($MySetting)] returned value [$($currentvalue)]" 
 
