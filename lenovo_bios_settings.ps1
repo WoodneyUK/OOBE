@@ -104,7 +104,8 @@ Else{
 }
         
 # Current BIOS Settings
-$currentSettings = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) } | select currentsetting
+# $currentSettings = @(gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) } | select -expandproperty currentsetting)
+
 
 # Change BIOS settings
 $BIOS = Get-WmiObject -Class Lenovo_SetBiosSetting -Namespace root\wmi 
@@ -115,44 +116,48 @@ ForEach($Settings in $Get_Settings)
         
         $MySetting = $Settings.Setting
         $ValueNew = $Settings.ValueNew
-	$ValueOld = $Settings.ValueOld
+	    $ValueOld = $Settings.ValueOld
 
         $currentsetting = gwmi -class Lenovo_BiosSetting -namespace root\wmi | Where-Object { $_.CurrentSetting.split(",", [StringSplitOptions]::RemoveEmptyEntries) -eq $MySetting } | select currentsetting -ExpandProperty currentsetting
-        $currentvalue = ($currentsetting -split ",")[1]
         
-        If (($currentvalue -eq $ValueNew) -or ($currentvalue -eq $ValueOld)){
-            Write-Host "[$($MySetting)] is already set to [$($ValueNew)], no change needed" -ForegroundColor Green
-        }
-        Else
-        {
+        If (-not $currentsetting) { Write-Host "[$MySetting] not found in this BIOS, skipping" }
+        Else {
+            $currentvalue = ($currentsetting -split ",")[1]
         
-	    $SaveNeeded = $true		
-            #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew,$CurrentPW,ascii,us").Return
+            If (($currentvalue -eq $ValueNew) -or ($currentvalue -eq $ValueOld)){
+                Write-Host "[$($MySetting)] is already set to [$($ValueNew)], no change needed" -ForegroundColor Green
+            }
+            Else
+            {
+        
+	        $SaveNeeded = $true		
+                #$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew,$CurrentPW,ascii,us").Return
 
-	    Write-Host "Attempting to write setting [$($MySetting)] with value [$($ValueNew)]"
+	        Write-Host "Attempting to write setting [$($MySetting)] with value [$($ValueNew)]"
      		
      	    $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueNew").Return
 
-	    write-host "BIOS Returned Response [$($Change_Return_Code)]"
+	        write-host "BIOS Returned Response [$($Change_Return_Code)]"
  
             If(($Change_Return_Code) -eq "Invalid Parameter"){
-                #Its probably a OldSkool BIOS, so give it a try
-                Write-Host "Retrying with Old Skool Bios method"
-		$Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld,$CurrentPW,ascii,us").Return
-            }
+                    #Its probably a OldSkool BIOS, so give it a try
+                    Write-Host "Retrying with Old Skool Bios method"
+		            $Change_Return_Code = $BIOS.SetBiosSetting("$MySetting,$ValueOld,$CurrentPW,ascii,us").Return
+                }
 
             If(($Change_Return_Code) -eq "Success")        								
                 {
                 If ($modernbios -eq $FALSE) {Write-Host "*********************"}
-		Write-Host "New value for [$($MySetting)] is [$($ValueNew)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
-      		If ($modernbios -eq $FALSE) {Write-Host "*********************"}
-                }
+		        Write-Host "New value for [$($MySetting)] is [$($ValueNew)]" -ForegroundColor Yellow -Backgroundcolor DarkGray
+      		    If ($modernbios -eq $FALSE) {Write-Host "*********************"}
+                    }
                 Else
-                {
-                Write-Warning "Cannot change setting [$($MySetting)] (Return code [$($Change_Return_Code)])"  											
-		Write-Warning "You must set this manually"
-      		$ManualSetBIOS = $TRUE
-		}
+                    {
+                    Write-Warning "Cannot change setting [$($MySetting)] (Return code [$($Change_Return_Code)])"  											
+		            Write-Warning "You must set this manually"
+      		        $ManualSetBIOS = $TRUE
+		        }
+            }
         }								
     }
 
