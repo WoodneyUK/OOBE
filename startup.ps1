@@ -4,6 +4,14 @@
 
 ##  Script runs in WINPE
 
+cls
+WRITE-ERROR "***Decomission Notice***"
+WRITE-ERROR "USB should not be connecting to this repo anymore"
+WRITE-ERROR "Please contact the EUDM for further instruction"
+
+pause
+
+
 [decimal]$minimumusb = 1.0
 $DateFormat = 'dd-MM-yyyy HH:mm:ss'
 $OSDCloud_StartTimeUTC = $(Get-Date ([System.DateTime]::UtcNow) -Format $DateFormat)
